@@ -11,7 +11,8 @@
       "width": 800,
       "height": 600,
       "fill": "#FFFFFF",
-      "layout": "none"
+      "layout": "none",
+      "children": []
     },
     {
       "type": "frame",
@@ -31,28 +32,6 @@
           "fill": "#000000",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "Q1j14",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "s155t",
-                  "fill": "#000000",
-                  "content": "§ 01 · HERO",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "KfOZl",
@@ -89,7 +68,8 @@
                       "fontFamily": "Pretendard",
                       "fontSize": 15,
                       "fontWeight": "600",
-                      "letterSpacing": 3
+                      "letterSpacing": 3,
+                      "children": []
                     }
                   ]
                 },
@@ -107,7 +87,8 @@
                       "content": "제품 소개",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 13,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -116,7 +97,8 @@
                       "content": "요금제",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 13,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -125,7 +107,8 @@
                       "content": "도입 사례",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 13,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -134,7 +117,8 @@
                       "content": "블로그",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 13,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     }
                   ]
                 },
@@ -152,7 +136,8 @@
                       "content": "로그인",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 13,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     },
                     {
                       "type": "frame",
@@ -171,7 +156,8 @@
                           "content": "무료 시작하기",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         }
                       ]
                     }
@@ -225,7 +211,8 @@
                       "width": 6,
                       "height": 6,
                       "fill": "#BFFF00",
-                      "cornerRadius": 3
+                      "cornerRadius": 3,
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -234,7 +221,8 @@
                       "content": "AI 기반 온라인 교실 플랫폼",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 12,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     }
                   ]
                 },
@@ -258,7 +246,8 @@
                       "fontFamily": "Pretendard",
                       "fontSize": 80,
                       "fontWeight": "700",
-                      "letterSpacing": -2
+                      "letterSpacing": -2,
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -272,7 +261,8 @@
                       "fontFamily": "Pretendard",
                       "fontSize": 80,
                       "fontWeight": "700",
-                      "letterSpacing": -2
+                      "letterSpacing": -2,
+                      "children": []
                     }
                   ]
                 },
@@ -280,7 +270,8 @@
                   "type": "frame",
                   "id": "6exGo",
                   "width": 1,
-                  "height": 24
+                  "height": 24,
+                  "children": []
                 },
                 {
                   "type": "text",
@@ -293,13 +284,15 @@
                   "textAlign": "center",
                   "fontFamily": "Pretendard",
                   "fontSize": 18,
-                  "fontWeight": "normal"
+                  "fontWeight": "normal",
+                  "children": []
                 },
                 {
                   "type": "frame",
                   "id": "3lwIg",
                   "width": 1,
-                  "height": 40
+                  "height": 40,
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -325,7 +318,8 @@
                           "content": "무료로 시작하기 →",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 16,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         }
                       ]
                     },
@@ -351,7 +345,8 @@
                           "content": "▶  데모 영상 보기",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 16,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     }
@@ -361,7 +356,8 @@
                   "type": "frame",
                   "id": "qY3U8",
                   "width": 1,
-                  "height": 48
+                  "height": 48,
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -377,7 +373,8 @@
                       "content": "이미 신뢰하는 기관들:",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 12,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -386,7 +383,8 @@
                       "content": "상하이교통대  ·  복단대  ·  우한대  ·  중산대  ·  +30개 대학",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 12,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     }
                   ]
                 }
@@ -402,28 +400,6 @@
           "fill": "#0A0A0A",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "zcOpX",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "J4Tgb",
-                  "fill": "#000000",
-                  "content": "§ 02 · PAIN POINT",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "tr0xQ",
@@ -454,7 +430,8 @@
                       "textAlign": "center",
                       "fontFamily": "Pretendard",
                       "fontSize": 44,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -467,7 +444,8 @@
                       "textAlign": "center",
                       "fontFamily": "Pretendard",
                       "fontSize": 16,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     }
                   ]
                 },
@@ -499,7 +477,8 @@
                           "content": "😶",
                           "fontFamily": "Pretendard",
                           "fontSize": 32,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -511,7 +490,8 @@
                           "lineHeight": 1.3,
                           "fontFamily": "Pretendard",
                           "fontSize": 20,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -523,7 +503,8 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -548,7 +529,8 @@
                           "content": "📉",
                           "fontFamily": "Pretendard",
                           "fontSize": 32,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -560,7 +542,8 @@
                           "lineHeight": 1.3,
                           "fontFamily": "Pretendard",
                           "fontSize": 20,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -572,7 +555,8 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -597,7 +581,8 @@
                           "content": "🔧",
                           "fontFamily": "Pretendard",
                           "fontSize": 32,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -609,7 +594,8 @@
                           "lineHeight": 1.3,
                           "fontFamily": "Pretendard",
                           "fontSize": 20,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -621,7 +607,8 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     }
@@ -660,7 +647,8 @@
                           "content": "55.3만원",
                           "fontFamily": "Pretendard",
                           "fontSize": 32,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -669,7 +657,8 @@
                           "content": "학생 1인당 월 평균 사교육비 (2023)",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -678,7 +667,8 @@
                       "id": "rbIAe",
                       "width": 1,
                       "height": 60,
-                      "fill": "#1A1A1A"
+                      "fill": "#1A1A1A",
+                      "children": []
                     },
                     {
                       "type": "frame",
@@ -695,7 +685,8 @@
                           "content": "최대 60%",
                           "fontFamily": "Pretendard",
                           "fontSize": 32,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -704,7 +695,8 @@
                           "content": "온라인 전환 시 평균 이탈률",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -713,7 +705,8 @@
                       "id": "D0IXH",
                       "width": 1,
                       "height": 60,
-                      "fill": "#1A1A1A"
+                      "fill": "#1A1A1A",
+                      "children": []
                     },
                     {
                       "type": "frame",
@@ -730,7 +723,8 @@
                           "content": "26조원",
                           "fontFamily": "Pretendard",
                           "fontSize": 32,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -739,7 +733,8 @@
                           "content": "2023년 국내 사교육 시장 규모",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     }
@@ -757,28 +752,6 @@
           "fill": "#000000",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "yYlrJ",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "Vf6H7",
-                  "fill": "#000000",
-                  "content": "§ 03 · SOLUTION",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "Sm8SO",
@@ -813,7 +786,8 @@
                       "content": "THE SOLUTION",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 11,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     }
                   ]
                 },
@@ -838,7 +812,8 @@
                       "fontFamily": "Pretendard",
                       "fontSize": 44,
                       "fontWeight": "700",
-                      "letterSpacing": -0.5
+                      "letterSpacing": -0.5,
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -851,7 +826,8 @@
                       "textAlign": "center",
                       "fontFamily": "Pretendard",
                       "fontSize": 16,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     },
                     {
                       "type": "frame",
@@ -892,7 +868,8 @@
                               "content": "출석 자동화",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 11,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             }
                           ]
                         },
@@ -919,7 +896,8 @@
                               "content": "AI 집중도 분석",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 11,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             }
                           ]
                         },
@@ -946,7 +924,8 @@
                               "content": "실시간 제어",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 11,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             }
                           ]
                         }
@@ -979,7 +958,8 @@
                           "height": 28,
                           "iconFontName": "brain",
                           "iconFontFamily": "lucide",
-                          "fill": "#BFFF00"
+                          "fill": "#BFFF00",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -988,7 +968,8 @@
                           "content": "AI 집중도 분석",
                           "fontFamily": "Pretendard",
                           "fontSize": 18,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -1000,7 +981,8 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -1021,7 +1003,8 @@
                           "height": 28,
                           "iconFontName": "zap",
                           "iconFontFamily": "lucide",
-                          "fill": "#BFFF00"
+                          "fill": "#BFFF00",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -1030,7 +1013,8 @@
                           "content": "실시간 상호작용",
                           "fontFamily": "Pretendard",
                           "fontSize": 18,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -1042,7 +1026,8 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -1063,7 +1048,8 @@
                           "height": 28,
                           "iconFontName": "layers",
                           "iconFontFamily": "lucide",
-                          "fill": "#BFFF00"
+                          "fill": "#BFFF00",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -1072,7 +1058,8 @@
                           "content": "올인원 운영",
                           "fontFamily": "Pretendard",
                           "fontSize": 18,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -1084,7 +1071,8 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     }
@@ -1107,7 +1095,8 @@
                       "content": "플랫폼 무료 체험하기 →",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 15,
-                      "fontWeight": "600"
+                      "fontWeight": "600",
+                      "children": []
                     }
                   ]
                 }
@@ -1123,28 +1112,6 @@
           "fill": "#0A0A0A",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "UKKum",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "8yfuq",
-                  "fill": "#000000",
-                  "content": "§ 04 · AI FEATURE",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "BB2Q6",
@@ -1184,7 +1151,8 @@
                           "content": "FEATURE 01 · AI MANAGEMENT",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 11,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         }
                       ]
                     },
@@ -1198,7 +1166,8 @@
                       "lineHeight": 1.2,
                       "fontFamily": "Pretendard",
                       "fontSize": 40,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -1210,7 +1179,8 @@
                       "lineHeight": 1.7,
                       "fontFamily": "Pretendard",
                       "fontSize": 15,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     },
                     {
                       "type": "frame",
@@ -1233,7 +1203,8 @@
                               "id": "oE0RF",
                               "width": 2,
                               "height": 40,
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1244,7 +1215,8 @@
                               "content": "AI 얼굴 인식 출석 체크 — 자동, 0초",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -1261,7 +1233,8 @@
                               "id": "J3KUf",
                               "width": 2,
                               "height": 40,
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1272,7 +1245,8 @@
                               "content": "집중도 스코어 실시간 대시보드",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -1289,7 +1263,8 @@
                               "id": "XxsCr",
                               "width": 2,
                               "height": 40,
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1300,7 +1275,8 @@
                               "content": "이탈·졸음 감지 → 선생님 즉시 알림",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -1317,7 +1293,8 @@
                               "id": "FElrO",
                               "width": 2,
                               "height": 40,
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1328,7 +1305,8 @@
                               "content": "수업 후 학생별 참여도 리포트 자동 생성",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         }
@@ -1365,7 +1343,8 @@
                       "content": "[ AI 대시보드 스크린샷 ]",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 13,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     }
                   ]
                 }
@@ -1381,28 +1360,6 @@
           "fill": "#000000",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "oXJRL",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "jxMGR",
-                  "fill": "#000000",
-                  "content": "§ 05 · INTERACT",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "6qWBe",
@@ -1435,7 +1392,8 @@
                       "content": "FEATURE 02 · INTERACTIVE TOOLS",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 11,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     }
                   ]
                 },
@@ -1450,7 +1408,8 @@
                   "textAlign": "center",
                   "fontFamily": "Pretendard",
                   "fontSize": 44,
-                  "fontWeight": "700"
+                  "fontWeight": "700",
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -1486,7 +1445,8 @@
                               "height": 24,
                               "iconFontName": "pen-tool",
                               "iconFontFamily": "lucide",
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1495,7 +1455,8 @@
                               "content": "실시간 화이트보드",
                               "fontFamily": "Pretendard",
                               "fontSize": 17,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1507,7 +1468,8 @@
                               "lineHeight": 1.6,
                               "fontFamily": "Pretendard",
                               "fontSize": 13,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -1528,7 +1490,8 @@
                               "height": 24,
                               "iconFontName": "users",
                               "iconFontFamily": "lucide",
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1537,7 +1500,8 @@
                               "content": "소그룹 토의 (Breakout)",
                               "fontFamily": "Pretendard",
                               "fontSize": 17,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1549,7 +1513,8 @@
                               "lineHeight": 1.6,
                               "fontFamily": "Pretendard",
                               "fontSize": 13,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         }
@@ -1580,7 +1545,8 @@
                               "height": 24,
                               "iconFontName": "trending-up",
                               "iconFontFamily": "lucide",
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1589,7 +1555,8 @@
                               "content": "실시간 퀴즈·투표",
                               "fontFamily": "Pretendard",
                               "fontSize": 17,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1601,7 +1568,8 @@
                               "lineHeight": 1.6,
                               "fontFamily": "Pretendard",
                               "fontSize": 13,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -1622,7 +1590,8 @@
                               "height": 24,
                               "iconFontName": "monitor",
                               "iconFontFamily": "lucide",
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1631,7 +1600,8 @@
                               "content": "파일·화면 공유",
                               "fontFamily": "Pretendard",
                               "fontSize": 17,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1643,7 +1613,8 @@
                               "lineHeight": 1.6,
                               "fontFamily": "Pretendard",
                               "fontSize": 13,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         }
@@ -1674,7 +1645,8 @@
                       "id": "9n6YA",
                       "width": 3,
                       "height": 48,
-                      "fill": "#BFFF00"
+                      "fill": "#BFFF00",
+                      "children": []
                     },
                     {
                       "type": "frame",
@@ -1693,7 +1665,8 @@
                           "content": "\"ClassIn 도입 후 수업 참여율이 평균 3배 올랐어요.\"",
                           "fontFamily": "Pretendard",
                           "fontSize": 16,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -1702,7 +1675,8 @@
                           "content": "— OO 수학학원 원장 / 수강생 340명 운영 중",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     }
@@ -1720,28 +1694,6 @@
           "fill": "#0A0A0A",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "L2wV3",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "0obZo",
-                  "fill": "#000000",
-                  "content": "§ 06 · OPS AUTO",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "3ojFo",
@@ -1780,7 +1732,8 @@
                       "content": "[ 운영 자동화 대시보드 ]",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 13,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     }
                   ]
                 },
@@ -1814,7 +1767,8 @@
                           "content": "FEATURE 03 · OPS AUTOMATION",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 11,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         }
                       ]
                     },
@@ -1828,7 +1782,8 @@
                       "lineHeight": 1.2,
                       "fontFamily": "Pretendard",
                       "fontSize": 38,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     },
                     {
                       "type": "frame",
@@ -1852,7 +1807,8 @@
                               "height": 16,
                               "iconFontName": "check",
                               "iconFontFamily": "lucide",
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1861,7 +1817,8 @@
                               "content": "수업 녹화 자동 저장 → 복습용 VOD 즉시 생성",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -1879,7 +1836,8 @@
                               "height": 16,
                               "iconFontName": "check",
                               "iconFontFamily": "lucide",
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1888,7 +1846,8 @@
                               "content": "출석·지각·결석 자동 집계, 수작업 0",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -1906,7 +1865,8 @@
                               "height": 16,
                               "iconFontName": "check",
                               "iconFontFamily": "lucide",
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1915,7 +1875,8 @@
                               "content": "과제 제출·채점 통합 관리",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -1933,7 +1894,8 @@
                               "height": 16,
                               "iconFontName": "check",
                               "iconFontFamily": "lucide",
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1942,7 +1904,8 @@
                               "content": "수업 리포트 자동 발송 (학부모 앱 연동)",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -1960,7 +1923,8 @@
                               "height": 16,
                               "iconFontName": "check",
                               "iconFontFamily": "lucide",
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -1969,7 +1933,8 @@
                               "content": "결제·수강 관리 통합",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         }
@@ -1989,28 +1954,6 @@
           "fill": "#000000",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "LY48P",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "QSF9O",
-                  "fill": "#000000",
-                  "content": "§ 07 · SCALE",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "uHzWI",
@@ -2043,7 +1986,8 @@
                       "content": "SCALE",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 11,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     }
                   ]
                 },
@@ -2059,7 +2003,8 @@
                   "fontFamily": "Pretendard",
                   "fontSize": 44,
                   "fontWeight": "700",
-                  "letterSpacing": -0.5
+                  "letterSpacing": -0.5,
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -2090,7 +2035,8 @@
                           "content": "2,000명",
                           "fontFamily": "Pretendard",
                           "fontSize": 40,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -2099,7 +2045,8 @@
                           "content": "동시 접속",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -2124,7 +2071,8 @@
                           "content": "< 200ms",
                           "fontFamily": "Pretendard",
                           "fontSize": 40,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -2133,7 +2081,8 @@
                           "content": "초저지연",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -2158,7 +2107,8 @@
                           "content": "99.9%",
                           "fontFamily": "Pretendard",
                           "fontSize": 40,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -2167,7 +2117,8 @@
                           "content": "서비스 안정성",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -2192,7 +2143,8 @@
                           "content": "전 디바이스",
                           "fontFamily": "Pretendard",
                           "fontSize": 40,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -2201,7 +2153,8 @@
                           "content": "PC·태블릿·스마트폰",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     }
@@ -2236,7 +2189,8 @@
                           "content": "1:1",
                           "fontFamily": "Pretendard",
                           "fontSize": 28,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -2245,7 +2199,8 @@
                           "content": "프리미엄 튜터링",
                           "fontFamily": "Pretendard",
                           "fontSize": 15,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         }
                       ]
                     },
@@ -2271,7 +2226,8 @@
                           "content": "5-15명",
                           "fontFamily": "Pretendard",
                           "fontSize": 28,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -2280,7 +2236,8 @@
                           "content": "소그룹 집중반",
                           "fontFamily": "Pretendard",
                           "fontSize": 15,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         }
                       ]
                     },
@@ -2306,7 +2263,8 @@
                           "content": "100명+",
                           "fontFamily": "Pretendard",
                           "fontSize": 28,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -2315,7 +2273,8 @@
                           "content": "대형 라이브 강의",
                           "fontFamily": "Pretendard",
                           "fontSize": 15,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         }
                       ]
                     },
@@ -2341,7 +2300,8 @@
                           "content": "글로벌",
                           "fontFamily": "Pretendard",
                           "fontSize": 28,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -2350,7 +2310,8 @@
                           "content": "해외 거주 학생 원격 수업",
                           "fontFamily": "Pretendard",
                           "fontSize": 15,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         }
                       ]
                     }
@@ -2368,28 +2329,6 @@
           "fill": "#0A0A0A",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "u4icT",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "LrXC5",
-                  "fill": "#000000",
-                  "content": "§ 08 · SOCIAL PROOF",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "xbbNF",
@@ -2422,7 +2361,8 @@
                       "content": "SOCIAL PROOF",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 11,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     }
                   ]
                 },
@@ -2438,7 +2378,8 @@
                   "fontFamily": "Pretendard",
                   "fontSize": 44,
                   "fontWeight": "700",
-                  "letterSpacing": -0.5
+                  "letterSpacing": -0.5,
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -2475,7 +2416,8 @@
                               "content": "★★★★★",
                               "fontFamily": "Pretendard",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -2489,7 +2431,8 @@
                           "lineHeight": 1.7,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "frame",
@@ -2506,7 +2449,8 @@
                               "content": "김○○ 원장",
                               "fontFamily": "Pretendard",
                               "fontSize": 13,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -2515,7 +2459,8 @@
                               "content": "OO 수학학원 · 수강생 340명",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 12,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -2543,7 +2488,8 @@
                               "content": "↑",
                               "fontFamily": "Pretendard",
                               "fontSize": 20,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -2552,7 +2498,8 @@
                               "content": "완주율 68% → 91%",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 13,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         }
@@ -2586,7 +2533,8 @@
                               "content": "★★★★★",
                               "fontFamily": "Pretendard",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -2600,7 +2548,8 @@
                           "lineHeight": 1.7,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "frame",
@@ -2617,7 +2566,8 @@
                               "content": "박○○ 팀장",
                               "fontFamily": "Pretendard",
                               "fontSize": 13,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -2626,7 +2576,8 @@
                               "content": "OO 영어튜터링 · 월 수업 1,200회",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 12,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -2654,7 +2605,8 @@
                               "content": "×2",
                               "fontFamily": "Pretendard",
                               "fontSize": 20,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -2663,7 +2615,8 @@
                               "content": "동일 교사로 관리 학생 2배",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 13,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         }
@@ -2697,7 +2650,8 @@
                               "content": "★★★★★",
                               "fontFamily": "Pretendard",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -2711,7 +2665,8 @@
                           "lineHeight": 1.7,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "frame",
@@ -2728,7 +2683,8 @@
                               "content": "이○○ 원장",
                               "fontFamily": "Pretendard",
                               "fontSize": 13,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -2737,7 +2693,8 @@
                               "content": "OO 입시학원 · 학부모 NPS 72점",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 12,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         },
@@ -2765,7 +2722,8 @@
                               "content": "↑",
                               "fontFamily": "Pretendard",
                               "fontSize": 20,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             },
                             {
                               "type": "text",
@@ -2774,7 +2732,8 @@
                               "content": "NPS 72점 달성",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 13,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         }
@@ -2798,7 +2757,8 @@
                       "lineHeight": 0.8,
                       "fontFamily": "Pretendard",
                       "fontSize": 120,
-                      "fontWeight": "800"
+                      "fontWeight": "800",
+                      "children": []
                     }
                   ]
                 }
@@ -2814,28 +2774,6 @@
           "fill": "#000000",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "dsVhN",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "SjZZQ",
-                  "fill": "#000000",
-                  "content": "§ 09 · MARKET DATA",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "X9auy",
@@ -2868,7 +2806,8 @@
                       "content": "MARKET OPPORTUNITY",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 11,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     }
                   ]
                 },
@@ -2884,7 +2823,8 @@
                   "fontFamily": "Pretendard",
                   "fontSize": 44,
                   "fontWeight": "700",
-                  "letterSpacing": -0.5
+                  "letterSpacing": -0.5,
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -2918,7 +2858,8 @@
                           "fontFamily": "Pretendard",
                           "fontSize": 56,
                           "fontWeight": "800",
-                          "letterSpacing": -1
+                          "letterSpacing": -1,
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -2929,7 +2870,8 @@
                           "content": "국내 사교육 시장 규모 (2023)",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -2958,7 +2900,8 @@
                           "fontFamily": "Pretendard",
                           "fontSize": 56,
                           "fontWeight": "800",
-                          "letterSpacing": -1
+                          "letterSpacing": -1,
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -2969,7 +2912,8 @@
                           "content": "온라인 사교육 연평균 성장률",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -2998,7 +2942,8 @@
                           "fontFamily": "Pretendard",
                           "fontSize": 56,
                           "fontWeight": "800",
-                          "letterSpacing": -1
+                          "letterSpacing": -1,
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3009,7 +2954,8 @@
                           "content": "학생 1인당 월 평균 사교육비",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -3037,7 +2983,8 @@
                           "content": "60%+",
                           "fontFamily": "Pretendard",
                           "fontSize": 36,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3048,7 +2995,8 @@
                           "content": "모바일 수강 비율",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     }
@@ -3101,7 +3049,8 @@
                       "textAlign": "center",
                       "fontFamily": "Pretendard",
                       "fontSize": 20,
-                      "fontWeight": "600"
+                      "fontWeight": "600",
+                      "children": []
                     }
                   ]
                 }
@@ -3117,28 +3066,6 @@
           "fill": "#0A0A0A",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "KX4Yy",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "rfNtD",
-                  "fill": "#000000",
-                  "content": "§ 10 · COMPARISON",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "I3Bmb",
@@ -3171,7 +3098,8 @@
                       "content": "COMPARISON",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 11,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     }
                   ]
                 },
@@ -3186,7 +3114,8 @@
                   "textAlign": "center",
                   "fontFamily": "Pretendard",
                   "fontSize": 44,
-                  "fontWeight": "700"
+                  "fontWeight": "700",
+                  "children": []
                 },
                 {
                   "type": "text",
@@ -3198,7 +3127,8 @@
                   "textAlign": "center",
                   "fontFamily": "Pretendard",
                   "fontSize": 16,
-                  "fontWeight": "600"
+                  "fontWeight": "600",
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -3233,7 +3163,8 @@
                           "content": "기능",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3245,7 +3176,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3257,7 +3189,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3269,7 +3202,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         }
                       ]
                     },
@@ -3299,7 +3233,8 @@
                           "content": "AI 집중도 분석",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3311,7 +3246,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3323,7 +3259,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3335,7 +3272,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 14,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         }
                       ]
                     },
@@ -3365,7 +3303,8 @@
                           "content": "교육 특화 화이트보드",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3377,7 +3316,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3389,7 +3329,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3401,7 +3342,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 14,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         }
                       ]
                     },
@@ -3431,7 +3373,8 @@
                           "content": "소그룹 자동 편성",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3443,7 +3386,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3455,7 +3399,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3467,7 +3412,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 14,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         }
                       ]
                     },
@@ -3497,7 +3443,8 @@
                           "content": "출석 자동 관리",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3509,7 +3456,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3521,7 +3469,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3533,7 +3482,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 14,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         }
                       ]
                     },
@@ -3563,7 +3513,8 @@
                           "content": "학부모 리포트",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3575,7 +3526,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3587,7 +3539,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3599,7 +3552,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 14,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         }
                       ]
                     },
@@ -3629,7 +3583,8 @@
                           "content": "수업료 관리",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3641,7 +3596,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3653,7 +3609,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3665,7 +3622,8 @@
                           "textAlign": "center",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 14,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         }
                       ]
                     }
@@ -3683,28 +3641,6 @@
           "fill": "#000000",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "vkP3g",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "s6jM4",
-                  "fill": "#000000",
-                  "content": "§ 11 · ONBOARDING",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "6CenT",
@@ -3737,7 +3673,8 @@
                       "content": "ONBOARDING",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 11,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     }
                   ]
                 },
@@ -3752,7 +3689,8 @@
                   "textAlign": "center",
                   "fontFamily": "Pretendard",
                   "fontSize": 44,
-                  "fontWeight": "700"
+                  "fontWeight": "700",
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -3795,7 +3733,8 @@
                               "content": "01",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             }
                           ]
                         },
@@ -3806,7 +3745,8 @@
                           "content": "Day 1",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3815,7 +3755,8 @@
                           "content": "무료 데모 신청",
                           "fontFamily": "Pretendard",
                           "fontSize": 16,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3827,7 +3768,8 @@
                           "lineHeight": 1.5,
                           "fontFamily": "Pretendard",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -3871,7 +3813,8 @@
                               "content": "02",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             }
                           ]
                         },
@@ -3882,7 +3825,8 @@
                           "content": "Day 2",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3891,7 +3835,8 @@
                           "content": "환경 세팅",
                           "fontFamily": "Pretendard",
                           "fontSize": 16,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3903,7 +3848,8 @@
                           "lineHeight": 1.5,
                           "fontFamily": "Pretendard",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -3947,7 +3893,8 @@
                               "content": "03",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             }
                           ]
                         },
@@ -3958,7 +3905,8 @@
                           "content": "Day 3",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3967,7 +3915,8 @@
                           "content": "첫 수업 파일럿",
                           "fontFamily": "Pretendard",
                           "fontSize": 16,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -3979,7 +3928,8 @@
                           "lineHeight": 1.5,
                           "fontFamily": "Pretendard",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -4023,7 +3973,8 @@
                               "content": "07+",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             }
                           ]
                         },
@@ -4034,7 +3985,8 @@
                           "content": "Day 7+",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4043,7 +3995,8 @@
                           "content": "정식 운영",
                           "fontFamily": "Pretendard",
                           "fontSize": 16,
-                          "fontWeight": "600"
+                          "fontWeight": "600",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4055,7 +4008,8 @@
                           "lineHeight": 1.5,
                           "fontFamily": "Pretendard",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     }
@@ -4076,7 +4030,8 @@
                       "content": "🔒  전담 온보딩 매니저",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 14,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -4085,7 +4040,8 @@
                       "content": "📚  선생님 1시간 교육 포함",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 14,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -4094,7 +4050,8 @@
                       "content": "💬  24/7 한국어 지원",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 14,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     }
                   ]
                 }
@@ -4110,28 +4067,6 @@
           "fill": "#0A0A0A",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "omG0d",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "kKvgW",
-                  "fill": "#000000",
-                  "content": "§ 12 · PRICING",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "IOCEN",
@@ -4164,7 +4099,8 @@
                       "content": "PRICING",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 11,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     }
                   ]
                 },
@@ -4179,7 +4115,8 @@
                   "textAlign": "center",
                   "fontFamily": "Pretendard",
                   "fontSize": 44,
-                  "fontWeight": "700"
+                  "fontWeight": "700",
+                  "children": []
                 },
                 {
                   "type": "text",
@@ -4191,7 +4128,8 @@
                   "textAlign": "center",
                   "fontFamily": "JetBrains Mono",
                   "fontSize": 14,
-                  "fontWeight": "normal"
+                  "fontWeight": "normal",
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -4222,7 +4160,8 @@
                           "content": "스타터",
                           "fontFamily": "Pretendard",
                           "fontSize": 20,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4231,14 +4170,16 @@
                           "content": "1인 튜터 / 소규모",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "frame",
                           "id": "VVh5g",
                           "width": "fill_container",
                           "height": 1,
-                          "fill": "#1A1A1A"
+                          "fill": "#1A1A1A",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4249,7 +4190,8 @@
                           "content": "최대 30명",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4260,7 +4202,8 @@
                           "content": "기본 AI 기능",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4271,7 +4214,8 @@
                           "content": "이메일 지원",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "frame",
@@ -4297,7 +4241,8 @@
                               "content": "무료로 시작하기",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         }
@@ -4335,7 +4280,8 @@
                               "content": "MOST POPULAR",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 9,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             }
                           ]
                         },
@@ -4346,7 +4292,8 @@
                           "content": "프로",
                           "fontFamily": "Pretendard",
                           "fontSize": 20,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4355,14 +4302,16 @@
                           "content": "중형 학원 (30~200명)",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "frame",
                           "id": "A59pJ",
                           "width": "fill_container",
                           "height": 1,
-                          "fill": "#1A1A1A"
+                          "fill": "#1A1A1A",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4373,7 +4322,8 @@
                           "content": "최대 200명",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4384,7 +4334,8 @@
                           "content": "풀 AI 기능",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4395,7 +4346,8 @@
                           "content": "전담 CS",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "frame",
@@ -4416,7 +4368,8 @@
                               "content": "플랜 확인하기 →",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "700"
+                              "fontWeight": "700",
+                              "children": []
                             }
                           ]
                         }
@@ -4444,7 +4397,8 @@
                           "content": "엔터프라이즈",
                           "fontFamily": "Pretendard",
                           "fontSize": 20,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4453,14 +4407,16 @@
                           "content": "대형 기관 / 플랫폼 사업자",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "frame",
                           "id": "Layh4",
                           "width": "fill_container",
                           "height": 1,
-                          "fill": "#1A1A1A"
+                          "fill": "#1A1A1A",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4471,7 +4427,8 @@
                           "content": "동시접속 무제한",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4482,7 +4439,8 @@
                           "content": "커스텀 AI 구성",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -4493,7 +4451,8 @@
                           "content": "전담 매니저",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "frame",
@@ -4519,7 +4478,8 @@
                               "content": "별도 문의하기",
                               "fontFamily": "JetBrains Mono",
                               "fontSize": 14,
-                              "fontWeight": "normal"
+                              "fontWeight": "normal",
+                              "children": []
                             }
                           ]
                         }
@@ -4539,28 +4499,6 @@
           "fill": "#000000",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "UJWEh",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "OuYsU",
-                  "fill": "#000000",
-                  "content": "§ 13 · FAQ",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "ApNLv",
@@ -4593,7 +4531,8 @@
                       "content": "FAQ",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 11,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     }
                   ]
                 },
@@ -4608,7 +4547,8 @@
                   "textAlign": "center",
                   "fontFamily": "Pretendard",
                   "fontSize": 44,
-                  "fontWeight": "700"
+                  "fontWeight": "700",
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -4647,7 +4587,8 @@
                               "content": "학생들이 별도 앱을 설치해야 하나요?",
                               "fontFamily": "Pretendard",
                               "fontSize": 15,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "icon_font",
@@ -4656,7 +4597,8 @@
                               "height": 16,
                               "iconFontName": "plus",
                               "iconFontFamily": "lucide",
-                              "fill": "#BFFF00"
+                              "fill": "#BFFF00",
+                              "children": []
                             }
                           ]
                         },
@@ -4670,7 +4612,8 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -4702,7 +4645,8 @@
                               "content": "인터넷이 느린 학생도 수업 참여 가능한가요?",
                               "fontFamily": "Pretendard",
                               "fontSize": 15,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "icon_font",
@@ -4711,7 +4655,8 @@
                               "height": 16,
                               "iconFontName": "plus",
                               "iconFontFamily": "lucide",
-                              "fill": "#6e6e6e"
+                              "fill": "#6e6e6e",
+                              "children": []
                             }
                           ]
                         },
@@ -4725,7 +4670,8 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -4757,7 +4703,8 @@
                               "content": "기존 수업 자료(PPT, HWP)를 그대로 쓸 수 있나요?",
                               "fontFamily": "Pretendard",
                               "fontSize": 15,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "icon_font",
@@ -4766,7 +4713,8 @@
                               "height": 16,
                               "iconFontName": "plus",
                               "iconFontFamily": "lucide",
-                              "fill": "#6e6e6e"
+                              "fill": "#6e6e6e",
+                              "children": []
                             }
                           ]
                         },
@@ -4780,7 +4728,8 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -4812,7 +4761,8 @@
                               "content": "개인정보보호법 준수 여부는?",
                               "fontFamily": "Pretendard",
                               "fontSize": 15,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "icon_font",
@@ -4821,7 +4771,8 @@
                               "height": 16,
                               "iconFontName": "plus",
                               "iconFontFamily": "lucide",
-                              "fill": "#6e6e6e"
+                              "fill": "#6e6e6e",
+                              "children": []
                             }
                           ]
                         },
@@ -4835,7 +4786,8 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -4867,7 +4819,8 @@
                               "content": "수업 녹화본은 얼마나 보관되나요?",
                               "fontFamily": "Pretendard",
                               "fontSize": 15,
-                              "fontWeight": "600"
+                              "fontWeight": "600",
+                              "children": []
                             },
                             {
                               "type": "icon_font",
@@ -4876,7 +4829,8 @@
                               "height": 16,
                               "iconFontName": "plus",
                               "iconFontFamily": "lucide",
-                              "fill": "#6e6e6e"
+                              "fill": "#6e6e6e",
+                              "children": []
                             }
                           ]
                         },
@@ -4890,7 +4844,8 @@
                           "lineHeight": 1.6,
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     }
@@ -4908,28 +4863,6 @@
           "fill": "#111111",
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "FfEBd",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "mrLLO",
-                  "fill": "#000000",
-                  "content": "§ 14 · FINAL CTA",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "2EWaV",
@@ -4959,7 +4892,8 @@
                       "width": 8,
                       "height": 8,
                       "fill": "#BFFF00",
-                      "cornerRadius": 4
+                      "cornerRadius": 4,
+                      "children": []
                     },
                     {
                       "type": "text",
@@ -4969,7 +4903,8 @@
                       "content": "LIMITED OFFER",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 11,
-                      "fontWeight": "700"
+                      "fontWeight": "700",
+                      "children": []
                     }
                   ]
                 },
@@ -4985,7 +4920,8 @@
                   "textAlign": "center",
                   "fontFamily": "Pretendard",
                   "fontSize": 56,
-                  "fontWeight": "800"
+                  "fontWeight": "800",
+                  "children": []
                 },
                 {
                   "type": "text",
@@ -4998,7 +4934,8 @@
                   "lineHeight": 1.6,
                   "textAlign": "center",
                   "fontFamily": "Pretendard",
-                  "fontSize": 18
+                  "fontSize": 18,
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -5027,7 +4964,8 @@
                           "content": "무료로 시작하기",
                           "fontFamily": "Pretendard",
                           "fontSize": 16,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         }
                       ]
                     },
@@ -5055,7 +4993,8 @@
                           "content": "데모 미팅 예약하기",
                           "fontFamily": "Pretendard",
                           "fontSize": 16,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         }
                       ]
                     }
@@ -5067,7 +5006,8 @@
                   "name": "divider",
                   "width": 400,
                   "height": 1,
-                  "fill": "#1A1A1A"
+                  "fill": "#1A1A1A",
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -5091,7 +5031,8 @@
                           "height": 16,
                           "iconFontName": "shield-check",
                           "iconFontFamily": "lucide",
-                          "fill": "#BFFF00"
+                          "fill": "#BFFF00",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5101,7 +5042,8 @@
                           "content": "SSL 보안 암호화",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "500"
+                          "fontWeight": "500",
+                          "children": []
                         }
                       ]
                     },
@@ -5120,7 +5062,8 @@
                           "height": 16,
                           "iconFontName": "timer",
                           "iconFontFamily": "lucide",
-                          "fill": "#BFFF00"
+                          "fill": "#BFFF00",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5130,7 +5073,8 @@
                           "content": "30일 무료 체험",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "500"
+                          "fontWeight": "500",
+                          "children": []
                         }
                       ]
                     },
@@ -5149,7 +5093,8 @@
                           "height": 16,
                           "iconFontName": "ban",
                           "iconFontFamily": "lucide",
-                          "fill": "#BFFF00"
+                          "fill": "#BFFF00",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5159,7 +5104,8 @@
                           "content": "언제든지 취소",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 13,
-                          "fontWeight": "500"
+                          "fontWeight": "500",
+                          "children": []
                         }
                       ]
                     }
@@ -5184,28 +5130,6 @@
           },
           "layout": "vertical",
           "children": [
-            {
-              "type": "frame",
-              "id": "aGf4f",
-              "name": "⚠ DEV LABEL – DELETE BEFORE DEPLOY",
-              "fill": "#BFFF00",
-              "padding": [
-                5,
-                10
-              ],
-              "alignItems": "center",
-              "children": [
-                {
-                  "type": "text",
-                  "id": "MDnFH",
-                  "fill": "#000000",
-                  "content": "§ 15 · FOOTER",
-                  "fontFamily": "JetBrains Mono",
-                  "fontSize": 11,
-                  "fontWeight": "700"
-                }
-              ]
-            },
             {
               "type": "frame",
               "id": "dH2hu",
@@ -5267,7 +5191,8 @@
                                   "textAlignVertical": "middle",
                                   "fontFamily": "Pretendard",
                                   "fontSize": 18,
-                                  "fontWeight": "800"
+                                  "fontWeight": "800",
+                                  "children": []
                                 }
                               ]
                             },
@@ -5279,7 +5204,8 @@
                               "content": "ClassIn",
                               "fontFamily": "Pretendard",
                               "fontSize": 20,
-                              "fontWeight": "800"
+                              "fontWeight": "800",
+                              "children": []
                             }
                           ]
                         },
@@ -5293,7 +5219,8 @@
                           "content": "온라인 학원 운영의 미래.\nAI가 이끄는 교육 플랫폼.",
                           "lineHeight": 1.7,
                           "fontFamily": "Pretendard",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "children": []
                         },
                         {
                           "type": "frame",
@@ -5320,7 +5247,8 @@
                                   "height": 16,
                                   "iconFontName": "youtube",
                                   "iconFontFamily": "lucide",
-                                  "fill": "#6e6e6e"
+                                  "fill": "#6e6e6e",
+                                  "children": []
                                 }
                               ]
                             },
@@ -5342,7 +5270,8 @@
                                   "height": 16,
                                   "iconFontName": "instagram",
                                   "iconFontFamily": "lucide",
-                                  "fill": "#6e6e6e"
+                                  "fill": "#6e6e6e",
+                                  "children": []
                                 }
                               ]
                             },
@@ -5364,7 +5293,8 @@
                                   "content": "K",
                                   "fontFamily": "Pretendard",
                                   "fontSize": 13,
-                                  "fontWeight": "700"
+                                  "fontWeight": "700",
+                                  "children": []
                                 }
                               ]
                             }
@@ -5388,7 +5318,8 @@
                           "content": "제품",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5398,7 +5329,8 @@
                           "content": "AI 기능 소개",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5408,7 +5340,8 @@
                           "content": "실시간 교실",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5418,7 +5351,8 @@
                           "content": "운영 자동화",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5428,7 +5362,8 @@
                           "content": "가격 안내",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5438,7 +5373,8 @@
                           "content": "업데이트 로그",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -5458,7 +5394,8 @@
                           "content": "지원",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5468,7 +5405,8 @@
                           "content": "도움말 센터",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5478,7 +5416,8 @@
                           "content": "온보딩 가이드",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5488,7 +5427,8 @@
                           "content": "고객 사례",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5498,7 +5438,8 @@
                           "content": "데모 신청",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     },
@@ -5518,7 +5459,8 @@
                           "content": "회사",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "700"
+                          "fontWeight": "700",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5528,7 +5470,8 @@
                           "content": "회사 소개",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5538,7 +5481,8 @@
                           "content": "블로그",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5548,7 +5492,8 @@
                           "content": "파트너십",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5558,7 +5503,8 @@
                           "content": "채용",
                           "fontFamily": "Pretendard",
                           "fontSize": 14,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     }
@@ -5570,7 +5516,8 @@
                   "name": "footer divider",
                   "width": "fill_container",
                   "height": 1,
-                  "fill": "#1A1A1A"
+                  "fill": "#1A1A1A",
+                  "children": []
                 },
                 {
                   "type": "frame",
@@ -5592,7 +5539,8 @@
                       "content": "© 2025 ClassIn. All rights reserved.",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 12,
-                      "fontWeight": "normal"
+                      "fontWeight": "normal",
+                      "children": []
                     },
                     {
                       "type": "frame",
@@ -5609,7 +5557,8 @@
                           "content": "개인정보 처리방침",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5619,7 +5568,8 @@
                           "content": "서비스 이용약관",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         },
                         {
                           "type": "text",
@@ -5629,7 +5579,8 @@
                           "content": "쿠키 정책",
                           "fontFamily": "JetBrains Mono",
                           "fontSize": 12,
-                          "fontWeight": "normal"
+                          "fontWeight": "normal",
+                          "children": []
                         }
                       ]
                     }
