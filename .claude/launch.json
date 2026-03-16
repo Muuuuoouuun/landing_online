@@ -1,0 +1,107 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "Landing_page (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\Class_project\\Landing_page && npm run dev"],
+      "port": 3000
+    },
+    {
+      "name": "OMR_maker (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\Class_project\\OMR_maker && npm run dev"],
+      "port": 3003
+    },
+    {
+      "name": "edu_community (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\Class_project\\edu_community && npm run dev"],
+      "port": 3004
+    },
+    {
+      "name": "block_matching (Vite)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\Class_project\\block_matching && npm run dev"],
+      "port": 5173
+    },
+    {
+      "name": "words_check (Node)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\Class_project\\Words_check && node src/index.js"],
+      "port": 4002
+    },
+    {
+      "name": "ai-content-os-mvp (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\brand_project\\content1 && npm run dev"],
+      "port": 3000
+    },
+    {
+      "name": "Salesbranding_dash (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\brand_project\\Salesbranding_dash && npm run dev"],
+      "port": 3006
+    },
+    {
+      "name": "worship_together (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\church_project\\worship_together && npm run dev"],
+      "port": 4000
+    },
+    {
+      "name": "ai_commu (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\community_project\\ai_commu && npm run dev"],
+      "port": 3007
+    },
+    {
+      "name": "ceo_commu (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\community_project\\ceo_commu && npm run dev"],
+      "port": 3008
+    },
+    {
+      "name": "christ_commu (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\community_project\\christ_commu && npm run dev"],
+      "port": 4000
+    },
+    {
+      "name": "g2_review (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\community_project\\g2_review && npm run dev"],
+      "port": 4001
+    },
+    {
+      "name": "medical_commu (Docker)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\community_project\\medical_commu && docker compose up"],
+      "port": 5432
+    },
+    {
+      "name": "portfolio-blog (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\Fucking_hot && npm run dev"],
+      "port": 3000
+    },
+    {
+      "name": "landing_big_man (Vite)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\Landing_s\\landing_big_man && npm run dev"],
+      "port": 5173
+    },
+    {
+      "name": "landing_medium_manage (Vite)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\Landing_s\\landing_medium_manage && npm run dev"],
+      "port": 5173
+    },
+    {
+      "name": "test_class0 (Next.js)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\test_class0 && npm run dev"],
+      "port": 2999
+    }
+  ]
+}
