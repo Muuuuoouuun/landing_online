@@ -1,0 +1,158 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Landing_page (Next.js :3000)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\Class_project\\Landing_page" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "OMR_maker (Next.js :3003)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\Class_project\\OMR_maker" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "edu_community (Next.js :3004)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\Class_project\\edu_community" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "block_matching (Vite :5173)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\Class_project\\block_matching" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "words_check (Node :4002)",
+      "type": "shell",
+      "command": "node src/index.js",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\Class_project\\Words_check" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "ai-content-os-mvp (Next.js :3000)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\brand_project\\content1" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "Salesbranding_dash (Next.js :3006)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\brand_project\\Salesbranding_dash" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "worship_together (Next.js :4000)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\church_project\\worship_together" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "ai_commu (Next.js :3007)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\community_project\\ai_commu" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "ceo_commu (Next.js :3008)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\community_project\\ceo_commu" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "christ_commu (Next.js :4000)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\community_project\\christ_commu" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "g2_review (Next.js :4001)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\community_project\\g2_review" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "medical_commu (Docker PostgreSQL :5432)",
+      "type": "shell",
+      "command": "docker compose up",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\community_project\\medical_commu" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "portfolio-blog (Next.js :3000)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\Fucking_hot" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "landing_big_man (Vite :5173)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\Landing_s\\landing_big_man" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "landing_medium_manage (Vite :5173)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\Landing_s\\landing_medium_manage" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    },
+    {
+      "label": "test_class0 (Next.js :2999)",
+      "type": "shell",
+      "command": "npm run dev",
+      "options": { "cwd": "C:\\Users\\aaaha\\OneDrive\\바탕 화면\\Projects\\test_class0" },
+      "group": "build",
+      "presentation": { "panel": "new", "reveal": "always" },
+      "isBackground": true
+    }
+  ]
+}
