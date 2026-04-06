@@ -1,7 +1,7 @@
 export function Footer() {
     return (
         <footer className="bg-black py-16 border-t border-[#1A1A1A]">
-            <div className="max-w-6xl mx-auto px-6">
+            <div className="max-w-6xl mx-auto px-8 md:px-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-10 mb-14">
                     <div className="col-span-2 md:col-span-1">
                         <span className="font-black text-white text-xl tracking-tight font-mono block mb-3">CLASS IN</span>

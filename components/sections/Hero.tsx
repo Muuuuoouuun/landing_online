@@ -8,7 +8,7 @@ export function Hero() {
             <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#BFFF00]/10 rounded-full blur-[120px] pointer-events-none" />
 
             {/* Nav */}
-            <nav className="relative z-20 flex items-center justify-between px-10 py-5 border-b border-[#1A1A1A]">
+            <nav className="relative z-20 flex items-center justify-between px-6 md:px-10 py-5 border-b border-[#1A1A1A]">
                 <span className="font-black text-white text-xl tracking-tight font-mono">CLASS IN</span>
                 <div className="hidden md:flex items-center gap-8 text-sm text-[#999] font-medium">
                     <a href="#" className="hover:text-white transition-colors">제품 소개</a>
@@ -23,7 +23,7 @@ export function Hero() {
             </nav>
 
             {/* Hero body */}
-            <div className="relative z-10 flex flex-col items-center justify-center flex-1 text-center px-6 py-24">
+            <div className="relative z-10 flex flex-col items-center justify-center flex-1 text-center px-8 md:px-6 py-24">
                 <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     animate={{ opacity: 1, y: 0 }}

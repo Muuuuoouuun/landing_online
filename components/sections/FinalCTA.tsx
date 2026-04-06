@@ -8,7 +8,7 @@ export function FinalCTA() {
         <section className="py-32 bg-black border-t border-[#1A1A1A] relative overflow-hidden">
             <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[600px] h-[400px] bg-[#BFFF00]/8 rounded-full blur-[120px] pointer-events-none" />
 
-            <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <div className="max-w-4xl mx-auto px-8 md:px-6 text-center relative z-10">
                 <motion.div
                     initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}

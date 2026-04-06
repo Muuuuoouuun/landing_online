@@ -29,7 +29,7 @@ const comparisons = [
 export function Outcomes() {
     return (
         <section id="outcomes" className="py-24 bg-slate-900 text-white">
-            <div className="container mx-auto">
+            <div className="container mx-auto px-8 md:px-6">
                 <div className="flex flex-col md:flex-row gap-12 items-center">
                     <div className="w-full md:w-1/3">
                         <h2 className="text-3xl font-extrabold tracking-tight mb-6">

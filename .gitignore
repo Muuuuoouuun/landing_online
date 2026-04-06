@@ -1,3 +1,10 @@
 .claude/
 !.claude/launch.json
 pencil-new.pen.bak*
+node_modules
+.next/
+build/
+dist/
+*.log
+.env*
+!.env.example

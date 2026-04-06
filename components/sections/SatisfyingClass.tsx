@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 export function SatisfyingClass() {
     return (
         <section className="py-24 md:py-32 bg-[#F9F8F4] overflow-hidden">
-            <div className="container mx-auto px-6 max-w-7xl relative">
+            <div className="container mx-auto px-8 md:px-6 max-w-7xl relative">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-16">
                     {/* Left text area */}
                     <div className="w-full lg:w-2/5 z-10">

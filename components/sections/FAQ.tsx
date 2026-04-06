@@ -70,7 +70,7 @@ function FAQItem({ question, answer, index }: { question: string; answer: string
 export function FAQ() {
     return (
         <section className="py-24 bg-[#0A0A0A] border-b border-[#1A1A1A]">
-            <div className="max-w-5xl mx-auto px-6">
+            <div className="max-w-5xl mx-auto px-8 md:px-6">
                 <div className="flex flex-col md:flex-row gap-16">
                     <div className="md:w-1/3 shrink-0">
                         <p className="text-[#BFFF00] text-xs font-mono tracking-widest uppercase mb-4">FAQ</p>

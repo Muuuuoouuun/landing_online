@@ -57,7 +57,7 @@ const plans = [
 export function Comparison() {
     return (
         <section className="py-24 bg-black border-b border-[#1A1A1A]">
-            <div className="max-w-5xl mx-auto px-6">
+            <div className="max-w-5xl mx-auto px-8 md:px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}

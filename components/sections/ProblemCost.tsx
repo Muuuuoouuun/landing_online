@@ -67,7 +67,7 @@ export function ProblemCost() {
             {/* Noise texture */}
             <div className="absolute inset-0 bg-[url('/images/noise-texture.png')] opacity-15 mix-blend-overlay pointer-events-none" />
 
-            <div className="container mx-auto relative z-10">
+            <div className="container mx-auto px-8 md:px-6 relative z-10">
                 {/* Title */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
