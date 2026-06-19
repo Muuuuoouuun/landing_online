@@ -56,62 +56,63 @@ const plans = [
 
 export function Comparison() {
     return (
-        <section className="py-24 bg-black border-b border-[#1A1A1A]">
+        <section className="py-24 md:py-32 bg-[#0E1A1F] border-t border-white/10">
             <div className="max-w-5xl mx-auto px-8 md:px-6">
                 <motion.div
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="mb-14"
+                    className="mb-16 max-w-2xl"
                 >
-                    <p className="text-[#BFFF00] text-xs font-mono tracking-widest uppercase mb-4">PRICING</p>
-                    <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight">
-                        합리적인 요금제
+                    <p className="text-[#E86A4C] text-xs tracking-[0.2em] uppercase mb-5">운영 구조 vs 단일 라이브 툴</p>
+                    <h2 className="font-serif font-semibold text-[#F2EFE8] text-4xl md:text-5xl tracking-[-0.02em] leading-[1.1]">
+                        라이브 수업 툴은 수업 中만 돕습니다.<br />
+                        ClassIn은 前·中·後를 잇습니다.
                     </h2>
-                    <p className="mt-4 text-[#777] text-lg">
+                    <p className="mt-5 text-[#8A9199] text-base md:text-lg leading-[1.65]">
                         규모에 맞게 시작하고, 필요할 때 확장하세요.
                     </p>
                 </motion.div>
 
-                <div className="grid md:grid-cols-3 gap-px bg-[#1A1A1A]">
+                <div className="grid md:grid-cols-3 gap-px bg-white/10 border border-white/10">
                     {plans.map((plan, i) => (
                         <motion.div
                             key={i}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 12 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.1 }}
+                            transition={{ duration: 0.6, delay: i * 0.08 }}
                             viewport={{ once: true }}
-                            className={`p-8 flex flex-col ${plan.highlight ? "bg-[#0D0D0D] border border-[#BFFF00]/30" : "bg-black"}`}
-                            style={{ margin: plan.highlight ? "-1px" : "0" }}
+                            className={`p-10 flex flex-col ${plan.highlight ? "bg-white/[0.03]" : "bg-[#0E1A1F]"}`}
                         >
                             {plan.highlight && (
-                                <span className="inline-block bg-[#BFFF00] text-black text-xs font-black px-3 py-1 mb-4 self-start tracking-wider">
+                                <span className="inline-block bg-[#1A4D3E] text-[#F2EFE8] text-[11px] tracking-[0.15em] uppercase px-3 py-1 mb-5 self-start rounded-sm">
                                     가장 인기
                                 </span>
                             )}
-                            <p className="text-[#777] text-xs font-mono uppercase tracking-widest mb-2">{plan.name}</p>
-                            <div className="flex items-end gap-1 mb-2">
-                                <span className={`text-4xl font-black ${plan.highlight ? "text-[#BFFF00]" : "text-white"}`}>
+                            <p className="text-[#8A9199] text-xs tracking-[0.2em] uppercase mb-3">{plan.name}</p>
+                            <div className="flex items-end gap-2 mb-3">
+                                <span className="font-serif text-[#F2EFE8] text-4xl md:text-5xl tracking-[-0.02em]">
                                     {plan.price}
                                 </span>
-                                {plan.period && <span className="text-[#555] text-sm mb-1">{plan.period}</span>}
+                                {plan.period && <span className="text-[#8A9199] text-sm mb-2">{plan.period}</span>}
                             </div>
-                            <p className="text-[#555] text-sm mb-8 leading-relaxed">{plan.desc}</p>
+                            <p className="text-[#8A9199] text-base leading-[1.65] mb-8">{plan.desc}</p>
 
                             <ul className="flex flex-col gap-3 mb-10 flex-1">
                                 {plan.features.map((f, fi) => (
-                                    <li key={fi} className="flex items-start gap-2.5 text-sm text-[#999]">
-                                        <Check className="w-4 h-4 text-[#BFFF00] mt-0.5 shrink-0" />
+                                    <li key={fi} className="flex items-start gap-3 text-base text-[#F2EFE8]/90 leading-[1.5]">
+                                        <Check className="w-4 h-4 text-[#1A4D3E] mt-1 shrink-0" strokeWidth={2.5} />
                                         {f}
                                     </li>
                                 ))}
                             </ul>
 
                             <DemoModal>
-                                <button className={`w-full py-3 font-bold text-sm transition-colors ${
+                                <button className={`w-full py-4 text-sm tracking-wide transition-colors rounded-lg ${
                                     plan.highlight
-                                        ? "bg-[#BFFF00] text-black hover:bg-white"
-                                        : "border border-[#2A2A2A] text-white hover:border-[#BFFF00] hover:text-[#BFFF00]"
+                                        ? "bg-[#1A4D3E] text-[#F2EFE8] hover:bg-[#1A4D3E]/90"
+                                        : "border border-white/10 text-[#F2EFE8] hover:border-[#1A4D3E] hover:text-[#F2EFE8]"
                                 }`}>
                                     {plan.cta}
                                 </button>

@@ -29,63 +29,58 @@ function CountUp({ target, suffix = "", prefix = "" }: { target: number; suffix?
 const pains = [
     {
         icon: TrendingDown,
-        title: "일관성 없는 수업 품질",
-        desc: "강사가 바뀌거나 지점이 늘어날 때마다 수업 품질이 떨어지나요?",
-        countTarget: 20,
+        title: "체험수업 → 등록, 조용한 누수",
+        desc: "체험은 들어오는데 결제로 안 이어집니다. 첫 5분의 인상과 후속 안내가 끊겨 있기 때문입니다.",
+        countTarget: 61,
         countSuffix: "%",
-        countLabel: "재등록률 하락",
-    },
-    {
-        icon: Clock,
-        title: "과도한 행정 업무",
-        desc: "강사들이 수업보다 채점과 리포트 작성에 더 많은 시간을 쓰고 있나요?",
-        countTarget: 1200,
-        countSuffix: "만원",
-        countLabel: "강사 1인당 연간 낭비",
+        countLabel: "체험 후 이탈률",
     },
     {
         icon: AlertTriangle,
-        title: "느린 강사 적응 속도",
-        desc: "신규 강사가 커리큘럼에 적응하는 데 몇 달이 걸리나요?",
-        countTarget: 3,
-        countSuffix: "개월",
-        countLabel: "적응 기간 소요",
+        title: "강사마다 달라지는 수업 경험",
+        desc: "같은 브랜드인데 튜터별 전달력·자료·피드백이 제각각. 학생 만족도 편차가 재등록률을 갉아먹습니다.",
+        countTarget: 58,
+        countSuffix: "%",
+        countLabel: "튜터별 만족도 편차",
+    },
+    {
+        icon: Clock,
+        title: "수업이 끝나면 경험도 끝난다",
+        desc: "녹화·복습·과제·피드백이 도구별로 흩어져, 수업 후 가치를 학생·학부모가 체감할 수 없습니다.",
+        countTarget: 42,
+        countSuffix: "%",
+        countLabel: "3개월 내 중도 이탈",
     },
 ]
 
 export function ProblemCost() {
     return (
-        <section className="relative py-24 md:py-32 bg-slate-950 overflow-hidden">
-            {/* Grid pattern */}
-            <div className="absolute inset-0 opacity-[0.03]"
-                style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
-
-            {/* Red/Orange ambient glow blobs */}
-            <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-red-500/[0.08] rounded-full blur-[120px] animate-blob1" />
-            <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-orange-500/[0.06] rounded-full blur-[100px] animate-blob2" />
+        <section className="relative py-24 md:py-32 bg-[#0E1A1F] overflow-hidden">
+            {/* Subtle radial accent */}
+            <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[720px] h-[720px] bg-[#1A4D3E]/[0.05] rounded-full blur-[140px]" />
 
             {/* Noise texture */}
-            <div className="absolute inset-0 bg-[url('/images/noise-texture.png')] opacity-15 mix-blend-overlay pointer-events-none" />
+            <div className="absolute inset-0 bg-[url('/images/noise-texture.png')] opacity-10 mix-blend-overlay pointer-events-none" />
 
             <div className="container mx-auto px-8 md:px-6 relative z-10">
                 {/* Title */}
                 <motion.div
-                    initial={{ opacity: 0, y: 40 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.7 }}
+                    transition={{ duration: 0.6 }}
                     className="text-center max-w-3xl mx-auto mb-20 px-4"
                 >
-                    <span className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-red-500/10 border border-red-500/20 text-red-400 text-sm font-semibold mb-6 backdrop-blur-sm">
-                        <span className="w-2 h-2 rounded-full bg-red-400 animate-pulse" />
-                        주의가 필요합니다
+                    <span className="inline-flex items-center gap-2 py-1.5 px-3 rounded-full border border-[#E86A4C]/30 text-[#E86A4C]/80 text-xs font-medium tracking-[0.15em] uppercase mb-8">
+                        <span className="w-1 h-1 rounded-full bg-[#E86A4C]/80" />
+                        누수 감지
                     </span>
-                    <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl md:text-[3.5rem] mb-6 leading-tight">
-                        전통적인 학원 운영의 <br className="md:hidden" />
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">숨겨진 비용</span>
+                    <h2 className="font-serif font-semibold text-3xl md:text-4xl lg:text-5xl text-[#F2EFE8] tracking-[-0.02em] leading-[1.1] mb-6">
+                        온라인 수업은 열려 있지만,<br className="md:hidden" />
+                        <span className="text-[#E86A4C]">가치는 조용히 새고 있습니다</span>
                     </h2>
-                    <p className="text-lg text-slate-400">
-                        표준화된 시스템 없이는 규모가 커질수록 수익이 아닌 혼란만 늘어납니다.
+                    <p className="text-base md:text-lg leading-[1.65] text-[#8A9199]">
+                        문제는 "온라인이 어렵다"가 아닙니다. 전환·재등록·신뢰가 경험의 끊긴 틈에서 매일 빠져나가고 있다는 것입니다.
                     </p>
                 </motion.div>
 
@@ -94,33 +89,31 @@ export function ProblemCost() {
                     {pains.map((pain, index) => (
                         <motion.div
                             key={index}
-                            initial={{ opacity: 0, y: 50, scale: 0.95 }}
-                            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                            transition={{ delay: index * 0.2, duration: 0.7, type: "spring", bounce: 0.15 }}
+                            initial={{ opacity: 0, y: 12 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1, duration: 0.6 }}
                             viewport={{ once: true }}
                             className="h-full"
                         >
-                            <div className="relative h-full md:min-h-[440px] rounded-3xl overflow-hidden group bg-slate-900/60 backdrop-blur-xl border border-slate-800/60 hover:border-red-500/30 transition-all duration-500 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] hover:shadow-[0_0_40px_rgba(239,68,68,0.1)]">
-                                {/* Top accent line */}
-                                <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent group-hover:via-red-400 group-hover:h-0.5 transition-all duration-500" />
+                            <div className="relative h-full md:min-h-[420px] rounded-xl overflow-hidden bg-white/[0.03] border border-white/10 transition-colors duration-500 hover:border-white/20 shadow-[0_1px_0_rgba(255,255,255,0.04)]">
+                                {/* Top hairline */}
+                                <div className="absolute top-0 inset-x-0 h-px bg-[#1A4D3E]/60" />
 
-                                <div className="pt-10 p-8 flex flex-col items-center text-center h-full">
+                                <div className="p-8 md:p-10 flex flex-col h-full">
                                     {/* Icon */}
-                                    <div className="relative mb-8">
-                                        <div className="absolute inset-0 rounded-full bg-red-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                                        <div className="relative p-5 rounded-2xl bg-gradient-to-br from-red-500/15 to-orange-500/10 border border-red-500/20 text-red-400 group-hover:from-red-500/25 group-hover:to-orange-500/20 group-hover:text-red-300 group-hover:scale-110 transition-all duration-500">
-                                            <pain.icon className="w-10 h-10" strokeWidth={1.5} />
-                                        </div>
+                                    <div className="mb-8">
+                                        <pain.icon className="w-8 h-8 text-[#E86A4C]/60" strokeWidth={1.25} />
                                     </div>
 
-                                    <h3 className="text-2xl font-extrabold mb-4 text-white tracking-tight">{pain.title}</h3>
-                                    <p className="text-slate-400 mb-8 flex-grow text-lg leading-relaxed">{pain.desc}</p>
+                                    <h3 className="font-serif font-semibold text-xl md:text-2xl text-[#F2EFE8] tracking-[-0.01em] leading-[1.2] mb-4">{pain.title}</h3>
+                                    <p className="text-[#8A9199] text-base leading-[1.65] mb-8 flex-grow">{pain.desc}</p>
 
                                     {/* Cost footer with counter */}
-                                    <div className="w-full pt-6 border-t border-slate-800 mt-auto">
-                                        <p className="text-xs font-bold text-red-400/70 uppercase tracking-[0.2em] mb-2">예상 손실</p>
-                                        <p className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400">
-                                            <CountUp target={pain.countTarget} suffix={pain.countSuffix} /> {pain.countLabel}
+                                    <div className="w-full pt-6 border-t border-white/10 mt-auto">
+                                        <p className="text-[11px] text-[#8A9199] uppercase tracking-[0.2em] mb-2">예상 손실</p>
+                                        <p className="font-serif font-semibold text-2xl text-[#F2EFE8]">
+                                            <span className="text-[#E86A4C]"><CountUp target={pain.countTarget} suffix={pain.countSuffix} /></span>
+                                            <span className="text-[#8A9199] text-base ml-2">{pain.countLabel}</span>
                                         </p>
                                     </div>
                                 </div>
@@ -131,106 +124,89 @@ export function ProblemCost() {
 
                 {/* Risk Dashboard */}
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.5, duration: 0.7 }}
+                    transition={{ delay: 0.2, duration: 0.6 }}
                     className="mt-20 mx-auto max-w-4xl"
                 >
-                    <div className="bg-slate-900/80 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-slate-800/60 shadow-[0_0_80px_rgba(239,68,68,0.06)]">
+                    <div className="bg-white/[0.03] p-8 md:p-10 rounded-xl border border-white/10 shadow-[0_1px_0_rgba(255,255,255,0.04)]">
                         {/* Header */}
                         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
                             <div>
-                                <h3 className="font-bold text-white text-xl mb-1">운영 리스크 대시보드</h3>
-                                <p className="text-slate-500 text-sm">시스템 미도입 학원 평균 데이터</p>
+                                <h3 className="font-serif font-semibold text-[#F2EFE8] text-xl tracking-[-0.01em] mb-1">운영 리스크 대시보드</h3>
+                                <p className="text-[#8A9199] text-sm">운영 구조 없이 라이브 툴만 쓰는 팀 평균</p>
                             </div>
-                            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-red-500/15 border border-red-500/30">
-                                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                                <span className="font-bold text-red-400 text-sm">즉시 개선 필요</span>
+                            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#E86A4C]/30">
+                                <span className="w-1 h-1 rounded-full bg-[#E86A4C]/80" />
+                                <span className="text-[#E86A4C]/80 text-xs tracking-[0.15em] uppercase">누수 감지</span>
                             </span>
                         </div>
 
                         {/* Metric Cards */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
                             {[
-                                { label: "데이터 파편화", value: 85, color: "red", desc: "지점 간 정보 단절" },
-                                { label: "강사 이탈률", value: 42, color: "orange", desc: "연간 평균 퇴사율" },
-                                { label: "학부모 불만", value: 67, color: "yellow", desc: "소통 부재 관련" },
+                                { label: "체험→등록 전환", value: 23, desc: "평균 전환율에 머무름" },
+                                { label: "3개월 재등록률", value: 48, desc: "수업 후 경험 공백" },
+                                { label: "튜터별 편차", value: 58, desc: "학생 만족도 분산" },
                             ].map((metric, i) => (
                                 <motion.div
                                     key={i}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    initial={{ opacity: 0, y: 12 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ delay: 0.6 + i * 0.15 }}
-                                    className="relative p-5 rounded-2xl bg-slate-800/50 border border-slate-700/50 group hover:border-slate-600/50 transition-all duration-300"
+                                    transition={{ delay: 0.3 + i * 0.1, duration: 0.6 }}
+                                    className="relative p-5 rounded-lg bg-white/[0.03] border border-white/10"
                                 >
                                     <div className="flex items-center justify-between mb-3">
-                                        <span className="text-slate-400 text-sm font-medium">{metric.label}</span>
-                                        <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-                                            metric.color === "red" ? "bg-red-500/15 text-red-400" :
-                                            metric.color === "orange" ? "bg-orange-500/15 text-orange-400" :
-                                            "bg-yellow-500/15 text-yellow-400"
-                                        }`}>
-                                            위험
-                                        </span>
+                                        <span className="text-[#8A9199] text-sm">{metric.label}</span>
                                     </div>
                                     <div className="flex items-end gap-1 mb-3">
-                                        <span className={`text-4xl font-black ${
-                                            metric.color === "red" ? "text-red-400" :
-                                            metric.color === "orange" ? "text-orange-400" :
-                                            "text-yellow-400"
-                                        }`}>
+                                        <span className="font-serif font-semibold text-4xl text-[#E86A4C]">
                                             <CountUp target={metric.value} suffix="" />
                                         </span>
-                                        <span className="text-slate-500 text-lg font-bold mb-1">%</span>
+                                        <span className="text-[#8A9199] text-lg mb-1">%</span>
                                     </div>
                                     {/* Mini bar */}
-                                    <div className="h-1.5 bg-slate-700/50 rounded-full overflow-hidden">
+                                    <div className="h-px bg-white/10 overflow-hidden">
                                         <motion.div
                                             initial={{ width: "0%" }}
                                             whileInView={{ width: `${metric.value}%` }}
                                             viewport={{ once: true }}
-                                            transition={{ duration: 1.5, delay: 0.8 + i * 0.2, ease: [0.16, 1, 0.3, 1] }}
-                                            className={`h-full rounded-full ${
-                                                metric.color === "red" ? "bg-gradient-to-r from-red-500 to-red-400" :
-                                                metric.color === "orange" ? "bg-gradient-to-r from-orange-500 to-orange-400" :
-                                                "bg-gradient-to-r from-yellow-500 to-yellow-400"
-                                            }`}
+                                            transition={{ duration: 1.2, delay: 0.5 + i * 0.15, ease: [0.16, 1, 0.3, 1] }}
+                                            className="h-full bg-[#1A4D3E]"
                                         />
                                     </div>
-                                    <p className="text-slate-500 text-xs mt-2">{metric.desc}</p>
+                                    <p className="text-[#8A9199] text-xs mt-3">{metric.desc}</p>
                                 </motion.div>
                             ))}
                         </div>
 
                         {/* Overall Risk Bar */}
-                        <div className="p-5 rounded-2xl bg-slate-800/30 border border-slate-700/30">
+                        <div className="p-5 rounded-lg bg-white/[0.02] border border-white/10">
                             <div className="flex items-center justify-between mb-3">
-                                <span className="text-slate-300 font-semibold text-sm">종합 운영 비효율 지수</span>
-                                <span className="text-red-400 font-black text-lg"><CountUp target={85} suffix="%" /></span>
+                                <span className="text-[#F2EFE8] text-sm">매출 누수 종합 지수</span>
+                                <span className="font-serif font-semibold text-[#E86A4C] text-lg"><CountUp target={76} suffix="%" /></span>
                             </div>
-                            <div className="relative h-3 bg-slate-800 rounded-full overflow-hidden">
+                            <div className="relative h-px bg-white/10 overflow-hidden">
                                 <motion.div
                                     initial={{ width: "0%" }}
-                                    whileInView={{ width: "85%" }}
-                                    transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
+                                    whileInView={{ width: "76%" }}
+                                    transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                                     viewport={{ once: true }}
-                                    className="h-full bg-gradient-to-r from-yellow-500 via-orange-500 to-red-500 rounded-full relative"
-                                >
-                                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer bg-[length:200%_100%]" />
-                                </motion.div>
+                                    className="h-full bg-[#1A4D3E]"
+                                />
                             </div>
-                            <p className="text-xs text-slate-500 mt-3 text-center">
-                                멀티 지점 학원의 85%가 표준화 시스템 부재로 운영 비효율을 겪고 있습니다
+                            <p className="text-xs text-[#8A9199] mt-3 text-center leading-[1.65]">
+                                10곳 중 7곳 이상이, 라이브 툴은 쓰지만 수업 前·中·後를 잇지 못해 매출이 새고 있습니다
                             </p>
                         </div>
                     </div>
                 </motion.div>
             </div>
 
-            {/* Bottom edge line */}
-            <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-red-500/30 to-transparent" />
+            {/* Bottom edge hairline */}
+            <div className="absolute bottom-0 inset-x-0 h-px bg-white/5" />
         </section>
     )
 }

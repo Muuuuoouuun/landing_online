@@ -1,94 +1,60 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Check, X, Minus } from "lucide-react"
 
-const features = [
-    "화면 공유 & 판서",
-    "인터랙티브 화이트보드",
-    "실시간 학생 모니터링",
-    "AI 자동 채점",
-    "출결 자동 관리",
-    "학습 분석 대시보드",
-    "학부모 리포트 자동화",
-    "대용량 동접 (2,000명+)",
-    "지연 없는 저지연 스트리밍",
-]
-
-type StatusType = "check" | "x" | "partial"
-
-const tools: { name: string; status: StatusType[] }[] = [
+const cases = [
     {
-        name: "Zoom",
-        status: ["check", "x", "x", "x", "x", "x", "x", "check", "check"],
+        num: "+34%",
+        label: "체험 → 등록 전환",
+        desc: "첫 수업 경험 설계와 자동 리마인드로 전환 누수를 막았습니다.",
     },
     {
-        name: "Google Meet",
-        status: ["check", "x", "x", "x", "x", "partial", "x", "check", "check"],
+        num: "72%",
+        label: "3개월 재등록률",
+        desc: "학습 데이터 기반 학부모 리포트로 지속 등록이 자연스러워졌습니다.",
     },
     {
-        name: "ClassIn",
-        status: ["check", "check", "check", "check", "check", "check", "check", "check", "check"],
+        num: "−60%",
+        label: "튜터 간 수업 편차",
+        desc: "공통 수업 템플릿과 운영 체크리스트로 품질 편차를 줄였습니다.",
     },
 ]
-
-function StatusIcon({ status }: { status: StatusType }) {
-    if (status === "check") return <Check className="w-5 h-5 text-[#BFFF00]" />
-    if (status === "partial") return <Minus className="w-5 h-5 text-[#555]" />
-    return <X className="w-4 h-4 text-[#444]" />
-}
 
 export function CaseStudies() {
     return (
-        <section className="py-24 bg-black border-b border-[#1A1A1A] overflow-x-auto">
+        <section className="py-24 md:py-32 bg-[#F2EFE8] border-t border-[#0B0F14]/10">
             <div className="max-w-5xl mx-auto px-8 md:px-6">
                 <motion.div
-                    initial={{ opacity: 0, y: 16 }}
+                    initial={{ opacity: 0, y: 12 }}
                     whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
-                    className="mb-14"
+                    className="mb-16 max-w-2xl"
                 >
-                    <p className="text-[#BFFF00] text-xs font-mono tracking-widest uppercase mb-4">COMPARISON</p>
-                    <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight leading-tight">
-                        왜 ClassIn인가요?
+                    <p className="text-[#1A4D3E] text-xs tracking-[0.2em] uppercase mb-5">CASE STUDIES</p>
+                    <h2 className="font-serif font-semibold text-[#0B0F14] text-4xl md:text-5xl tracking-[-0.02em] leading-[1.1]">
+                        숫자가 먼저 달라졌습니다.
                     </h2>
-                    <p className="mt-4 text-[#777] text-lg max-w-xl">
-                        교육 특화 기능에서 ClassIn은 범용 화상회의 툴과 비교가 되지 않습니다.
+                    <p className="mt-5 text-[#5A6169] text-base md:text-lg leading-[1.65]">
+                        ClassIn 도입 기관에서 관찰된 전환·재등록·편차 지표의 변화입니다.
                     </p>
                 </motion.div>
 
-                <div className="min-w-[640px]">
-                    {/* Header */}
-                    <div className="grid grid-cols-4 border-b border-[#1A1A1A] pb-4 mb-0">
-                        <div className="text-[#555] text-xs font-mono uppercase tracking-wider">기능</div>
-                        {tools.map((tool, i) => (
-                            <div key={i} className={`text-center text-sm font-bold ${tool.name === "ClassIn" ? "text-[#BFFF00]" : "text-[#777]"}`}>
-                                {tool.name === "ClassIn" ? (
-                                    <span className="inline-flex items-center gap-1">
-                                        {tool.name}
-                                        <span className="text-[10px] bg-[#BFFF00] text-black px-1.5 py-0.5 font-black">추천</span>
-                                    </span>
-                                ) : tool.name}
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Rows */}
-                    {features.map((feat, fi) => (
+                <div className="grid md:grid-cols-3 gap-px bg-[#0B0F14]/10 border border-[#0B0F14]/10">
+                    {cases.map((c, i) => (
                         <motion.div
-                            key={fi}
-                            initial={{ opacity: 0, x: -8 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            transition={{ delay: fi * 0.05 }}
+                            key={i}
+                            initial={{ opacity: 0, y: 12 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: i * 0.08 }}
                             viewport={{ once: true }}
-                            className={`grid grid-cols-4 py-4 border-b border-[#1A1A1A] ${fi % 2 === 0 ? "bg-transparent" : "bg-[#0A0A0A]"}`}
+                            className="bg-[#F2EFE8] p-10 flex flex-col"
                         >
-                            <div className="text-[#999] text-sm">{feat}</div>
-                            {tools.map((tool, ti) => (
-                                <div key={ti} className="flex justify-center items-center">
-                                    <StatusIcon status={tool.status[fi]} />
-                                </div>
-                            ))}
+                            <span className="font-serif text-[#E86A4C] text-5xl md:text-6xl tracking-[-0.02em] leading-[1] mb-6">
+                                {c.num}
+                            </span>
+                            <p className="font-serif text-[#0B0F14] text-lg mb-3">{c.label}</p>
+                            <p className="text-[#5A6169] text-base leading-[1.65]">{c.desc}</p>
                         </motion.div>
                     ))}
                 </div>

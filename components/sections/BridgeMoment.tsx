@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
-import { ArrowRight } from "lucide-react"
 
 function CountUp({ target, suffix = "", prefix = "", decimals = 0 }: { target: number; suffix?: string; prefix?: string; decimals?: number }) {
     const ref = useRef<HTMLSpanElement>(null)
@@ -31,35 +30,27 @@ function CountUp({ target, suffix = "", prefix = "", decimals = 0 }: { target: n
 }
 
 const stats = [
-    { value: 38, suffix: "%", prefix: "+", label: "매출 성장", decimals: 0 },
-    { value: 15, suffix: "시간", prefix: "", label: "주당 절감 시간", decimals: 0 },
-    { value: 4.8, suffix: "점", prefix: "", label: "학부모 만족도", decimals: 1 },
+    { value: 34, suffix: "%", prefix: "+", label: "체험→등록 전환율", decimals: 0 },
+    { value: 72, suffix: "%", prefix: "", label: "3개월 재등록률", decimals: 0 },
+    { value: 60, suffix: "%", prefix: "-", label: "튜터별 경험 편차", decimals: 0 },
 ]
 
 export function BridgeMoment() {
     return (
-        <section className="relative py-20 md:py-28 bg-gradient-to-b from-slate-950 via-slate-900 to-[#084734] overflow-hidden">
-            {/* Radial glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#CEF17B]/[0.05] rounded-full blur-[150px]" />
-
-            {/* Dot pattern */}
-            <div className="absolute inset-0 opacity-[0.04]"
-                style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 1px)', backgroundSize: '32px 32px' }} />
+        <section className="relative py-24 md:py-32 bg-[#F2EFE8] overflow-hidden">
+            {/* Subtle radial accent */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] bg-[#1A4D3E]/[0.05] rounded-full blur-[150px]" />
 
             <div className="container mx-auto px-8 md:px-6 relative z-10">
                 <motion.div
-                    initial={{ opacity: 0, y: 40, scale: 0.97 }}
-                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                    transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
                     viewport={{ once: true }}
                     className="relative max-w-5xl mx-auto"
                 >
-                    {/* Outer glow ring */}
-                    <div className="absolute -inset-px rounded-3xl bg-gradient-to-r from-[#CEF17B]/30 via-emerald-500/20 to-[#CEF17B]/30 blur-sm" />
-
-                    <div className="relative rounded-3xl overflow-hidden bg-white/[0.04] backdrop-blur-2xl border border-white/10 shadow-[0_0_80px_rgba(206,241,123,0.08)]">
-                        {/* Inner glow at top */}
-                        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#CEF17B]/50 to-transparent" />
+                    <div className="relative rounded-xl overflow-hidden bg-white/60 border border-[#0B0F14]/10">
+                        <div className="absolute top-0 inset-x-0 h-px bg-[#1A4D3E]/30" />
 
                         <div className="relative z-10 p-8 md:p-16">
                             {/* Top section: Question + Answer */}
@@ -67,76 +58,72 @@ export function BridgeMoment() {
                                 {/* Left: Question */}
                                 <div className="flex-1 text-center md:text-left min-w-0">
                                     <motion.p
-                                        initial={{ opacity: 0, y: 10 }}
+                                        initial={{ opacity: 0, y: 12 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ delay: 0.2 }}
-                                        className="text-[#CEF17B]/60 text-sm font-semibold uppercase tracking-[0.25em] mb-4"
+                                        transition={{ delay: 0.1, duration: 0.6 }}
+                                        className="text-[#5A6169] text-xs font-medium uppercase tracking-[0.25em] mb-4"
                                     >
-                                        상상해 보세요
+                                        만약에
                                     </motion.p>
 
                                     <motion.h2
-                                        initial={{ opacity: 0, y: 15 }}
+                                        initial={{ opacity: 0, y: 12 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ delay: 0.3, duration: 0.7 }}
-                                        className="text-3xl md:text-4xl lg:text-[2.75rem] font-black text-white leading-[1.3] tracking-tight"
+                                        transition={{ delay: 0.15, duration: 0.6 }}
+                                        className="font-serif font-semibold text-3xl md:text-4xl lg:text-5xl text-[#0B0F14] leading-[1.1] tracking-[-0.02em]"
                                     >
-                                        <span className="text-[#CEF17B]">10개 지점</span> 관리가<br />
-                                        <span className="text-[#CEF17B]">1개 지점</span>처럼 느껴진다면?
+                                        <span className="text-[#1A4D3E]">체험수업의 첫 5분</span>부터<br />
+                                        <span className="text-[#1A4D3E]">재등록</span>까지 이어진다면?
                                     </motion.h2>
                                 </div>
 
-                                {/* Divider - animated arrow */}
+                                {/* Divider - hairline */}
                                 <div className="hidden md:flex items-center shrink-0">
-                                    <motion.div
-                                        animate={{ x: [0, 8, 0] }}
-                                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                                    >
-                                        <ArrowRight className="w-10 h-10 text-[#CEF17B]/40" />
-                                    </motion.div>
+                                    <div className="w-16 h-px bg-[#1A4D3E]/40" />
+                                    <span className="text-[#1A4D3E] text-xl ml-1">→</span>
                                 </div>
 
                                 {/* Right: Answer */}
                                 <div className="flex-1 text-center md:text-left min-w-0">
                                     <motion.p
-                                        initial={{ opacity: 0, y: 15 }}
+                                        initial={{ opacity: 0, y: 12 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ delay: 0.4 }}
-                                        className="text-slate-300 text-lg md:text-xl leading-relaxed"
+                                        transition={{ delay: 0.2, duration: 0.6 }}
+                                        className="text-[#5A6169] text-base md:text-lg leading-[1.65]"
                                     >
-                                        하나의 플랫폼, 하나의 기준으로<br className="hidden md:block" />
-                                        모든 지점이 최고 효율로 운영됩니다.
+                                        수업 前·中·後가 하나의 경험이 되면,<br className="hidden md:block" />
+                                        전환·재등록·신뢰가 같이 움직입니다.
                                     </motion.p>
                                 </div>
                             </div>
 
                             {/* Divider line */}
-                            <div className="my-8 md:my-10 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                            <div className="my-8 md:my-10 h-px bg-[#0B0F14]/10" />
 
                             {/* Bottom: Stats */}
                             <motion.div
-                                initial={{ opacity: 0, y: 20 }}
+                                initial={{ opacity: 0, y: 12 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                transition={{ delay: 0.5 }}
+                                transition={{ delay: 0.25, duration: 0.6 }}
                                 className="grid grid-cols-3 gap-4 md:gap-6"
                             >
                                 {stats.map((stat, i) => (
                                     <motion.div
                                         key={i}
-                                        initial={{ opacity: 0, y: 20 }}
+                                        initial={{ opacity: 0, y: 12 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
-                                        transition={{ delay: 0.6 + i * 0.15 }}
-                                        className="relative p-5 md:p-6 rounded-2xl bg-white/[0.06] border border-white/10 hover:bg-white/[0.1] transition-colors duration-300 text-center"
+                                        transition={{ delay: 0.3 + i * 0.1, duration: 0.6 }}
+                                        className="relative p-5 md:p-6 rounded-lg bg-white/70 border border-[#0B0F14]/10 text-center"
                                     >
-                                        <div className="text-3xl md:text-5xl font-black text-[#CEF17B] mb-2">
+                                        <div className="font-serif font-semibold text-3xl md:text-5xl text-[#E86A4C] mb-2 tracking-[-0.02em]">
                                             <CountUp target={stat.value} prefix={stat.prefix} suffix={stat.suffix} decimals={stat.decimals} />
                                         </div>
-                                        <div className="text-white/40 text-xs md:text-sm font-medium tracking-wider">{stat.label}</div>
+                                        <div className="text-[#5A6169] text-xs md:text-sm tracking-wider">{stat.label}</div>
                                     </motion.div>
                                 ))}
                             </motion.div>
@@ -145,8 +132,8 @@ export function BridgeMoment() {
                 </motion.div>
             </div>
 
-            {/* Bottom edge line */}
-            <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#CEF17B]/30 to-transparent" />
+            {/* Bottom edge hairline */}
+            <div className="absolute bottom-0 inset-x-0 h-px bg-[#0B0F14]/10" />
         </section>
     )
 }

@@ -31,20 +31,20 @@ function FAQItem({ question, answer, index }: { question: string; answer: string
     const [open, setOpen] = useState(false)
     return (
         <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.07 }}
+            transition={{ duration: 0.6, delay: index * 0.05 }}
             viewport={{ once: true }}
-            className="border-b border-[#1A1A1A]"
+            className="border-b border-[#0B0F14]/10"
         >
             <button
                 onClick={() => setOpen(!open)}
                 className="w-full flex items-center justify-between py-7 text-left gap-4 group"
             >
-                <span className="text-white font-semibold text-lg group-hover:text-[#BFFF00] transition-colors leading-snug">
+                <span className="font-serif text-[#0B0F14] text-lg md:text-xl leading-[1.3] group-hover:text-[#1A4D3E] transition-colors">
                     {question}
                 </span>
-                <span className="shrink-0 w-8 h-8 border border-[#2A2A2A] flex items-center justify-center text-[#555] group-hover:border-[#BFFF00] group-hover:text-[#BFFF00] transition-colors">
+                <span className="shrink-0 w-9 h-9 rounded-full border border-[#0B0F14]/10 flex items-center justify-center text-[#5A6169] group-hover:border-[#1A4D3E] group-hover:text-[#1A4D3E] transition-colors">
                     {open ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
                 </span>
             </button>
@@ -57,7 +57,7 @@ function FAQItem({ question, answer, index }: { question: string; answer: string
                         transition={{ duration: 0.25, ease: "easeInOut" }}
                         className="overflow-hidden"
                     >
-                        <p className="pb-7 text-[#999] text-base leading-relaxed pr-12">
+                        <p className="pb-8 text-[#5A6169] text-base md:text-lg leading-[1.65] pr-12">
                             {answer}
                         </p>
                     </motion.div>
@@ -69,20 +69,20 @@ function FAQItem({ question, answer, index }: { question: string; answer: string
 
 export function FAQ() {
     return (
-        <section className="py-24 bg-[#0A0A0A] border-b border-[#1A1A1A]">
+        <section className="py-24 md:py-32 bg-[#F2EFE8] border-t border-[#0B0F14]/10">
             <div className="max-w-5xl mx-auto px-8 md:px-6">
                 <div className="flex flex-col md:flex-row gap-16">
                     <div className="md:w-1/3 shrink-0">
-                        <p className="text-[#BFFF00] text-xs font-mono tracking-widest uppercase mb-4">FAQ</p>
-                        <h2 className="text-4xl font-black text-white leading-tight tracking-tight">
+                        <p className="text-[#1A4D3E] text-xs tracking-[0.2em] uppercase mb-5">FAQ</p>
+                        <h2 className="font-serif font-semibold text-[#0B0F14] text-4xl md:text-5xl tracking-[-0.02em] leading-[1.1]">
                             자주 묻는<br />질문
                         </h2>
-                        <p className="mt-4 text-[#777] text-sm leading-relaxed">
+                        <p className="mt-5 text-[#5A6169] text-base leading-[1.65]">
                             더 궁금한 점이 있으시다면 언제든지 문의해 주세요.
                         </p>
                     </div>
 
-                    <div className="flex-1 border-t border-[#1A1A1A]">
+                    <div className="flex-1 border-t border-[#0B0F14]/10">
                         {faqs.map((faq, i) => (
                             <FAQItem key={i} {...faq} index={i} />
                         ))}

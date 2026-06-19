@@ -4,8 +4,9 @@
     {
       "name": "classin-landing (Next.js :3010)",
       "runtimeExecutable": "cmd",
-      "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\Landing_s\\landing_online && npm run dev"],
-      "port": 3010
+      "runtimeArgs": ["/c", "cd /d C:\\Projects\\Landing_s\\landing_online && npx next dev"],
+      "port": 3010,
+      "autoPort": true
     },
     {
       "name": "Landing_page (Next.js)",

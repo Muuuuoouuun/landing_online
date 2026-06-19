@@ -28,21 +28,30 @@ const comparisons = [
 
 export function Outcomes() {
     return (
-        <section id="outcomes" className="py-24 bg-slate-900 text-white">
-            <div className="container mx-auto px-8 md:px-6">
-                <div className="flex flex-col md:flex-row gap-12 items-center">
+        <section id="outcomes" className="relative py-24 md:py-32 bg-[#0B0F14] text-[#F2EFE8] overflow-hidden">
+            {/* Subtle radial accent */}
+            <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[700px] h-[700px] bg-[#1A4D3E]/[0.05] rounded-full blur-[140px]" />
+
+            <div className="container mx-auto px-8 md:px-6 relative z-10">
+                <div className="flex flex-col md:flex-row gap-12 md:gap-16 items-start">
                     <div className="w-full md:w-1/3">
-                        <h2 className="text-3xl font-extrabold tracking-tight mb-6">
-                            단순한 관리 도구가 아닙니다.<br />
-                            <span className="text-[#CEF17B]">성장 엔진입니다.</span>
-                        </h2>
-                        <p className="text-slate-400 text-lg mb-8">
-                            주먹구구식 운영에서 벗어나, 데이터 기반의 확장 가능한 교육 기업으로 성장하세요.
+                        <motion.h2
+                            initial={{ opacity: 0, y: 12 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="font-serif font-semibold text-3xl md:text-4xl lg:text-5xl tracking-[-0.02em] leading-[1.1] mb-6"
+                        >
+                            라이브 수업 툴이 아니라,<br />
+                            <span className="text-[#E86A4C]">전환·재등록의 구조입니다.</span>
+                        </motion.h2>
+                        <p className="text-[#8A9199] text-base md:text-lg leading-[1.65] mb-8">
+                            수업 前·中·後를 하나의 경험으로 잇자, 매출 누수 지점이 선명해졌습니다.
                         </p>
-                        <div className="p-6 bg-slate-800 rounded-xl border border-slate-700 inline-block">
-                            <div className="text-sm text-slate-400 uppercase tracking-wider font-semibold mb-2">평균 절감 시간</div>
-                            <div className="text-5xl font-bold text-[#CEF17B]">15시간</div>
-                            <div className="text-sm text-slate-400 mt-2">강사 1인당 / 주</div>
+                        <div className="p-6 bg-[#1A4D3E]/10 rounded-lg border border-[#1A4D3E]/30 inline-block">
+                            <div className="text-xs text-[#8A9199] uppercase tracking-[0.2em] mb-2">평균 재등록률 변화</div>
+                            <div className="font-serif font-semibold text-5xl text-[#E86A4C] tracking-[-0.02em]">+31%p</div>
+                            <div className="text-xs text-[#8A9199] mt-2">도입 3개월 후 / 팀 평균</div>
                         </div>
                     </div>
 
@@ -50,16 +59,16 @@ export function Outcomes() {
                         {/* Desktop Table Header */}
                         <div className="hidden md:grid md:grid-cols-2 px-8">
                             <div className="flex items-center gap-3">
-                                <div className="p-2 rounded-full bg-slate-800 border border-slate-700">
-                                    <X className="w-6 h-6 text-red-400" />
+                                <div className="p-1.5 rounded-full border border-white/10">
+                                    <X className="w-4 h-4 text-[#8A9199]" strokeWidth={1.25} />
                                 </div>
-                                <span className="font-extrabold text-2xl text-slate-300 tracking-tight">Before</span>
+                                <span className="font-serif font-semibold text-lg text-[#8A9199] tracking-[-0.01em]">Before</span>
                             </div>
                             <div className="flex items-center gap-3">
-                                <div className="p-2 rounded-full bg-[#084734]/30 border border-[#084734]">
-                                    <Check className="w-6 h-6 text-[#CEF17B]" />
+                                <div className="p-1.5 rounded-full border border-[#1A4D3E]/40">
+                                    <Check className="w-4 h-4 text-[#F2EFE8]" strokeWidth={1.25} />
                                 </div>
-                                <span className="font-extrabold text-2xl text-[#CEF17B] tracking-tight">After</span>
+                                <span className="font-serif font-semibold text-lg text-[#F2EFE8] tracking-[-0.01em]">After</span>
                             </div>
                         </div>
 
@@ -67,31 +76,31 @@ export function Outcomes() {
                             {comparisons.map((item, index) => (
                                 <motion.div
                                     key={index}
-                                    initial={{ opacity: 0, y: 20 }}
+                                    initial={{ opacity: 0, y: 12 }}
                                     whileInView={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.1 }}
+                                    transition={{ delay: index * 0.08, duration: 0.6 }}
                                     viewport={{ once: true }}
-                                    className="grid md:grid-cols-2 rounded-2xl overflow-hidden border border-slate-700 bg-slate-800/30 shadow-lg"
+                                    className="grid md:grid-cols-2 rounded-lg overflow-hidden border border-white/10"
                                 >
                                     {/* Before Card */}
-                                    <div className="p-6 md:p-8 flex flex-col justify-center border-b md:border-b-0 md:border-r border-slate-700/50 hover:bg-slate-800/50 transition-colors">
+                                    <div className="p-6 md:p-8 flex flex-col justify-center border-b md:border-b-0 md:border-r border-white/10 bg-white/[0.02]">
                                         <div className="md:hidden flex items-center gap-2 mb-4">
-                                            <X className="w-5 h-5 text-red-400" />
-                                            <span className="font-bold text-lg text-slate-300 tracking-tight">Before</span>
+                                            <X className="w-4 h-4 text-[#8A9199]" strokeWidth={1.25} />
+                                            <span className="font-serif font-semibold text-base text-[#8A9199]">Before</span>
                                         </div>
-                                        <span className="text-slate-500 font-bold text-sm mb-3 uppercase tracking-wider">{item.role}</span>
-                                        <p className="text-slate-300 text-lg leading-relaxed">{item.before}</p>
+                                        <span className="text-[#8A9199] text-[11px] mb-3 uppercase tracking-[0.2em]">{item.role}</span>
+                                        <p className="text-[#8A9199] text-base md:text-lg leading-[1.65]">{item.before}</p>
                                     </div>
 
                                     {/* After Card */}
-                                    <div className="p-6 md:p-8 flex flex-col justify-center relative overflow-hidden bg-gradient-to-br from-[#084734]/20 to-[#084734]/5 hover:from-[#084734]/30 transition-colors">
-                                        <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-[#CEF17B]" />
+                                    <div className="p-6 md:p-8 flex flex-col justify-center relative overflow-hidden bg-[#1A4D3E]/15 border border-[#1A4D3E]/40 md:border-0">
+                                        <div className="absolute left-0 top-0 bottom-0 w-px bg-[#1A4D3E]" />
                                         <div className="md:hidden flex items-center gap-2 mb-4">
-                                            <Check className="w-5 h-5 text-[#CEF17B]" />
-                                            <span className="font-bold text-lg text-[#CEF17B] tracking-tight">After</span>
+                                            <Check className="w-4 h-4 text-[#F2EFE8]" strokeWidth={1.25} />
+                                            <span className="font-serif font-semibold text-base text-[#F2EFE8]">After</span>
                                         </div>
-                                        <span className="text-emerald-500 font-bold text-sm mb-3 uppercase tracking-wider">{item.role}</span>
-                                        <p className="text-white text-lg font-medium leading-relaxed">{item.after}</p>
+                                        <span className="text-[#F2EFE8]/70 text-[11px] mb-3 uppercase tracking-[0.2em]">{item.role}</span>
+                                        <p className="text-[#F2EFE8] text-base md:text-lg leading-[1.65]">{item.after}</p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -99,6 +108,9 @@ export function Outcomes() {
                     </div>
                 </div>
             </div>
+
+            {/* Bottom edge hairline */}
+            <div className="absolute bottom-0 inset-x-0 h-px bg-white/5" />
         </section>
     )
 }
