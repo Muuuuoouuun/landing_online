@@ -9,6 +9,8 @@ ClassIn 20초 키네틱 타이포그래피 영상 (Remotion 4).
 - 아이콘: `src/icons.tsx` (lucide 라인 아이콘 + 획 드로우온) · 장점 표현 요소: `src/elements.tsx`
 - 손글씨 강조 + 손그림 마크: `src/hand.tsx` (카피의 `{중괄호}`가 연두 손글씨로 쓰인다)
 - '슥슥' + UI 효과음: `public/sfx/*.wav` — 임시 합성본, `npm run sfx`로 재생성
+- 실사 소재: `public/img/` (수업 화면 · 과정 화면 2장 · 노트북 사진) — `RealShot`으로 흰 프레임 컷 삽입
+- 기획안: [PLAN.md](./PLAN.md)
 - 요소 보드: `npx remotion still ElementBoard out/element-board.png --frame=89`
 
 ## 실행

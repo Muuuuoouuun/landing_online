@@ -1,10 +1,10 @@
 import React from "react";
 import { useCurrentFrame } from "remotion";
 import { COLOR } from "../brand";
-import { ClassroomWall, CompareCounter, RadarChart, ScoreRing } from "../elements";
+import { CompareCounter, RadarChart, ScoreRing } from "../elements";
 import { Icon, IconName } from "../icons";
 import { sceneById } from "../timeline";
-import { Avatar, Chip, CopyLine, Cursor, EASE_IN_OUT, Eyebrow, lerp, ramp, SceneShell, shadow } from "./kit";
+import { Avatar, Chip, CopyLine, Cursor, EASE_IN_OUT, Eyebrow, lerp, ramp, RealShot, SceneShell, shadow } from "./kit";
 
 // S5 관리 · S6 AI 강의 평가 — 쌓인 데이터가 강사 표를 채우고, 클릭 한 번에 강사 카드가 펼쳐진다.
 // 표의 숫자는 화면 연출용 예시다.
@@ -16,7 +16,7 @@ const TEACHERS = [
   { name: "최민호", initial: "최", cls: "중3 과학 · 2개 반", classes: 36, att: 98.2, ai: 90, trend: [5, 5, 6, 6, 7, 7, 8] },
   { name: "정유나", initial: "정", cls: "초6 수학 · 3개 반", classes: 40, att: 99.4, ai: 93, trend: [6, 7, 7, 8, 8, 9, 9] },
 ];
-const TABLE = { x: 150, y: 410, w: 1000, head: 58, rowH: 86 };
+const TABLE = { x: 150, y: 430, w: 1000, head: 58, rowH: 86 };
 const COLS = [330, 150, 150, 160, 160]; // 강사 · 수업 · 출결 · AI 평가 · 추이
 const rowY = (i: number) => TABLE.y + TABLE.head + i * TABLE.rowH;
 
@@ -49,16 +49,17 @@ const RECENT = [
 export const S5Manage: React.FC = () => {
   const s = sceneById("S5");
   const t = useCurrentFrame();
-  const count = ramp(t, 12, 26, EASE_IN_OUT);
-  const move = ramp(t, 40, 16, EASE_IN_OUT);
-  const press = ramp(t, 58, 10);
-  const picked = t >= 60;
-  const card = ramp(t, 62, 16);
+  const count = ramp(t, 10, 24, EASE_IN_OUT);
+  const move = ramp(t, 36, 14, EASE_IN_OUT);
+  const press = ramp(t, 52, 10);
+  const picked = t >= 54;
+  const card = ramp(t, 56, 14);
+  const SHOT = 70; // 실사 컷 등장
   const cx = lerp(1180, TABLE.x + 250, move);
   const cy = lerp(1000, rowY(1) + 40, move);
 
   return (
-    <SceneShell from={s.from} duration={s.duration} enter={8} exit={8}>
+    <SceneShell from={s.from} duration={s.duration} enter={8} exit={5}>
       <div style={{ position: "absolute", left: 150, top: 96 }}>
         <Eyebrow text={s.eyebrow!} at={s.from + 4} />
       </div>
@@ -159,12 +160,12 @@ export const S5Manage: React.FC = () => {
       </div>
 
       {/* 클릭 한 번 → 강사 카드 */}
-      {t >= 38 && <Cursor x={cx} y={cy} press={press} opacity={ramp(t, 38, 6)} />}
+      {t >= 34 && <Cursor x={cx} y={cy} press={press} opacity={ramp(t, 34, 6)} />}
       <div
         style={{
           position: "absolute",
           left: 1196,
-          top: 320,
+          top: 380,
           width: 600,
           padding: 28,
           background: COLOR.surface,
@@ -201,7 +202,7 @@ export const S5Manage: React.FC = () => {
               height: 54,
               borderTop: `1px solid ${COLOR.line}`,
               fontSize: 19,
-              opacity: ramp(t, 70 + i * 4, 8),
+              opacity: ramp(t, 64 + i * 4, 8),
             }}
           >
             <Icon name="CirclePlay" size={24} color={COLOR.limeInk} />
@@ -211,15 +212,28 @@ export const S5Manage: React.FC = () => {
           </div>
         ))}
       </div>
+
+      {/* 실제 과정 화면 — 정규·보강(결석자) 반, 일일 과제, 채점까지 한 과정에 */}
+      <RealShot
+        src="img/lms-course-special.png"
+        native={[1391, 832]}
+        width={1000}
+        x={800}
+        y={392}
+        t={t - SHOT}
+        label="실제 ClassIn 과정 화면"
+        spots={[
+          { x: 30, y: 205, w: 98, h: 35, kind: "circle", at: 6 },
+          { x: 986, y: 653, w: 84, h: 39, kind: "circle", at: 9 },
+          { x: 383, y: 684, w: 84, h: 12, kind: "underline", at: 12 },
+        ]}
+      />
     </SceneShell>
   );
 };
 
 // ── S6 ───────────────────────────────────────────────────────
 
-const WALL = { x: 150, y: 400, cell: 72 };
-const WALL_W = WALL.cell * 8 + 5 * 7;
-const WALL_H = ((WALL.cell * 9) / 16 + 2) * 6 + 5 * 5;
 
 const Metric: React.FC<{ icon: IconName; label: string; value: string; p: number }> = ({ icon, label, value, p }) => (
   <div style={{ display: "flex", alignItems: "center", gap: 10, height: 52, borderTop: `1px solid ${COLOR.line}`, opacity: p }}>
@@ -229,17 +243,29 @@ const Metric: React.FC<{ icon: IconName; label: string; value: string; p: number
   </div>
 );
 
+// ClassIn 과정 화면 사이드바의 '에이전트' 영역을 그대로 옮긴 것 (원본 캡처는 확대하기엔 해상도가 낮다)
+const AGENTS = [
+  { name: "AI 튜터", tone: 0 },
+  { name: "AI 평가", tone: 1, isNew: true },
+  { name: "레전드 공부 친구", tone: 2 },
+  { name: "ClassIn Math Guide KR", tone: 3 },
+];
+const AGENT = { x: 150, y: 410, w: 560, rowH: 64 };
+
 export const S6AI: React.FC = () => {
   const s = sceneById("S6");
   const t = useCurrentFrame();
-  const scan = ramp(t, 4, 30, EASE_IN_OUT);
-  const card = ramp(t, 30, 14);
-  const score = ramp(t, 38, 20, EASE_IN_OUT);
+  const move = ramp(t, 0, 7, EASE_IN_OUT);
+  const press = ramp(t, 8, 8);
+  const picked = t >= 9;
+  const card = ramp(t, 14, 14);
+  const score = ramp(t, 20, 20, EASE_IN_OUT);
+  const target = { x: AGENT.x + 150, y: AGENT.y + 70 + AGENT.rowH * 1 + 34 };
 
   return (
-    <SceneShell from={s.from} duration={s.duration} enter={8} exit={8}>
+    <SceneShell from={s.from} duration={s.duration} enter={6} exit={8}>
       <div style={{ position: "absolute", left: 150, top: 96 }}>
-        <Eyebrow text={s.eyebrow!} at={s.from + 4} />
+        <Eyebrow text={s.eyebrow!} at={s.from + 2} />
       </div>
       <div style={{ position: "absolute", left: 150, top: 150 }}>
         <CopyLine cue={s.cues[0]} />
@@ -248,25 +274,59 @@ export const S6AI: React.FC = () => {
         <CopyLine cue={s.cues[1]} size={96} />
       </div>
 
-      {/* 48개 수업을 훑는 스캔 */}
-      <div style={{ position: "absolute", left: WALL.x, top: WALL.y, opacity: ramp(t, 0, 10) }}>
-        <ClassroomWall shown={1} checked={scan} cell={WALL.cell} />
-        <div
-          style={{
-            position: "absolute",
-            left: -16,
-            top: lerp(-10, WALL_H + 4, scan),
-            width: WALL_W + 32,
-            height: 5,
-            borderRadius: 3,
-            background: COLOR.lime,
-            boxShadow: `0 0 24px 8px ${COLOR.lime}66`,
-            opacity: scan > 0 && scan < 1 ? 1 : 0,
-          }}
-        />
+      {/* 사이드바 › 에이전트 › AI 평가 */}
+      <div
+        style={{
+          position: "absolute",
+          left: AGENT.x,
+          top: AGENT.y,
+          width: AGENT.w,
+          padding: "18px 14px",
+          background: COLOR.surface,
+          borderRadius: 22,
+          border: `1px solid ${COLOR.line}`,
+          boxShadow: shadow,
+          opacity: ramp(t, 0, 8),
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", padding: "0 12px 10px", fontSize: 18, color: COLOR.sub, fontWeight: 600 }}>
+          에이전트
+          <span style={{ marginLeft: "auto", display: "flex", gap: 14 }}>
+            <Icon name="Sparkles" size={20} color={COLOR.sub} />
+          </span>
+        </div>
+        {AGENTS.map((ag, i) => {
+          const on = picked && ag.isNew;
+          return (
+            <div
+              key={ag.name}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 14,
+                height: AGENT.rowH,
+                padding: "0 12px",
+                borderRadius: 14,
+                fontSize: 22,
+                fontWeight: 600,
+                background: on ? COLOR.limeSoft : "transparent",
+                boxShadow: on ? `inset 0 0 0 2px ${COLOR.lime}` : undefined,
+                opacity: ramp(t, 2 + i * 2, 6),
+              }}
+            >
+              <Avatar name={ag.name.slice(0, 1)} size={38} tone={ag.tone} />
+              {ag.name}
+              {ag.isNew && (
+                <span style={{ padding: "2px 9px", borderRadius: 999, background: "#F04E3A", color: "#fff", fontSize: 13, fontWeight: 800 }}>NEW</span>
+              )}
+            </div>
+          );
+        })}
       </div>
-      <div style={{ position: "absolute", left: WALL.x, top: WALL.y + WALL_H + 36, opacity: ramp(t, 34, 10) }}>
-        <CompareCounter progress={ramp(t, 36, 20, EASE_IN_OUT)} />
+      {t < 30 && <Cursor x={lerp(target.x + 260, target.x, move)} y={lerp(target.y + 120, target.y, move)} press={press} opacity={1 - ramp(t, 24, 6)} />}
+
+      <div style={{ position: "absolute", left: AGENT.x, top: AGENT.y + 380, opacity: ramp(t, 28, 10) }}>
+        <CompareCounter progress={ramp(t, 30, 20, EASE_IN_OUT)} />
       </div>
 
       {/* AI 강의 평가 카드 — 점수는 기본 폰트 */}
@@ -294,9 +354,9 @@ export const S6AI: React.FC = () => {
           <ScoreRing score={92} progress={score} size={220} label={false} />
           <RadarChart values={[0.92, 0.74, 0.88, 0.8, 0.7]} progress={score} size={280} />
           <div style={{ flex: 1 }}>
-            <Metric icon="MessageCircle" label="학생 발화" value="42%" p={ramp(t, 44, 8)} />
-            <Metric icon="Hand" label="상호작용" value="38회" p={ramp(t, 48, 8)} />
-            <Metric icon="Clock" label="질문 후 대기" value="1.8초" p={ramp(t, 52, 8)} />
+            <Metric icon="MessageCircle" label="학생 발화" value="42%" p={ramp(t, 26, 8)} />
+            <Metric icon="Hand" label="상호작용" value="38회" p={ramp(t, 30, 8)} />
+            <Metric icon="Clock" label="질문 후 대기" value="1.8초" p={ramp(t, 34, 8)} />
           </div>
         </div>
         <div
@@ -309,7 +369,7 @@ export const S6AI: React.FC = () => {
             borderRadius: 14,
             background: COLOR.limeSoft,
             fontSize: 19,
-            opacity: ramp(t, 54, 8),
+            opacity: ramp(t, 38, 8),
           }}
         >
           <Icon name="Lightbulb" size={22} color={COLOR.limeInk} />

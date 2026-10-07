@@ -4,7 +4,7 @@ import { COLOR } from "../brand";
 import { MONO } from "../fonts";
 import { Icon, IconName } from "../icons";
 import { sceneById } from "../timeline";
-import { arc, Avatar, Chip, CopyLine, Cursor, EASE_IN_OUT, Eyebrow, lerp, ramp, SceneShell, shadow, WindowFrame } from "./kit";
+import { arc, Avatar, Chip, CopyLine, Cursor, EASE_IN_OUT, Eyebrow, lerp, ramp, RealShot, SceneShell, shadow, WindowFrame } from "./kit";
 
 // S3 수업 · S4 데이터 — ClassIn 교실 창에서 상호작용이 일어나고, 수업이 끝나면 전부 기록으로 쌓인다.
 
@@ -19,8 +19,8 @@ const TOOLS: { icon: IconName; label: string }[] = [
   { icon: "Timer", label: "타이머" },
   { icon: "Users", label: "소그룹" },
 ];
-// 동사 타이밍 (S3 로컬): 무대 · 판서 · 퀴즈 · 트로피
-const BEATS = [16, 34, 52, 70];
+// 동사 타이밍 (S3 로컬): 무대 · 판서 · 퀴즈 · 트로피 — timeline의 동사 cue와 맞춘다
+const BEATS = [14, 30, 46, 62];
 const seatX = (i: number) => SEAT.x0 + i * (SEAT.w + SEAT.gap);
 const toolY = (i: number) => BOARD.y + 8 + i * 70;
 
@@ -56,8 +56,8 @@ const SeatPerson: React.FC<{ name: string; label: string; tone: number }> = ({ n
 
 // 칠판 위 판서 — 선생님(잉크)과 학생(연두)이 동시에 쓴다. 글씨가 아니라 선으로 그린다.
 const BoardDrawing: React.FC<{ t: number }> = ({ t }) => {
-  const teacher = ramp(t, 34, 14, EASE_IN_OUT);
-  const student = ramp(t, 42, 10, EASE_IN_OUT);
+  const teacher = ramp(t, BEATS[1], 14, EASE_IN_OUT);
+  const student = ramp(t, BEATS[1] + 8, 10, EASE_IN_OUT);
   return (
     <svg width={BOARD.w} height={BOARD.h} style={{ position: "absolute", left: 0, top: 0 }}>
       <g stroke={COLOR.ink} strokeWidth={4} strokeLinecap="round" fill="none">
@@ -69,10 +69,10 @@ const BoardDrawing: React.FC<{ t: number }> = ({ t }) => {
         <ellipse cx={290} cy={335} rx={38} ry={26} pathLength={1} strokeDasharray={1} strokeDashoffset={1 - ramp(student, 0, 0.7)} />
         <path d="M335 330 L 420 300" pathLength={1} strokeDasharray={1} strokeDashoffset={1 - ramp(student, 0.6, 0.4)} />
       </g>
-      <text x={70} y={70} fontSize={30} fontWeight={700} fill={COLOR.ink} opacity={ramp(t, 34, 8)} fontStyle="italic">
+      <text x={70} y={70} fontSize={30} fontWeight={700} fill={COLOR.ink} opacity={ramp(t, BEATS[1], 8)} fontStyle="italic">
         y = x² − 4x + 3
       </text>
-      <g opacity={ramp(t, 46, 8)}>
+      <g opacity={ramp(t, BEATS[1] + 12, 8)}>
         <rect x={428} y={278} width={96} height={36} rx={18} fill={COLOR.limeSoft} stroke={COLOR.lime} />
         <text x={476} y={302} fontSize={18} fontWeight={700} fill={COLOR.ink} textAnchor="middle">
           서연 · 꼭짓점
@@ -89,8 +89,8 @@ const QUIZ = [
   { k: "D", v: "x = 4", pct: 5 },
 ];
 const QuizCard: React.FC<{ t: number }> = ({ t }) => {
-  const p = ramp(t, 52, 10);
-  const bars = ramp(t, 56, 12);
+  const p = ramp(t, BEATS[2], 10);
+  const bars = ramp(t, BEATS[2] + 4, 12);
   if (p <= 0) return null;
   return (
     <div
@@ -133,7 +133,7 @@ const QuizCard: React.FC<{ t: number }> = ({ t }) => {
 // ClassIn 교실 창. t = S3 로컬 프레임 (S4에서는 끝 상태 t=90으로 다시 그린다)
 export const ClassroomWindow: React.FC<{ t: number; endPress?: number }> = ({ t, endPress = 0 }) => {
   const called = ramp(t, BEATS[0], 12, EASE_IN_OUT);
-  const handChip = ramp(t, 6, 8) * (1 - ramp(t, BEATS[0], 4));
+  const handChip = ramp(t, BEATS[0] - 10, 8) * (1 - ramp(t, BEATS[0], 4));
   const [ax, ay] = arc(called, [96, 532], [seatX(4) + SEAT.w / 2, SEAT.y0 + 36], 140);
   const trophyFly = ramp(t, BEATS[3], 12, EASE_IN_OUT);
   const [tx, ty] = arc(trophyFly, [BOARD.x + BOARD.w + 52, toolY(3) + 26], [seatX(4) + SEAT.w / 2, SEAT.y0 + 30], 170);
@@ -205,7 +205,7 @@ export const ClassroomWindow: React.FC<{ t: number; endPress?: number }> = ({ t,
             left: 24,
             bottom: 22,
             opacity: handChip,
-            transform: `translateY(${(1 - ramp(t, 6, 8)) * 16}px)`,
+            transform: `translateY(${(1 - ramp(t, BEATS[0] - 10, 8)) * 16}px)`,
           }}
         >
           <Chip icon="Hand" label="서연 손들기" on size={18} />
@@ -306,6 +306,8 @@ export const ClassroomWindow: React.FC<{ t: number; endPress?: number }> = ({ t,
   );
 };
 
+const SHOT_AT = 78; // S3 로컬 — 실사 컷 등장
+
 const CHIP_ROW: { icon: IconName; label: string }[] = [
   { icon: "Presentation", label: "무대" },
   { icon: "PenLine", label: "판서" },
@@ -348,6 +350,21 @@ export const S3Classroom: React.FC = () => {
           <Chip key={c.label} icon={c.icon} label={c.label} on={t >= BEATS[i]} style={{ opacity: ramp(t, 8 + i * 2, 10) }} />
         ))}
       </div>
+
+      {/* 실제 수업 화면 — 학생 트로피 ×3, 학생이 직접 그린 주석 */}
+      <RealShot
+        src="img/classroom-live.webp"
+        native={[1098, 618]}
+        width={960}
+        x={850}
+        y={250}
+        t={t - SHOT_AT}
+        label="실제 ClassIn 수업 화면"
+        spots={[
+          { x: 246, y: 38, w: 108, h: 30, kind: "circle", at: 6 },
+          { x: 728, y: 318, w: 134, h: 128, kind: "circle", at: 9 },
+        ]}
+      />
     </SceneShell>
   );
 };
@@ -370,11 +387,12 @@ export const S4Data: React.FC = () => {
   const t = useCurrentFrame();
   const press = ramp(t, 4, 8);
   const shrink = ramp(t, 8, 18, EASE_IN_OUT);
+  const SHOT = 54; // 실사 컷 등장
   const thumbCx = THUMB.x + (WIN.w * THUMB.scale) / 2;
   const thumbCy = THUMB.y + (WIN.h * THUMB.scale) / 2;
 
   return (
-    <SceneShell from={s.from} duration={s.duration} enter={0} exit={8}>
+    <SceneShell from={s.from} duration={s.duration} enter={0} exit={5}>
       <div style={{ position: "absolute", left: 150, top: 96 }}>
         <Eyebrow text={s.eyebrow!} at={s.from + 10} />
       </div>
@@ -440,8 +458,8 @@ export const S4Data: React.FC = () => {
           borderRadius: 22,
           border: `1px solid ${COLOR.line}`,
           boxShadow: shadow,
-          opacity: ramp(t, 30, 10),
-          transform: `translateY(${(1 - ramp(t, 30, 14)) * 30}px)`,
+          opacity: ramp(t, 22, 10),
+          transform: `translateY(${(1 - ramp(t, 22, 14)) * 30}px)`,
         }}
       >
         <div style={{ display: "flex", alignItems: "baseline", gap: 14, marginBottom: 10 }}>
@@ -449,7 +467,7 @@ export const S4Data: React.FC = () => {
           <span style={{ fontSize: 18, color: COLOR.sub }}>중2 수학 A반 · 3월 12일 19:00 – 19:52 · 박서준 강사</span>
         </div>
         {RECORDS.map((r, i) => {
-          const fill = ramp(t, 48 + i * 5, 8);
+          const fill = ramp(t, 34 + i * 4, 6);
           return (
             <div
               key={r.label}
@@ -478,7 +496,7 @@ export const S4Data: React.FC = () => {
               >
                 {r.value}
               </span>
-              <Icon name="Check" size={26} color={COLOR.limeInk} strokeWidth={3} progress={ramp(t, 52 + i * 5, 6)} />
+              <Icon name="Check" size={26} color={COLOR.limeInk} strokeWidth={3} progress={ramp(t, 36 + i * 4, 6)} />
             </div>
           );
         })}
@@ -486,12 +504,27 @@ export const S4Data: React.FC = () => {
 
       {/* 녹화 카드 → 기록 행으로 날아가는 데이터 */}
       {RECORDS.map((_, i) => {
-        const p = ramp(t, 40 + i * 5, 9, EASE_IN_OUT);
+        const p = ramp(t, 26 + i * 4, 9, EASE_IN_OUT);
         if (p <= 0 || p >= 1) return null;
         const rowY = PANEL.y + 22 + 48 + i * PANEL.rowH + PANEL.rowH / 2;
         const [x, y] = arc(p, [thumbCx, thumbCy], [PANEL.x + 50, rowY], 60);
         return <div key={i} style={{ position: "absolute", left: x - 9, top: y - 9, width: 18, height: 18, borderRadius: 9, background: COLOR.lime, boxShadow: `0 0 0 6px ${COLOR.lime}40` }} />;
       })}
+
+      {/* 실제 과정 화면 — 끝난 수업에 녹화·리포트가 붙어 있다 */}
+      <RealShot
+        src="img/lms-course-winter.png"
+        native={[1391, 832]}
+        width={1000}
+        x={800}
+        y={392}
+        t={t - SHOT}
+        label="실제 ClassIn 과정 화면"
+        spots={[
+          { x: 986, y: 618, w: 84, h: 40, kind: "circle", at: 6 },
+          { x: 755, y: 641, w: 50, h: 16, kind: "underline", at: 10 },
+        ]}
+      />
     </SceneShell>
   );
 };

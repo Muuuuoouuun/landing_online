@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, staticFile, useCurrentFrame } from "remotion";
 import { COLOR } from "../brand";
 import { ClassroomWall } from "../elements";
 import { Icon, IconName } from "../icons";
@@ -18,38 +18,27 @@ const PINS: { x: number; y: number; icon: IconName; label: string }[] = [
   { x: 1560, y: 470, icon: "Wifi", label: "원장 · 어디서나" },
 ];
 
-const Laptop: React.FC<{ p: number }> = ({ p }) => (
+// 노트북 한 대로 돌아가는 실제 수업 사진이 기관의 중심
+const PHOTO = { w: 620, h: 349 };
+const PhotoHub: React.FC<{ p: number }> = ({ p }) => (
   <div
     style={{
       position: "absolute",
-      left: HUB.x - 230,
-      top: HUB.y - 150,
-      width: 460,
+      left: HUB.x - PHOTO.w / 2 - 10,
+      top: HUB.y - PHOTO.h / 2 - 10,
+      padding: 10,
+      borderRadius: 24,
+      background: COLOR.surface,
+      border: `1px solid ${COLOR.line}`,
+      boxShadow: "0 40px 90px rgba(21,24,28,0.20), 0 4px 10px rgba(21,24,28,0.08)",
       opacity: p,
-      transform: `scale(${lerp(0.8, 1, p)})`,
+      transform: `scale(${lerp(0.85, 1, p)})`,
     }}
   >
-    <div
-      style={{
-        width: 460,
-        height: 280,
-        borderRadius: 18,
-        border: `10px solid ${COLOR.ink}`,
-        background: COLOR.surface,
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 10,
-        boxShadow: shadow,
-      }}
-    >
-      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 15, fontWeight: 700, color: COLOR.sub }}>
-        <Icon name="LayoutDashboard" size={18} color={COLOR.limeInk} /> 기관 대시보드 · 수업 48
-      </div>
-      <ClassroomWall shown={1} checked={p} cell={42} />
+    <Img src={staticFile("img/laptop-class.webp")} style={{ width: PHOTO.w, height: PHOTO.h, borderRadius: 16, display: "block", objectFit: "cover" }} />
+    <div style={{ position: "absolute", left: 24, top: -22, opacity: ramp(p * 10, 6, 4) }}>
+      <Chip icon="Laptop" label="노트북 한 대로 운영하는 기관" on size={18} style={{ boxShadow: shadow }} />
     </div>
-    <div style={{ width: 540, height: 20, marginLeft: -40, borderRadius: "0 0 14px 14px", background: COLOR.ink }} />
   </div>
 );
 
@@ -92,7 +81,7 @@ export const S7Office: React.FC = () => {
       {/* 노트북 하나에 기관 전체, 어디서든 연결 */}
       <svg width={1920} height={1080} style={{ position: "absolute", left: 0, top: 0 }}>
         {PINS.map((pin, i) => {
-          const p = ramp(t, 26 + i * 4, 10, EASE_IN_OUT);
+          const p = ramp(t, 22 + i * 4, 10, EASE_IN_OUT);
           const x2 = lerp(HUB.x, pin.x, p);
           const y2 = lerp(HUB.y, pin.y, p);
           return (
@@ -112,9 +101,9 @@ export const S7Office: React.FC = () => {
           );
         })}
       </svg>
-      <Laptop p={laptop} />
+      <PhotoHub p={laptop} />
       {PINS.map((pin, i) => {
-        const p = ramp(t, 30 + i * 4, 10);
+        const p = ramp(t, 26 + i * 4, 10);
         return (
           <div
             key={pin.label}
@@ -143,7 +132,7 @@ export const S8Seen: React.FC = () => {
         <ClassroomWall shown={1} checked={1} cell={120} />
       </AbsoluteFill>
       <div style={{ position: "absolute", top: 462, width: "100%", textAlign: "center" }}>
-        <CopyLine cue={s.cues[0]} size={120} />
+        <CopyLine cue={s.cues[0]} size={100} />
       </div>
     </SceneShell>
   );
@@ -171,7 +160,7 @@ export const S9Lockup: React.FC = () => {
   const t = useCurrentFrame();
   const [slogan, logo, tagline, cta] = s.cues;
   const pull = ramp(t, 0, 26, EASE_IN_OUT);
-  const rise = ramp(t, 22, 12, EASE_IN_OUT);
+  const rise = ramp(t, 15, 10, EASE_IN_OUT);
   const hitT = logo.at - s.from;
   const pop = ramp(t, hitT, 10);
   const ring = ramp(t, hitT, 18);

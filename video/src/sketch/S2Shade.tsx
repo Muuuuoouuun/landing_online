@@ -1,30 +1,10 @@
 import React from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { COLOR } from "../brand";
-import { Icon, IconName } from "../icons";
-import { CopyLine, EASE_IN_OUT, lerp, Paper, ramp, SceneShell } from "../main/kit";
+import { Icon } from "../icons";
+import { CopyLine, EASE_IN_OUT, lerp, Paper, ramp, SceneShell, Shaded } from "../main/kit";
 
 // 기획 시안 — S2 '수업은, 회의가 아니니까.'에 회의/수업 아이콘을 음영으로 붙이는 두 가지 안.
-// 음영 = 같은 아이콘을 오프셋으로 한 번 더 깔아 만든 그림자(마커 톤과 맞춘 2도 인쇄 느낌).
-
-const Shaded: React.FC<{ name: IconName; size: number; shade: string; ink: string; offset?: number; p?: number; opacity?: number }> = ({
-  name,
-  size,
-  shade,
-  ink,
-  offset = size * 0.045,
-  p = 1,
-  opacity = 1,
-}) => (
-  <div style={{ position: "relative", width: size, height: size, opacity }}>
-    <div style={{ position: "absolute", left: offset, top: offset }}>
-      <Icon name={name} size={size} color={shade} strokeWidth={2.4} progress={p} />
-    </div>
-    <div style={{ position: "absolute", left: 0, top: 0 }}>
-      <Icon name={name} size={size} color={ink} strokeWidth={1.4} progress={p} />
-    </div>
-  </div>
-);
 
 const CUE = { at: 0, text: "수업은, 회의가 {아니니까}.", style: "slam" as const, mark: "underline" as const };
 

@@ -1,8 +1,8 @@
 import React, { createContext, useContext } from "react";
-import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { COLOR } from "../brand";
 import { MONO, SANS } from "../fonts";
-import { emphasisTiming, HandWord, MARK_FRAMES, parseEmphasis } from "../hand";
+import { emphasisTiming, HandWord, Mark, MARK_FRAMES, MarkKind, parseEmphasis } from "../hand";
 import { Icon, IconName } from "../icons";
 import { Cue, CueStyle } from "../timeline";
 
@@ -284,3 +284,68 @@ export const arc = (p: number, from: [number, number], to: [number, number], h: 
   lerp(from[0], to[0], p),
   lerp(from[1], to[1], p) - Math.sin(Math.PI * p) * h,
 ];
+
+// 음영 아이콘 — 같은 아이콘을 오프셋으로 한 겹 더 깔아 만든 그림자 (마커 톤의 2도 인쇄 느낌)
+export const Shaded: React.FC<{ name: IconName; size: number; shade: string; ink: string; offset?: number; p?: number }> = ({
+  name,
+  size,
+  shade,
+  ink,
+  offset = size * 0.045,
+  p = 1,
+}) => (
+  <div style={{ position: "relative", width: size, height: size }}>
+    <div style={{ position: "absolute", left: offset, top: offset }}>
+      <Icon name={name} size={size} color={shade} strokeWidth={2.4} progress={p} />
+    </div>
+    <div style={{ position: "absolute", left: 0, top: 0 }}>
+      <Icon name={name} size={size} color={ink} strokeWidth={1.4} progress={p} />
+    </div>
+  </div>
+);
+
+// 실제 화면 컷 — 흰 프레임에 넣어 0.6–0.8초 띄우고, 연두 손그림 마크로 짚는다.
+// spots 좌표는 원본 이미지 픽셀 기준, at은 컷 시작 기준 프레임.
+export type Spot = { x: number; y: number; w: number; h: number; kind: MarkKind; at: number };
+export const RealShot: React.FC<{
+  src: string;
+  native: [number, number];
+  width: number;
+  x: number;
+  y: number;
+  t: number;
+  spots?: Spot[];
+  label?: string;
+  tilt?: number;
+}> = ({ src, native, width, x, y, t, spots = [], label = "실제 ClassIn 화면", tilt = -2.5 }) => {
+  if (t < 0) return null;
+  const k = width / native[0];
+  const p = ramp(t, 0, 10);
+  return (
+    <div
+      style={{
+        position: "absolute",
+        left: x,
+        top: y,
+        opacity: p,
+        transform: `translateY(${(1 - p) * 50}px) scale(${lerp(0.92, 1, p)}) rotate(${lerp(tilt, tilt * 0.3, p)}deg)`,
+        transformOrigin: "50% 60%",
+        zIndex: 60,
+      }}
+    >
+      <div style={{ padding: 10, borderRadius: 22, background: COLOR.surface, border: `1px solid ${COLOR.line}`, boxShadow: "0 40px 90px rgba(21,24,28,0.22), 0 4px 10px rgba(21,24,28,0.08)" }}>
+        <div style={{ position: "relative", width, height: native[1] * k, borderRadius: 14, overflow: "hidden" }}>
+          <Img src={staticFile(src)} style={{ width, height: native[1] * k, display: "block" }} />
+          {spots.map((sp, i) => (
+            <div key={i} style={{ position: "absolute", left: sp.x * k, top: sp.y * k, width: sp.w * k, height: sp.h * k }}>
+              <Mark kind={sp.kind} progress={ramp(t, sp.at, MARK_FRAMES[sp.kind] + 2, EASE_IN_OUT)} size={90} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style={{ position: "absolute", left: 22, top: -24, opacity: ramp(t, 4, 6) }}>
+        <Chip icon="Monitor" label={label} on size={18} style={{ boxShadow: shadow }} />
+      </div>
+    </div>
+  );
+};

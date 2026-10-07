@@ -27,7 +27,7 @@ const MUSIC = getStaticFiles().find((f) => /^music\/bed\.(mp3|wav)$/.test(f.name
 export const ClassIn20: React.FC = () => {
   const frame = useCurrentFrame();
   // 회의 화면(S1)은 살짝 회색, 마커가 지나가면 밝은 종이로
-  const tint = 1 - ramp(frame, 70, 24);
+  const tint = 1 - ramp(frame, 62, 24);
   return (
     <AbsoluteFill>
       <Paper tint={tint} />

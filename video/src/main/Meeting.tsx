@@ -4,7 +4,7 @@ import { COLOR } from "../brand";
 import { EngagementMeter } from "../elements";
 import { Icon } from "../icons";
 import { sceneById } from "../timeline";
-import { CopyLine, EASE_IN_OUT, lerp, ramp, SceneShell } from "./kit";
+import { CopyLine, EASE_IN_OUT, lerp, ramp, SceneShell, Shaded } from "./kit";
 
 // S1 고민 · S2 전환 — 회의 그리드 48칸 → 연두 마커로 지워 버린다.
 
@@ -151,6 +151,7 @@ export const S2Wipe: React.FC = () => {
   const s = sceneById("S2");
   const local = useCurrentFrame();
   const fold = ramp(local, 12, 18, EASE_IN_OUT);
+  const swap = ramp(local, 36, 12, EASE_IN_OUT);
   return (
     <SceneShell from={s.from} duration={s.duration} enter={0} exit={6}>
       <AbsoluteFill
@@ -163,6 +164,21 @@ export const S2Wipe: React.FC = () => {
         <Scribble p={ramp(local, 0, 14, EASE_IN_OUT)} />
       </AbsoluteFill>
       <Glow opacity={1 - fold} />
+      {/* 카피 뒤 음영 아이콘: 회의(카메라) → 수업(칠판). '아니니까요'를 다 쓰는 순간 바뀐다 */}
+      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+        <div
+          style={{
+            position: "absolute",
+            opacity: ramp(local, 14, 10) * lerp(0.7, 0, swap),
+            transform: `translate(${-swap * 380}px, 0) scale(${lerp(1, 0.55, swap)})`,
+          }}
+        >
+          <Shaded name="Video" size={560} shade="#E4E6E1" ink="#CDD1CB" />
+        </div>
+        <div style={{ position: "absolute", opacity: swap * 0.42, transform: `scale(${lerp(0.8, 1, swap)})` }}>
+          <Shaded name="Presentation" size={600} shade={COLOR.lime} ink={`${COLOR.ink}33`} p={swap} />
+        </div>
+      </AbsoluteFill>
       <div style={{ position: "absolute", top: 468, width: "100%", textAlign: "center" }}>
         <CopyLine cue={s.cues[0]} size={112} />
       </div>
