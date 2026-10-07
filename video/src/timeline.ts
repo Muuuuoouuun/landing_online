@@ -1,5 +1,6 @@
-// SCRIPT.md 대본을 프레임 단위 데이터로 옮긴 것. 대본을 고치면 여기도 같이 고친다.
+// SCRIPT.md 대본(v2 · 스토리텔링)을 프레임 단위 데이터로 옮긴 것. 대본을 고치면 여기도 같이 고친다.
 // 모든 프레임 번호는 영상 전체 기준(절대값), 30fps.
+import type { IconName } from "./icons";
 
 export const FPS = 30;
 export const WIDTH = 1920;
@@ -9,13 +10,12 @@ export const BPM = 120;
 export const BEAT = (FPS * 60) / BPM; // 15f
 
 export type CueStyle =
-  | "hook" // 밋밋한 회의 툴 톤
+  | "story" // 내레이션 문장 (이야기를 끌고 가는 줄)
   | "slam" // 대형 슬램
   | "accent" // 코랄 강조
   | "verb" // 동사 컷 — 한 번에 하나만 보임
-  | "line" // 문장
   | "kpi" // 숫자 카운트업
-  | "tag" // 기능 태그 / 인사이트 카드
+  | "tag" // 기능 태그 / 작은 캡션
   | "logo"
   | "cta";
 
@@ -28,123 +28,138 @@ export type Scene = {
   from: number;
   duration: number;
   visual: string;
-  motion: string;
+  benefit: string; // 장점 표현 장치
   sound: string;
+  icons: IconName[];
   cues: Cue[];
 };
 
 export const SCENES: Scene[] = [
   {
     id: "S1",
-    title: "HOOK — 회의실",
+    title: "회의 화면",
     from: 0,
-    duration: 45,
-    visual: "회색 4×4 회의 그리드 · 음소거 아이콘 · 카메라 꺼짐 · 졸고 있는 타일",
-    motion: "느린 푸시인 · 타자기식 단어 등장 · f36 '?' 바운스 · f40 타일에 균열",
-    sound: "룸톤 험 · 알림음 · 단어마다 키보드 틱 · f24부터 라이저",
+    duration: 60,
+    visual: "회색 4×4 균일 그리드 · 민준 타일(카메라·마이크 꺼짐) · 졸음·끊김 타일 · 화면 공유 바",
+    benefit: "참여도 미터가 바닥에 붙은 평평한 선 — S3에서 차오를 기준점 · 채도 0%",
+    sound: "룸톤 험 · 알림음 · 단어마다 키보드 틱 · f30 라이저",
+    icons: ["VideoOff", "MicOff", "MonitorUp", "Grid3x3", "WifiOff", "Moon", "FaceNeutral", "Activity"],
     cues: [
-      { at: 3, text: "아직도", style: "hook" },
-      { at: 12, text: "회의용 툴로", style: "hook" },
-      { at: 24, text: "수업하세요?", style: "hook" },
+      { at: 4, text: "회의 화면 속 민준이는,", style: "story" },
+      { at: 20, text: "오늘도 카메라를 껐다.", style: "story" },
+      { at: 46, text: "하지만 오늘은,", style: "story" },
     ],
   },
   {
     id: "S2",
-    title: "BREAK — 회의 말고, 수업.",
-    from: 45,
-    duration: 45,
-    visual: "그리드 산산조각 → 회색이 딥 에메랄드로 → 타일이 강단+칠판 교실로 재조립",
-    motion: "2f 화이트 플래시 · 3D 타일 셔터 + 모션블러 · 스케일 슬램 · 크로매틱 쉐이크 · 라이트 릭",
-    sound: "f45 임팩트+디지털 글래스 · f60 베이스 드롭(메인 비트 시작) · 리버스 우쉬",
-    cues: [
-      { at: 47, text: "회의 말고,", style: "slam" },
-      { at: 60, text: "수업.", style: "accent" },
-    ],
+    title: "수업이었다",
+    from: 60,
+    duration: 30,
+    visual: "그리드 셔터 → 강단 6석 + 칠판 + 도구바 교실로 재조립 · 회색 → 컬러",
+    benefit: "'회의' 취소선 → '수업' 배지 · 채도 0→100% (회색 세계가 교실의 온도로)",
+    sound: "f60 임팩트 + 디지털 글래스 · 베이스 드롭(메인 비트 인)",
+    icons: ["Grid3x3", "Presentation", "Zap", "Sparkles"],
+    cues: [{ at: 60, text: "수업이었다.", style: "accent" }],
   },
   {
     id: "S3",
-    title: "INTERACTIVE CLASSROOM",
+    title: "무대 · 판서 · 퀴즈 · 트로피",
     eyebrow: "01 / INTERACTIVE CLASSROOM",
     from: 90,
-    duration: 105,
-    visual: "ClassIn 교실 UI — 강단 · 칠판 · 답변기 · 트로피 · 소그룹",
-    motion: "동사마다 하드컷 + 동사가 뜻대로 움직이는 타이포(쓰이고·올라가고·쪼개짐) + UI 마이크로 인터랙션",
-    sound: "동사마다 퍼커시브 스탭(비트 싱크) · f180 스네어 롤",
+    duration: 90,
+    visual: "커서가 민준 타일을 강단으로 드래그 · 2색 동시 판서 · 답변기 A–D · 트로피 포물선 + 파티클",
+    benefit: "참여도 미터가 상호작용마다 한 칸씩 차오름 · 손들기/판서/퀴즈/트로피 칩이 차례로 점등",
+    sound: "동사마다 퍼커시브 스탭(비트 싱크) · f166 반짝 SFX",
+    icons: ["MousePointer2", "Presentation", "PenLine", "Hand", "ListChecks", "Medal", "Trophy", "FaceSlightlySmiling"],
     cues: [
-      { at: 90, text: "온라인에서도,", style: "line" },
-      { at: 105, text: "판서하고", style: "verb" },
-      { at: 120, text: "무대에 올리고", style: "verb" },
-      { at: 135, text: "퀴즈 내고", style: "verb" },
-      { at: 150, text: "트로피 주고", style: "verb" },
-      { at: 165, text: "그룹 나누고", style: "verb" },
-      { at: 180, text: "교실 그대로.", style: "accent" },
+      { at: 92, text: "선생님이 민준이를", style: "story" },
+      { at: 104, text: "무대로 불렀다.", style: "slam" },
+      { at: 122, text: "칠판에 같이 풀고,", style: "verb" },
+      { at: 138, text: "퀴즈 1등,", style: "verb" },
+      { at: 152, text: "트로피 하나.", style: "verb" },
+      { at: 166, text: "민준이가 웃었다.", style: "tag" },
     ],
   },
   {
     id: "S4",
-    title: "AUTO RECORDING",
+    title: "밤 11시",
     eyebrow: "02 / AUTO RECORDING",
-    from: 195,
+    from: 180,
     duration: 45,
-    visual: "'수업 종료' 클릭 → 화면이 필름 스트립으로 접히며 가로 질주 · ● REC 점멸 → 다시보기 카드",
-    motion: "클릭 리플 · 고속 패닝 + 모션블러 · '=' 회전 등장 · 체크 마크 드로잉",
+    visual: "교실이 필름 스트립으로 접혀 폰 화면 '수업 다시보기'로 · 타임라인에 판서·퀴즈·트로피 챕터 마커",
+    benefit: "체크 배지 — 녹화 버튼 0번 · 판서 ✓ 화면 ✓ 음성 ✓ · 자동 저장",
     sound: "테이프 리와인드 · 셔터 · 체크 딩",
+    icons: ["Moon", "Smartphone", "CirclePlay", "CircleDot", "Film", "CloudCheck", "RotateCcw", "Check"],
     cues: [
-      { at: 198, text: "수업 종료", style: "slam" },
-      { at: 208, text: "=", style: "accent" },
-      { at: 214, text: "녹화 완료", style: "slam" },
-      { at: 222, text: "자동 녹화 · 판서까지 그대로 · 바로 다시보기", style: "tag" },
+      { at: 182, text: "밤 11시,", style: "story" },
+      { at: 192, text: "오늘 수업을 한 번 더 봤다.", style: "slam" },
+      { at: 206, text: "자동 녹화 · 판서까지 그대로", style: "tag" },
     ],
   },
   {
     id: "S5",
-    title: "INSTITUTION ADMIN",
+    title: "같은 시각, 원장님은",
     eyebrow: "03 / INSTITUTION ADMIN",
-    from: 240,
-    duration: 75,
-    visual: "카메라 돌리아웃 — 교실이 8×6 라이브 교실 월의 한 칸 → 관리자 대시보드(좌측 메뉴 · KPI 카드)",
-    motion: "줌아웃(1→0.12) · 패널 슬라이드인 · 숫자 카운트업 · 기능 태그 티커",
+    from: 225,
+    duration: 60,
+    visual: "돌리아웃 — 폰 → 민준의 교실 → 8×6 교실 월(민준 교실은 코랄 외곽선 추적) → 관리자 대시보드",
+    benefit: "48 → 1 수렴 카운터 · KPI 칩 카운트업 · 커서 클릭 → '순찰 중' 배지",
     sound: "베이스 스웰 · 카운터 틱 · UI 우쉬",
+    icons: ["LayoutDashboard", "School", "BookOpen", "CalendarDays", "UserCheck", "Users", "Eye", "MonitorPlay"],
     cues: [
-      { at: 246, text: "모든 교실을,", style: "line" },
-      { at: 260, text: "한 화면에서.", style: "slam" },
-      { at: 276, text: "진행 중 수업 128", style: "kpi" },
-      { at: 282, text: "오늘 출석률 97.4%", style: "kpi" },
-      { at: 288, text: "이번 달 수업 3,412회", style: "kpi" },
-      { at: 294, text: "수업 순찰 · 출결 집계 · 시간표 · 강사·학생 계정 · 수업 리포트", style: "tag" },
+      { at: 227, text: "같은 시각, 원장님은", style: "story" },
+      { at: 241, text: "48개 교실을, 한 화면에서.", style: "slam" },
+      { at: 258, text: "진행 중 수업 48", style: "kpi" },
+      { at: 264, text: "오늘 출석률 97.4%", style: "kpi" },
+      { at: 270, text: "순찰 · 출결 · 시간표 · 강사·학생 계정", style: "tag" },
     ],
   },
   {
     id: "S6",
-    title: "AI",
-    eyebrow: "04 / AI",
-    from: 315,
+    title: "AI가 봤다",
+    eyebrow: "04 / AI LECTURE EVALUATION",
+    from: 285,
     duration: 75,
-    visual: "스캔 라인이 교실을 훑음 → 레이더 차트(상호작용·학생 발화·참여도·판서 활용·피드백) → 인사이트 카드 3장",
-    motion: "스캔 스윕 + 글로우 · 차트 드로잉 · 점수 링 카운트업 · 카드 스태거 · 글리치",
-    sound: "디지털 아르페지오 · 스캐너 스윕 · 글리치 · 엔딩을 향한 라이저",
+    visual: "스캔 라인이 48칸을 훑고 칸마다 체크 · AI 강의 평가 카드(점수 링 · 레이더 5축 · 발화 비율 · 개선 포인트)",
+    benefit: "비교 카운터 — 원장님이 직접 본 수업 0 · AI가 평가한 수업 48 ✓ · 강사별 평가 순위",
+    sound: "디지털 아르페지오 · 스캐너 스윕 · 글리치 · 라이저",
+    icons: ["ScanLine", "Sparkles", "Brain", "Gauge", "Radar", "MessageCircle", "Lightbulb", "ClipboardCheck"],
     cues: [
-      { at: 318, text: "AI가 수업을 평가하고,", style: "line" },
-      { at: 338, text: "운영까지 관리한다.", style: "slam" },
-      { at: 350, text: "AI 강의 평가 92", style: "kpi" },
-      { at: 356, text: "강사 코칭 포인트 2건", style: "tag" },
-      { at: 364, text: "이탈 위험 학생 3명 → 상담 알림", style: "tag" },
-      { at: 372, text: "학부모 리포트 128건 자동 발송", style: "tag" },
+      { at: 287, text: "다 볼 수는 없으니까,", style: "story" },
+      { at: 303, text: "AI가 봤다.", style: "accent" },
+      { at: 318, text: "AI 강의 평가 92", style: "kpi" },
+      { at: 326, text: "48개 수업 평가 완료 · 강사별 개선 포인트", style: "tag" },
+      { at: 340, text: "직접 본 수업 0 · AI 평가 48", style: "kpi" },
     ],
   },
   {
     id: "S7",
-    title: "LOCKUP",
-    from: 390,
-    duration: 60,
-    visual: "모든 UI 조각이 중앙으로 빨려 들어감 → 플래시 → ClassIn 로고 + 슬로건 + CTA",
-    motion: "방사형 임플로전 + 트레일 · 로고 마스크 리빌 + 라이트 스윕",
-    sound: "리버스 석션 → f400 최종 히트 · 쉬머 + 리버브 테일 / (선택 VO) \"회의 말고, 수업. 클래스인.\"",
+    title: "다음 날",
+    from: 360,
+    duration: 45,
+    visual: "S1과 같은 구도의 민준 타일 클로즈업(수미상관) · 카메라 꺼짐 → 켜짐 플립 · 주변 타일도 하나둘 켜짐",
+    benefit: "S1의 평평한 참여도 선이 살아 있는 파형으로 — before / after",
+    sound: "음악이 한 박자 빠짐(정적) → 카메라 켜지는 '틱' → 따뜻한 패드",
+    icons: ["Sun", "VideoOff", "Video", "Mic", "FaceGrinning", "Heart", "Activity"],
     cues: [
-      { at: 392, text: "회의 말고, 수업.", style: "accent" },
-      { at: 405, text: "ClassIn", style: "logo" },
-      { at: 416, text: "온라인 교육기관을 위한 교육 전용 플랫폼", style: "line" },
-      { at: 424, text: "도입 문의 · [URL]", style: "cta" },
+      { at: 362, text: "다음 날,", style: "story" },
+      { at: 372, text: "민준이는 카메라를 켰다.", style: "slam" },
+    ],
+  },
+  {
+    id: "S8",
+    title: "LOCKUP",
+    from: 405,
+    duration: 45,
+    visual: "영상에 나온 아이콘 전부가 궤도를 그리며 중앙으로 빨려 들어가 로고가 됨 · CTA 버튼",
+    benefit: "아이콘 궤도 = 지금까지 본 기능이 전부 하나의 플랫폼",
+    sound: "리버스 석션 → f412 최종 히트 · 쉬머 + 리버브 테일 / (선택 VO) \"회의 말고, 수업. 클래스인.\"",
+    icons: ["Presentation", "PenLine", "Trophy", "CircleDot", "LayoutDashboard", "Sparkles", "ArrowRight"],
+    cues: [
+      { at: 405, text: "회의 말고, 수업.", style: "accent" },
+      { at: 414, text: "ClassIn", style: "logo" },
+      { at: 424, text: "교육을 위해 만든 온라인 교실", style: "tag" },
+      { at: 432, text: "도입 문의 · [URL]", style: "cta" },
     ],
   },
 ];

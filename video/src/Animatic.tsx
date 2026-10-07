@@ -9,16 +9,16 @@ import {
 } from "remotion";
 import { COLOR } from "./brand";
 import { MONO, SANS } from "./fonts";
+import { Icon } from "./icons";
 import { BEAT, Cue, CueStyle, DURATION, FPS, Scene, SCENES } from "./timeline";
 
 // 대본 타이밍 검토용 애니매틱. 최종 모션이 아니라 '몇 프레임에 어떤 카피가 뜨는지'만 보여준다.
 
 const STYLE: Record<CueStyle, React.CSSProperties> = {
-  hook: { fontSize: 84, fontWeight: 400, color: COLOR.muted },
+  story: { fontSize: 72, fontWeight: 600, color: COLOR.cream },
   slam: { fontSize: 120, fontWeight: 900, color: COLOR.cream, letterSpacing: "-0.03em" },
   accent: { fontSize: 140, fontWeight: 900, color: COLOR.coral, letterSpacing: "-0.03em" },
   verb: { fontSize: 130, fontWeight: 800, color: COLOR.cream, letterSpacing: "-0.03em" },
-  line: { fontSize: 64, fontWeight: 600, color: COLOR.cream },
   kpi: { fontSize: 44, fontWeight: 800, color: COLOR.coral, fontVariantNumeric: "tabular-nums" },
   tag: { fontSize: 30, fontWeight: 500, color: COLOR.muted },
   logo: { fontSize: 160, fontWeight: 800, color: COLOR.cream, letterSpacing: "-0.04em" },
@@ -97,12 +97,17 @@ const SceneSlate: React.FC<{ scene: Scene }> = ({ scene }) => {
         ))}
       </div>
 
+      <div style={{ display: "flex", gap: 14, marginBottom: 14 }}>
+        {scene.icons.map((name, i) => (
+          <Icon key={name + i} name={name} size={36} progress={interpolate(frame, [i * 2, i * 2 + 12], [0, 1], { extrapolateRight: "clamp" })} />
+        ))}
+      </div>
       <div style={{ color: COLOR.muted, fontSize: 22, lineHeight: 1.6, opacity: 0.85 }}>
         <div>
           <b style={{ color: COLOR.cream }}>화면</b> {scene.visual}
         </div>
         <div>
-          <b style={{ color: COLOR.cream }}>모션</b> {scene.motion}
+          <b style={{ color: COLOR.cream }}>장점</b> {scene.benefit}
         </div>
         <div>
           <b style={{ color: COLOR.cream }}>사운드</b> {scene.sound}
@@ -153,12 +158,12 @@ const TimelineBar: React.FC = () => {
   );
 };
 
-const HITS = [45, 400];
+const HITS = [60, 412];
 
 export const Animatic: React.FC = () => {
   const frame = useCurrentFrame();
   const flash = Math.max(...HITS.map((h) => interpolate(frame, [h, h + 1, h + 4], [0, 0.9, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })));
-  const bg = frame < 45 ? COLOR.meetingGray : COLOR.ink;
+  const bg = frame < 60 ? COLOR.meetingGray : COLOR.ink;
   return (
     <AbsoluteFill style={{ background: bg }}>
       {SCENES.map((s) => (
