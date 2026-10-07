@@ -9,6 +9,12 @@
       "autoPort": true
     },
     {
+      "name": "classin-motion (Remotion Studio :3020)",
+      "runtimeExecutable": "cmd",
+      "runtimeArgs": ["/c", "cd /d C:\\Projects\\Landing_s\\landing_online\\video && npx remotion studio --port 3020"],
+      "port": 3020
+    },
+    {
       "name": "Landing_page (Next.js)",
       "runtimeExecutable": "cmd",
       "runtimeArgs": ["/c", "cd /d C:\\dev\\projects\\Class_project\\Landing_page && npm run dev"],
