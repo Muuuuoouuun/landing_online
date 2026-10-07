@@ -3,129 +3,96 @@ import { interpolate } from "remotion";
 import { noise2D } from "@remotion/noise";
 import { COLOR } from "./brand";
 import { MONO, SANS } from "./fonts";
+import { HandWord } from "./hand";
 import { Icon, IconName } from "./icons";
 
-// 장점 표현 장치 + 히어로 오브젝트. 전부 progress(0→1) 하나로 움직이고, 1이면 완성 상태.
+// 장점 표현 장치 (밝은 테마). 전부 progress(0→1) 하나로 움직이고, 1이면 완성 상태.
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
-const card: React.CSSProperties = {
-  background: "rgba(242,239,232,0.04)",
-  border: "1px solid rgba(242,239,232,0.10)",
+export const card: React.CSSProperties = {
+  background: COLOR.surface,
+  border: `1px solid ${COLOR.line}`,
   borderRadius: 16,
+  boxShadow: "0 10px 30px rgba(21,24,28,0.06)",
   fontFamily: SANS,
-  color: COLOR.cream,
+  color: COLOR.ink,
 };
 
-// 히어로 오브젝트 — 민준 타일. on 0(회의 화면, 카메라 꺼짐) → 1(카메라 켜짐)
-export const StudentTile: React.FC<{
-  name?: string;
-  on?: number;
-  width?: number;
-  highlight?: boolean;
-}> = ({ name = "민준", on = 0, width = 320, highlight = false }) => {
-  const h = (width * 9) / 16;
-  return (
-    <div
-      style={{
-        position: "relative",
-        width,
-        height: h,
-        borderRadius: 14,
-        overflow: "hidden",
-        background: COLOR.meetingGray,
-        boxShadow: highlight ? `0 0 0 3px ${COLOR.coral}, 0 0 40px ${COLOR.coral}66` : undefined,
-        fontFamily: SANS,
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          opacity: on,
-          background: `radial-gradient(120% 90% at 30% 20%, #F2B48C 0%, ${COLOR.coral} 35%, ${COLOR.emerald} 100%)`,
-        }}
-      >
-        <svg viewBox="0 0 160 90" width="100%" height="100%">
-          <circle cx="80" cy="38" r="16" fill={COLOR.cream} opacity={0.85} />
-          <path d="M44 90 C48 64 62 58 80 58 C98 58 112 64 116 90 Z" fill={COLOR.cream} opacity={0.85} />
-        </svg>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          opacity: 1 - on,
-        }}
-      >
+// S1→S2 회의 그리드. scribble 0→1로 연두 마커가 그리드를 지워 버린다.
+export const MeetingGrid: React.FC<{ scribble: number; cols?: number; rows?: number; cell?: number }> = ({
+  scribble,
+  cols = 6,
+  rows = 4,
+  cell = 64,
+}) => (
+  <div style={{ position: "relative", alignSelf: "flex-start" }}>
+    <div style={{ display: "grid", gridTemplateColumns: `repeat(${cols}, ${cell}px)`, gap: 6 }}>
+      {Array.from({ length: cols * rows }, (_, i) => (
         <div
+          key={i}
           style={{
-            width: h * 0.42,
-            height: h * 0.42,
-            borderRadius: "50%",
-            background: "#3A3F45",
+            height: (cell * 9) / 16,
+            borderRadius: 6,
+            background: COLOR.meeting,
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: COLOR.muted,
-            fontSize: h * 0.13,
-            fontWeight: 600,
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
+            padding: 4,
           }}
         >
-          {name}
+          <Icon name={i % 3 === 0 ? "MicOff" : "VideoOff"} size={cell * 0.2} color={COLOR.meetingIcon} strokeWidth={2} />
         </div>
-      </div>
-      <div
-        style={{
-          position: "absolute",
-          left: 12,
-          right: 12,
-          bottom: 10,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          fontSize: h * 0.1,
-          color: COLOR.cream,
-        }}
-      >
-        <span style={{ background: "rgba(11,15,20,0.55)", padding: "2px 8px", borderRadius: 6 }}>{name}</span>
-        <span style={{ display: "flex", gap: 6, background: "rgba(11,15,20,0.55)", padding: 4, borderRadius: 6 }}>
-          <Icon name={on > 0.5 ? "Mic" : "MicOff"} size={h * 0.12} color={on > 0.5 ? COLOR.cream : COLOR.coral} strokeWidth={2} />
-          <Icon name={on > 0.5 ? "Video" : "VideoOff"} size={h * 0.12} color={on > 0.5 ? COLOR.cream : COLOR.coral} strokeWidth={2} />
-        </span>
-      </div>
+      ))}
     </div>
-  );
-};
+    <svg
+      viewBox="0 0 100 100"
+      preserveAspectRatio="none"
+      style={{
+        position: "absolute",
+        left: "-4%",
+        top: "-8%",
+        width: "108%",
+        height: "116%",
+        overflow: "visible",
+        WebkitMaskImage: `linear-gradient(180deg, #000 ${scribble * 104 - 4}%, transparent ${scribble * 104}%)`,
+        maskImage: `linear-gradient(180deg, #000 ${scribble * 104 - 4}%, transparent ${scribble * 104}%)`,
+      }}
+    >
+      <path
+        d="M4 6 L 96 3 L 3 24 L 97 20 L 4 43 L 95 39 L 3 62 L 97 58 L 4 81 L 96 77 L 5 97 L 95 95"
+        fill="none"
+        stroke={COLOR.lime}
+        strokeWidth={cell * 0.38}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        vectorEffect="non-scaling-stroke"
+        opacity={0.9}
+      />
+    </svg>
+  </div>
+);
 
-// 참여도 미터 — level 0이면 평평한 선(S1), 1이면 살아 있는 파형(S3·S7)
-export const EngagementMeter: React.FC<{ level: number; frame: number; width?: number }> = ({
-  level,
-  frame,
-  width = 360,
-}) => {
+// 참여도 미터 — level 0이면 평평한 선, 1이면 살아 있는 파형
+export const EngagementMeter: React.FC<{ level: number; frame: number; width?: number }> = ({ level, frame, width = 300 }) => {
   const bars = 18;
+  const live = level > 0.05;
   return (
     <div style={{ ...card, padding: "16px 20px", width }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 18, color: COLOR.muted, marginBottom: 12 }}>
-        <Icon name="Activity" size={22} color={level > 0.05 ? COLOR.coral : COLOR.muted} />
+      <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 18, color: COLOR.sub, marginBottom: 12 }}>
+        <Icon name="Activity" size={22} color={live ? COLOR.limeInk : COLOR.sub} />
         참여도
       </div>
       <div style={{ display: "flex", alignItems: "flex-end", gap: 5, height: 64 }}>
         {Array.from({ length: bars }, (_, i) => {
           const wiggle = (noise2D("meter", i * 0.35, frame * 0.06) + 1) / 2;
-          const hgt = 3 + level * (14 + wiggle * 50);
           return (
             <div
               key={i}
               style={{
                 flex: 1,
-                height: hgt,
+                height: 3 + level * (14 + wiggle * 50),
                 borderRadius: 3,
-                background: level > 0.05 ? COLOR.coral : COLOR.muted,
-                opacity: level > 0.05 ? 0.55 + wiggle * 0.45 : 0.4,
+                background: live ? COLOR.lime : COLOR.line,
               }}
             />
           );
@@ -135,37 +102,9 @@ export const EngagementMeter: React.FC<{ level: number; frame: number; width?: n
   );
 };
 
-// '회의' 취소선 → '수업'
-export const StrikeBadge: React.FC<{ progress: number }> = ({ progress }) => {
-  const strike = interpolate(progress, [0, 0.5], [0, 1], clamp);
-  const reveal = interpolate(progress, [0.4, 1], [0, 1], clamp);
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 20, fontFamily: SANS, fontWeight: 900, fontSize: 64 }}>
-      <span style={{ position: "relative", color: COLOR.muted }}>
-        회의
-        <span
-          style={{
-            position: "absolute",
-            left: -6,
-            top: "52%",
-            height: 7,
-            width: `calc(${strike * 100}% + 12px)`,
-            background: COLOR.coral,
-            borderRadius: 4,
-          }}
-        />
-      </span>
-      <Icon name="ArrowRight" size={44} color={COLOR.muted} progress={reveal} strokeWidth={2.5} />
-      <span style={{ color: COLOR.coral, opacity: reveal, transform: `scale(${interpolate(reveal, [0, 1], [1.4, 1])})` }}>
-        수업
-      </span>
-    </div>
-  );
-};
-
-// 상호작용 칩 — S3에서 하나씩 점등
+// 상호작용 칩 — S3에서 동사가 나올 때마다 하나씩 연두로 점등
 const INTERACTIONS: { icon: IconName; label: string }[] = [
-  { icon: "Hand", label: "무대" },
+  { icon: "Presentation", label: "무대" },
   { icon: "PenLine", label: "판서" },
   { icon: "ListChecks", label: "퀴즈" },
   { icon: "Trophy", label: "트로피" },
@@ -184,12 +123,14 @@ export const InteractionChips: React.FC<{ lit: number }> = ({ lit }) => (
             gap: 8,
             padding: "10px 16px",
             fontSize: 20,
-            background: on ? COLOR.emerald : card.background,
-            borderColor: on ? COLOR.emeraldLight : "rgba(242,239,232,0.10)",
-            color: on ? COLOR.cream : COLOR.muted,
+            fontWeight: 600,
+            background: on ? COLOR.limeSoft : COLOR.surface,
+            borderColor: on ? COLOR.lime : COLOR.line,
+            color: on ? COLOR.ink : COLOR.sub,
+            boxShadow: "none",
           }}
         >
-          <Icon name={c.icon} size={24} color={on ? COLOR.cream : COLOR.muted} />
+          <Icon name={c.icon} size={24} color={on ? COLOR.limeInk : COLOR.sub} />
           {c.label}
         </div>
       );
@@ -198,29 +139,26 @@ export const InteractionChips: React.FC<{ lit: number }> = ({ lit }) => (
 );
 
 // 자동 녹화 체크 배지
-export const CheckBadge: React.FC<{ progress: number }> = ({ progress }) => {
-  const items = ["판서", "화면", "음성"];
-  return (
-    <div style={{ ...card, padding: "18px 22px", display: "flex", flexDirection: "column", gap: 12, width: 360 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 20 }}>
-        <Icon name="CircleDot" size={24} color={COLOR.coral} />
-        <span>녹화 버튼</span>
-        <b style={{ marginLeft: "auto", fontFamily: MONO, color: COLOR.coral }}>0번</b>
-      </div>
-      <div style={{ display: "flex", gap: 18, fontSize: 20, color: COLOR.cream }}>
-        {items.map((t, i) => (
-          <span key={t} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <Icon name="Check" size={22} color={COLOR.coral} strokeWidth={2.5} progress={interpolate(progress, [i * 0.2, i * 0.2 + 0.5], [0, 1], clamp)} />
-            {t}
-          </span>
-        ))}
-      </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 16, color: COLOR.muted }}>
-        <Icon name="CloudCheck" size={20} color={COLOR.muted} /> 수업 종료와 동시에 자동 저장
-      </div>
+export const CheckBadge: React.FC<{ progress: number }> = ({ progress }) => (
+  <div style={{ ...card, padding: "18px 22px", display: "flex", flexDirection: "column", gap: 12, width: 340 }}>
+    <div style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 20 }}>
+      <Icon name="CircleDot" size={24} color={COLOR.limeInk} />
+      <span>녹화 버튼</span>
+      <b style={{ marginLeft: "auto", fontFamily: MONO, color: COLOR.limeInk }}>0번</b>
     </div>
-  );
-};
+    <div style={{ display: "flex", gap: 18, fontSize: 20 }}>
+      {["판서", "화면", "음성"].map((t, i) => (
+        <span key={t} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <Icon name="Check" size={22} color={COLOR.limeInk} strokeWidth={2.5} progress={interpolate(progress, [i * 0.2, i * 0.2 + 0.5], [0, 1], clamp)} />
+          {t}
+        </span>
+      ))}
+    </div>
+    <div style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 16, color: COLOR.sub }}>
+      <Icon name="CloudCheck" size={20} color={COLOR.sub} /> 수업 종료와 동시에 자동 저장
+    </div>
+  </div>
+);
 
 // KPI 칩
 export const KpiChip: React.FC<{ icon: IconName; label: string; value: number; suffix?: string; decimals?: number; progress: number }> = ({
@@ -232,75 +170,79 @@ export const KpiChip: React.FC<{ icon: IconName; label: string; value: number; s
   progress,
 }) => (
   <div style={{ ...card, display: "flex", alignItems: "center", gap: 14, padding: "12px 18px" }}>
-    <div style={{ width: 44, height: 44, borderRadius: 12, background: COLOR.emerald, display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <Icon name={icon} size={26} progress={progress} />
+    <div style={{ width: 44, height: 44, borderRadius: 12, background: COLOR.limeSoft, display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <Icon name={icon} size={26} color={COLOR.limeInk} progress={progress} />
     </div>
     <div>
-      <div style={{ fontSize: 15, color: COLOR.muted }}>{label}</div>
+      <div style={{ fontSize: 15, color: COLOR.sub }}>{label}</div>
       <div style={{ fontSize: 30, fontWeight: 800, fontVariantNumeric: "tabular-nums" }}>
-        {(value * interpolate(progress, [0, 1], [0, 1], clamp)).toFixed(decimals)}
+        {(value * progress).toFixed(decimals)}
         {suffix}
       </div>
     </div>
   </div>
 );
 
-// 48 → 1 수렴 (교실 월)
-export const ClassroomWall: React.FC<{ progress: number; cell?: number }> = ({ progress, cell = 26 }) => (
-  <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-    <div style={{ display: "grid", gridTemplateColumns: `repeat(8, ${cell}px)`, gap: 4 }}>
-      {Array.from({ length: 48 }, (_, i) => {
-        const shown = interpolate(progress, [i / 60, i / 60 + 0.2], [0, 1], clamp);
-        const mine = i === 19;
-        return (
-          <div
-            key={i}
-            style={{
-              height: (cell * 9) / 16,
-              borderRadius: 3,
-              background: mine ? COLOR.coral : COLOR.emerald,
-              opacity: shown,
-              boxShadow: mine ? `0 0 0 2px ${COLOR.cream}` : undefined,
-            }}
-          />
-        );
-      })}
-    </div>
-    <div style={{ fontFamily: SANS, fontWeight: 900, fontSize: 56, color: COLOR.cream, whiteSpace: "nowrap" }}>
-      48 <span style={{ color: COLOR.muted }}>→</span> <span style={{ color: COLOR.coral }}>1</span>
-      <div style={{ fontSize: 18, fontWeight: 500, color: COLOR.muted }}>교실 48개, 화면 1개</div>
-    </div>
+// 48칸 교실 월 — checked 0→1로 칸마다 연두 체크가 채워진다 (S6 스캔 · S7 해소)
+export const ClassroomWall: React.FC<{ shown: number; checked: number; cell?: number }> = ({ shown, checked, cell = 30 }) => (
+  <div style={{ display: "grid", gridTemplateColumns: `repeat(8, ${cell}px)`, gap: 5 }}>
+    {Array.from({ length: 48 }, (_, i) => {
+      const appear = interpolate(shown, [i / 60, i / 60 + 0.2], [0, 1], clamp);
+      const done = interpolate(checked, [i / 60, i / 60 + 0.15], [0, 1], clamp);
+      return (
+        <div
+          key={i}
+          style={{
+            height: (cell * 9) / 16 + 2,
+            borderRadius: 4,
+            background: done > 0.5 ? COLOR.limeSoft : COLOR.surface,
+            border: `1px solid ${done > 0.5 ? COLOR.lime : COLOR.line}`,
+            opacity: appear,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Icon name="Check" size={cell * 0.45} color={COLOR.limeInk} strokeWidth={3} progress={done} />
+        </div>
+      );
+    })}
   </div>
 );
 
-// AI 강의 평가 점수 링
-export const ScoreRing: React.FC<{ score: number; progress: number; size?: number }> = ({ score, progress, size = 200 }) => {
+// AI 강의 평가 점수 — 링 + 채점하듯 쓰는 손글씨 점수 + 동그라미
+export const ScoreRing: React.FC<{ score: number; progress: number; write: number; circle: number; size?: number }> = ({
+  score,
+  progress,
+  write,
+  circle,
+  size = 200,
+}) => {
   const r = 80;
   const c = 2 * Math.PI * r;
-  const shown = score * progress;
   return (
-    <div style={{ position: "relative", width: size, height: size, fontFamily: SANS }}>
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, fontFamily: SANS }}>
+    <div style={{ position: "relative", width: size, height: size }}>
       <svg viewBox="0 0 200 200" width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-        <circle cx="100" cy="100" r={r} fill="none" stroke="rgba(242,239,232,0.10)" strokeWidth={14} />
+        <circle cx="100" cy="100" r={r} fill="none" stroke={COLOR.line} strokeWidth={12} />
         <circle
           cx="100"
           cy="100"
           r={r}
           fill="none"
-          stroke={COLOR.coral}
-          strokeWidth={14}
+          stroke={COLOR.lime}
+          strokeWidth={12}
           strokeLinecap="round"
           strokeDasharray={c}
-          strokeDashoffset={c * (1 - shown / 100)}
+          strokeDashoffset={c * (1 - (score / 100) * progress)}
         />
       </svg>
       <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-        <div style={{ fontSize: size * 0.3, fontWeight: 900, color: COLOR.cream, lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
-          {Math.round(shown)}
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 4, fontSize: size * 0.075, color: COLOR.muted, marginTop: 6 }}>
-          <Icon name="Sparkles" size={size * 0.09} color={COLOR.coral} /> AI 강의 평가
-        </div>
+        <HandWord text={String(score)} size={size * 0.34} write={write} mark="circle" markProgress={circle} color={COLOR.ink} />
+      </div>
+    </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 18, color: COLOR.sub }}>
+        <Icon name="Sparkles" size={20} color={COLOR.limeInk} /> AI 강의 평가
       </div>
     </div>
   );
@@ -320,17 +262,17 @@ export const RadarChart: React.FC<{ values: number[]; progress: number; size?: n
   return (
     <svg viewBox="0 0 260 260" width={size} height={size} style={{ fontFamily: SANS }}>
       {[0.33, 0.66, 1].map((k) => (
-        <polygon key={k} points={poly(() => k)} fill="none" stroke="rgba(242,239,232,0.12)" />
+        <polygon key={k} points={poly(() => k)} fill="none" stroke={COLOR.line} />
       ))}
       {RADAR_AXES.map((_, i) => {
         const [x, y] = pt(i, 1);
-        return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke="rgba(242,239,232,0.12)" />;
+        return <line key={i} x1={cx} y1={cy} x2={x} y2={y} stroke={COLOR.line} />;
       })}
-      <polygon points={poly((i) => values[i] * progress)} fill={`${COLOR.coral}55`} stroke={COLOR.coral} strokeWidth={2.5} />
+      <polygon points={poly((i) => values[i] * progress)} fill={`${COLOR.lime}66`} stroke={COLOR.limeInk} strokeWidth={2.5} />
       {RADAR_AXES.map((label, i) => {
         const [x, y] = pt(i, 1.28);
         return (
-          <text key={label} x={x} y={y} fill={COLOR.muted} fontSize={14} textAnchor="middle" dominantBaseline="middle">
+          <text key={label} x={x} y={y} fill={COLOR.sub} fontSize={14} textAnchor="middle" dominantBaseline="middle">
             {label}
           </text>
         );
@@ -343,17 +285,17 @@ export const RadarChart: React.FC<{ values: number[]; progress: number; size?: n
 export const CompareCounter: React.FC<{ progress: number }> = ({ progress }) => (
   <div style={{ ...card, display: "flex", padding: "18px 24px", gap: 28 }}>
     <div>
-      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 16, color: COLOR.muted }}>
-        <Icon name="Eye" size={20} color={COLOR.muted} /> 원장님이 직접 본 수업
+      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 16, color: COLOR.sub }}>
+        <Icon name="Eye" size={20} color={COLOR.sub} /> 원장님이 직접 본 수업
       </div>
-      <div style={{ fontSize: 52, fontWeight: 900, color: COLOR.muted, fontVariantNumeric: "tabular-nums" }}>0</div>
+      <div style={{ fontSize: 52, fontWeight: 900, color: COLOR.sub, fontVariantNumeric: "tabular-nums" }}>0</div>
     </div>
-    <div style={{ width: 1, background: "rgba(242,239,232,0.12)" }} />
+    <div style={{ width: 1, background: COLOR.line }} />
     <div>
-      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 16, color: COLOR.cream }}>
-        <Icon name="ClipboardCheck" size={20} color={COLOR.coral} /> AI가 평가한 수업
+      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 16, color: COLOR.ink }}>
+        <Icon name="ClipboardCheck" size={20} color={COLOR.limeInk} /> AI가 평가한 수업
       </div>
-      <div style={{ fontSize: 52, fontWeight: 900, color: COLOR.coral, fontVariantNumeric: "tabular-nums" }}>
+      <div style={{ fontSize: 52, fontWeight: 900, color: COLOR.limeInk, fontVariantNumeric: "tabular-nums" }}>
         {Math.round(48 * progress)}
       </div>
     </div>

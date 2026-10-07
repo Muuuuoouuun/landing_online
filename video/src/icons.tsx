@@ -121,7 +121,7 @@ export const Icon: React.FC<{
   strokeWidth?: number;
   progress?: number;
   style?: React.CSSProperties;
-}> = ({ name, size = 48, color = COLOR.cream, strokeWidth = 1.75, progress = 1, style }) => {
+}> = ({ name, size = 48, color = COLOR.ink, strokeWidth = 1.75, progress = 1, style }) => {
   const node = ICONS[name];
   const n = node.length;
   return (

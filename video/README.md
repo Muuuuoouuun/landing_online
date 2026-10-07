@@ -6,6 +6,8 @@ ClassIn 15초 시네마틱 키네틱 타이포그래피 영상 (Remotion 4).
 - 대본 → 프레임 데이터: `src/timeline.ts` (대본을 고치면 여기도 같이 고친다)
 - 브랜드 컬러: `src/brand.ts` · 폰트: `src/fonts.ts` (Pretendard, JetBrains Mono — 전부 로컬 번들, 렌더 시 네트워크 불필요)
 - 아이콘: `src/icons.tsx` (lucide 라인 아이콘 + 획 드로우온) · 장점 표현 요소: `src/elements.tsx`
+- 손글씨 강조 + 손그림 마크: `src/hand.tsx` (카피의 `{중괄호}`가 연두 손글씨로 쓰인다)
+- '슥슥' 효과음: `public/sfx/*.wav` — 임시 합성본, `python3 scripts/make-sfx.py`로 재생성
 - 요소 보드: `npx remotion still ElementBoard out/element-board.png --frame=89`
 
 ## 실행
@@ -36,6 +38,7 @@ npm run typecheck
 | `@remotion/effects`, `@remotion/light-leaks` | 라이트 릭 등 이펙트 |
 | `@remotion/fonts`, `pretendard`, `@fontsource/jetbrains-mono` | 로컬 폰트 로딩 |
 | `lucide` | 라인 아이콘 세트 (ISC) — 획 단위 데이터라 드로우온 애니메이션 가능 |
+| `@fontsource/east-sea-dokdo` 외 3종 | 손글씨 강조 폰트 후보 (OFL) — 동해 독도 · 나눔손글씨 펜/붓 · 개구 |
 | `@remotion/google-fonts` | 디스플레이 폰트 탐색용 (렌더 시 네트워크 필요) |
 | `@remotion/media-utils` | 음원 파형·비트 분석 |
 

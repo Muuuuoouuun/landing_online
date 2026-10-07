@@ -1,28 +1,30 @@
 import React from "react";
 import {
   AbsoluteFill,
+  Html5Audio,
   interpolate,
   Sequence,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
 import { COLOR } from "./brand";
 import { MONO, SANS } from "./fonts";
+import { EmphLine } from "./hand";
 import { Icon } from "./icons";
-import { BEAT, Cue, CueStyle, DURATION, FPS, Scene, SCENES } from "./timeline";
+import { BEAT, Cue, CueStyle, DURATION, FPS, Scene, SCENES, SFX } from "./timeline";
 
-// 대본 타이밍 검토용 애니매틱. 최종 모션이 아니라 '몇 프레임에 어떤 카피가 뜨는지'만 보여준다.
+// 대본 타이밍 검토용 애니매틱 — 카피 · 손글씨 강조 · '슥슥' 효과음 싱크만 보여준다. 최종 모션 아님.
 
-const STYLE: Record<CueStyle, React.CSSProperties> = {
-  story: { fontSize: 72, fontWeight: 600, color: COLOR.cream },
-  slam: { fontSize: 120, fontWeight: 900, color: COLOR.cream, letterSpacing: "-0.03em" },
-  accent: { fontSize: 140, fontWeight: 900, color: COLOR.coral, letterSpacing: "-0.03em" },
-  verb: { fontSize: 130, fontWeight: 800, color: COLOR.cream, letterSpacing: "-0.03em" },
-  kpi: { fontSize: 44, fontWeight: 800, color: COLOR.coral, fontVariantNumeric: "tabular-nums" },
-  tag: { fontSize: 30, fontWeight: 500, color: COLOR.muted },
-  logo: { fontSize: 160, fontWeight: 800, color: COLOR.cream, letterSpacing: "-0.04em" },
-  cta: { fontSize: 32, fontWeight: 700, color: COLOR.cream, fontFamily: MONO },
+const STYLE: Record<CueStyle, { size: number; css: React.CSSProperties }> = {
+  story: { size: 60, css: { fontWeight: 600, color: COLOR.sub } },
+  slam: { size: 112, css: { fontWeight: 900, color: COLOR.ink, letterSpacing: "-0.03em" } },
+  verb: { size: 120, css: { fontWeight: 800, color: COLOR.ink, letterSpacing: "-0.03em" } },
+  kpi: { size: 44, css: { fontWeight: 800, color: COLOR.ink, fontVariantNumeric: "tabular-nums" } },
+  tag: { size: 28, css: { fontWeight: 500, color: COLOR.sub } },
+  logo: { size: 150, css: { fontWeight: 800, color: COLOR.ink, letterSpacing: "-0.04em" } },
+  cta: { size: 30, css: { fontWeight: 700, color: COLOR.ink, fontFamily: MONO } },
 };
 
 const timecode = (f: number) => {
@@ -33,20 +35,19 @@ const timecode = (f: number) => {
 
 const CueText: React.FC<{ cue: Cue; local: number }> = ({ cue, local }) => {
   const { fps } = useVideoConfig();
-  const t = spring({ frame: local, fps, config: { damping: 14, stiffness: 220 } });
-  const big = cue.style === "slam" || cue.style === "accent" || cue.style === "logo";
+  const t = spring({ frame: local, fps, config: { damping: 16, stiffness: 240 } });
+  const { size, css } = STYLE[cue.style];
   return (
     <div
       style={{
-        ...STYLE[cue.style],
-        lineHeight: 1.1,
+        ...css,
+        fontSize: size,
+        lineHeight: 1.25,
         opacity: t,
-        transform: big
-          ? `scale(${interpolate(t, [0, 1], [1.5, 1])})`
-          : `translateY(${interpolate(t, [0, 1], [40, 0])}px)`,
+        transform: `translateY(${interpolate(t, [0, 1], [30, 0])}px)`,
       }}
     >
-      {cue.text}
+      <EmphLine text={cue.text} size={size} local={local} mark={cue.mark} delay={cue.delay} />
     </div>
   );
 };
@@ -56,19 +57,17 @@ const SceneSlate: React.FC<{ scene: Scene }> = ({ scene }) => {
   const abs = scene.from + frame;
   const shown = scene.cues.filter((c) => c.at <= abs);
   const lastVerb = [...shown].reverse().find((c) => c.style === "verb");
-  const main = shown.filter(
-    (c) => !["kpi", "tag", "verb"].includes(c.style) || c === lastVerb,
-  );
+  const main = shown.filter((c) => !["kpi", "tag", "verb", "cta"].includes(c.style) || c === lastVerb);
   const kpis = shown.filter((c) => c.style === "kpi");
-  const tags = shown.filter((c) => c.style === "tag");
+  const tags = shown.filter((c) => c.style === "tag" || c.style === "cta");
 
   return (
     <AbsoluteFill style={{ padding: "64px 96px 120px", fontFamily: SANS }}>
       <div style={{ display: "flex", justifyContent: "space-between", fontFamily: MONO, fontSize: 24 }}>
-        <span style={{ color: COLOR.muted }}>
+        <span style={{ color: COLOR.sub }}>
           {scene.id} — {scene.title}
         </span>
-        <span style={{ color: COLOR.coral }}>{scene.eyebrow ?? ""}</span>
+        <span style={{ color: COLOR.limeInk }}>{scene.eyebrow ?? ""}</span>
       </div>
 
       <div
@@ -78,7 +77,7 @@ const SceneSlate: React.FC<{ scene: Scene }> = ({ scene }) => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          gap: 20,
+          gap: 18,
           textAlign: "center",
         }}
       >
@@ -86,7 +85,7 @@ const SceneSlate: React.FC<{ scene: Scene }> = ({ scene }) => {
           <CueText key={c.at} cue={c} local={abs - c.at} />
         ))}
         {kpis.length > 0 && (
-          <div style={{ display: "flex", gap: 56, marginTop: 16 }}>
+          <div style={{ display: "flex", gap: 56, marginTop: 12 }}>
             {kpis.map((c) => (
               <CueText key={c.at} cue={c} local={abs - c.at} />
             ))}
@@ -99,18 +98,24 @@ const SceneSlate: React.FC<{ scene: Scene }> = ({ scene }) => {
 
       <div style={{ display: "flex", gap: 14, marginBottom: 14 }}>
         {scene.icons.map((name, i) => (
-          <Icon key={name + i} name={name} size={36} progress={interpolate(frame, [i * 2, i * 2 + 12], [0, 1], { extrapolateRight: "clamp" })} />
+          <Icon
+            key={name + i}
+            name={name}
+            size={34}
+            color={COLOR.sub}
+            progress={interpolate(frame, [i * 2, i * 2 + 12], [0, 1], { extrapolateRight: "clamp" })}
+          />
         ))}
       </div>
-      <div style={{ color: COLOR.muted, fontSize: 22, lineHeight: 1.6, opacity: 0.85 }}>
+      <div style={{ color: COLOR.sub, fontSize: 21, lineHeight: 1.6 }}>
         <div>
-          <b style={{ color: COLOR.cream }}>화면</b> {scene.visual}
+          <b style={{ color: COLOR.ink }}>화면</b> {scene.visual}
         </div>
         <div>
-          <b style={{ color: COLOR.cream }}>장점</b> {scene.benefit}
+          <b style={{ color: COLOR.ink }}>강조</b> {scene.emphasis}
         </div>
         <div>
-          <b style={{ color: COLOR.cream }}>사운드</b> {scene.sound}
+          <b style={{ color: COLOR.ink }}>사운드</b> {scene.sound}
         </div>
       </div>
     </AbsoluteFill>
@@ -120,8 +125,26 @@ const SceneSlate: React.FC<{ scene: Scene }> = ({ scene }) => {
 const TimelineBar: React.FC = () => {
   const frame = useCurrentFrame();
   const beat = Math.floor(frame / BEAT);
+  const lastSfx = [...SFX].reverse().find((s) => s.at <= frame);
+  const sfxOn = lastSfx && frame - lastSfx.at < 8;
   return (
     <AbsoluteFill style={{ justifyContent: "flex-end", padding: "0 96px 24px", fontFamily: MONO }}>
+      <div style={{ position: "relative", height: 10, marginBottom: 8 }}>
+        {SFX.map((s, i) => (
+          <div
+            key={i}
+            style={{
+              position: "absolute",
+              left: `${(s.at / DURATION) * 100}%`,
+              top: 0,
+              width: 3,
+              height: 10,
+              borderRadius: 2,
+              background: s.at <= frame ? COLOR.limeInk : COLOR.line,
+            }}
+          />
+        ))}
+      </div>
       <div style={{ display: "flex", gap: 4, marginBottom: 8 }}>
         {SCENES.map((s) => {
           const active = frame >= s.from && frame < s.from + s.duration;
@@ -132,14 +155,14 @@ const TimelineBar: React.FC = () => {
                 flex: s.duration,
                 height: 6,
                 borderRadius: 3,
-                background: active ? COLOR.coral : frame >= s.from ? COLOR.emeraldLight : COLOR.meetingGray,
+                background: active ? COLOR.lime : frame >= s.from ? COLOR.limeInk : COLOR.line,
               }}
             />
           );
         })}
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <div style={{ display: "flex", gap: 6 }}>
+        <div style={{ display: "flex", gap: 6, alignItems: "center" }}>
           {Array.from({ length: DURATION / BEAT }, (_, i) => (
             <div
               key={i}
@@ -147,32 +170,43 @@ const TimelineBar: React.FC = () => {
                 width: 14,
                 height: 14,
                 borderRadius: 2,
-                background: i === beat ? COLOR.cream : i % 4 === 0 ? COLOR.emerald : COLOR.meetingGray,
+                background: i === beat ? COLOR.ink : i % 4 === 0 ? COLOR.lime : COLOR.line,
               }}
             />
           ))}
+          <span style={{ marginLeft: 16, fontSize: 20, color: sfxOn ? COLOR.limeInk : COLOR.line }}>
+            ✎ {sfxOn ? lastSfx.name : "sfx"}
+          </span>
         </div>
-        <span style={{ color: COLOR.cream, fontSize: 24 }}>{timecode(frame)}</span>
+        <span style={{ color: COLOR.ink, fontSize: 24 }}>{timecode(frame)}</span>
       </div>
     </AbsoluteFill>
   );
 };
 
-const HITS = [60, 412];
-
 export const Animatic: React.FC = () => {
   const frame = useCurrentFrame();
-  const flash = Math.max(...HITS.map((h) => interpolate(frame, [h, h + 1, h + 4], [0, 0.9, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })));
-  const bg = frame < 60 ? COLOR.meetingGray : COLOR.ink;
+  // S1은 회의 화면 톤(회색), S2 스크리블부터 밝은 종이
+  const bg = frame < 60 ? "#ECEDEA" : COLOR.paper;
   return (
-    <AbsoluteFill style={{ background: bg }}>
+    <AbsoluteFill
+      style={{
+        background: bg,
+        backgroundImage: `linear-gradient(${COLOR.grid} 1px, transparent 1px), linear-gradient(90deg, ${COLOR.grid} 1px, transparent 1px)`,
+        backgroundSize: "48px 48px",
+      }}
+    >
       {SCENES.map((s) => (
         <Sequence key={s.id} from={s.from} durationInFrames={s.duration} layout="none">
           <SceneSlate scene={s} />
         </Sequence>
       ))}
+      {SFX.map((s, i) => (
+        <Sequence key={i} from={s.at} layout="none">
+          <Html5Audio src={staticFile(`sfx/${s.name}.wav`)} volume={0.9} />
+        </Sequence>
+      ))}
       <TimelineBar />
-      <AbsoluteFill style={{ background: COLOR.cream, opacity: flash }} />
     </AbsoluteFill>
   );
 };

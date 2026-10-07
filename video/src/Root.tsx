@@ -1,7 +1,7 @@
 import React from "react";
 import { Composition } from "remotion";
 import { Animatic } from "./Animatic";
-import { BOARD_DURATION, ElementBoard } from "./ElementBoard";
+import { BOARD_DURATION, BOARD_HEIGHT, ElementBoard } from "./ElementBoard";
 import { DURATION, FPS, HEIGHT, WIDTH } from "./timeline";
 
 export const RemotionRoot: React.FC = () => (
@@ -20,7 +20,7 @@ export const RemotionRoot: React.FC = () => (
       durationInFrames={BOARD_DURATION}
       fps={FPS}
       width={WIDTH}
-      height={1600}
+      height={BOARD_HEIGHT}
     />
   </>
 );
