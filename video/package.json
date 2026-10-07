@@ -9,6 +9,7 @@
     "render:animatic": "remotion render Animatic out/animatic.mp4",
     "still": "remotion still",
     "sfx": "python3 scripts/make-sfx.py",
+    "bgm": "python3 scripts/make-bgm.py",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

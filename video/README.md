@@ -22,10 +22,11 @@ npm run studio            # 브라우저 미리보기 (Remotion Studio)
 npm run render            # 본편 20초 → out/classin-20s.mp4
 npm run render:animatic   # 대본 타이밍 애니매틱 → out/animatic.mp4
 npm run sfx               # '슥슥' 효과음 임시본 다시 만들기
+npm run bgm               # BGM(오리지널 합성) 다시 만들기 → public/music/bed.mp3
 npm run typecheck
 ```
 
-음악은 `public/music/bed.mp3`(또는 `.wav`)를 넣으면 자동으로 깔린다.
+BGM은 `public/music/bed.mp3` — `npm run bgm`으로 만든 오리지널 음원이다. 같은 이름으로 다른 곡을 넣으면 그 곡이 깔린다.
 
 첫 렌더 때 Remotion이 Chrome Headless Shell을 내려받는다. 네트워크가 막힌 환경이면 이미 깔린 Chromium을 지정한다:
 `npx remotion render Animatic out/animatic.mp4 --browser-executable=<headless_shell 경로>`

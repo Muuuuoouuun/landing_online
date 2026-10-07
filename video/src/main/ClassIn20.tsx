@@ -1,6 +1,6 @@
 import React from "react";
 import { AbsoluteFill, getStaticFiles, Html5Audio, Sequence, staticFile, useCurrentFrame } from "remotion";
-import { SCENES, SFX, SFX_VOLUME } from "../timeline";
+import { MASTER, musicVolume, SCENES, SFX, SFX_VOLUME } from "../timeline";
 import { S3Classroom, S4Data } from "./Classroom";
 import { S1Meeting, S2Wipe } from "./Meeting";
 import { S5Manage, S6AI } from "./Manage";
@@ -21,7 +21,7 @@ const SCENE_COMPONENTS: Record<string, React.FC> = {
   S9: S9Lockup,
 };
 
-// public/music/bed.(mp3|wav)를 넣으면 깔린다. 손글씨 소리가 주인공이라 음악은 낮게.
+// BGM: public/music/bed.mp3 (scripts/make-bgm.py). 다른 곡으로 바꾸려면 같은 이름으로 넣으면 된다.
 const MUSIC = getStaticFiles().find((f) => /^music\/bed\.(mp3|wav)$/.test(f.name));
 
 export const ClassIn20: React.FC = () => {
@@ -41,10 +41,10 @@ export const ClassIn20: React.FC = () => {
       })}
       {SFX.map((s, i) => (
         <Sequence key={i} from={s.at} durationInFrames={30} layout="none" name={`sfx ${s.name}`}>
-          <Html5Audio src={staticFile(`sfx/${s.name}.wav`)} volume={SFX_VOLUME[s.name]} />
+          <Html5Audio src={staticFile(`sfx/${s.name}.wav`)} volume={MASTER * SFX_VOLUME[s.name]} />
         </Sequence>
       ))}
-      {MUSIC && <Html5Audio src={staticFile(MUSIC.name)} volume={0.35} />}
+      {MUSIC && <Html5Audio src={staticFile(MUSIC.name)} volume={musicVolume} />}
     </AbsoluteFill>
   );
 };

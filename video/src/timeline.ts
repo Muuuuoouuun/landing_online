@@ -232,18 +232,33 @@ export const SFX: Sfx[] = SCENES.flatMap((s) => [
   }),
 ]).sort((a, b) => a.at - b.at);
 
-// 믹스: 손글씨 소리가 주인공, UI 소리는 한 단계 아래
+// 믹스: BGM 위에 '슥슥'이 또렷이 얹히되 튀지 않게 (v5 대비 약 −6dB), UI 소리는 그보다 한 단계 아래
 export const SFX_VOLUME: Record<SfxName, number> = {
-  "write-short": 0.9,
-  "write-long": 0.9,
-  underline: 0.85,
-  circle: 0.85,
-  check: 0.85,
-  highlight: 0.85,
-  strike: 0.95,
-  click: 0.5,
-  pop: 0.35,
-  tick: 0.22,
-  whoosh: 0.35,
-  hit: 0.8,
+  "write-short": 0.45,
+  "write-long": 0.45,
+  underline: 0.42,
+  circle: 0.42,
+  check: 0.42,
+  highlight: 0.42,
+  strike: 0.5,
+  click: 0.4,
+  pop: 0.3,
+  tick: 0.16,
+  whoosh: 0.3,
+  hit: 0.4,
+};
+
+// 전체 음량 — 효과음·음악 비율은 그대로 두고 믹스를 약 −16 LUFS(웹 영상 기준)로 맞춘다
+export const MASTER = 1.48;
+
+// BGM — scripts/make-bgm.py로 만든 오리지널 음원. 손글씨 소리가 날 때는 살짝 비켜 준다(덕킹).
+export const MUSIC_VOLUME = 0.5;
+const SCRIBBLES: SfxName[] = ["write-short", "write-long", "underline", "circle", "check", "highlight", "strike"];
+export const musicVolume = (frame: number) => {
+  const duck = SFX.filter((s) => SCRIBBLES.includes(s.name)).reduce((d, s) => {
+    const x = frame - s.at;
+    const w = x < -2 || x > 16 ? 0 : x < 0 ? (x + 2) / 2 : x > 12 ? (16 - x) / 4 : 1;
+    return Math.max(d, w);
+  }, 0);
+  return MASTER * MUSIC_VOLUME * (1 - 0.25 * duck);
 };
