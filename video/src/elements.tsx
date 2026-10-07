@@ -3,7 +3,6 @@ import { interpolate } from "remotion";
 import { noise2D } from "@remotion/noise";
 import { COLOR } from "./brand";
 import { MONO, SANS } from "./fonts";
-import { HandWord } from "./hand";
 import { Icon, IconName } from "./icons";
 
 // 장점 표현 장치 (밝은 테마). 전부 progress(0→1) 하나로 움직이고, 1이면 완성 상태.
@@ -210,40 +209,44 @@ export const ClassroomWall: React.FC<{ shown: number; checked: number; cell?: nu
   </div>
 );
 
-// AI 강의 평가 점수 — 링 + 채점하듯 쓰는 손글씨 점수 + 동그라미
-export const ScoreRing: React.FC<{ score: number; progress: number; write: number; circle: number; size?: number }> = ({
+// AI 강의 평가 점수 — 링 + 숫자 카운트업 (점수는 기본 폰트. 손글씨는 카피 강조에만 쓴다)
+export const ScoreRing: React.FC<{ score: number; progress: number; size?: number; label?: boolean }> = ({
   score,
   progress,
-  write,
-  circle,
   size = 200,
+  label = true,
 }) => {
   const r = 80;
   const c = 2 * Math.PI * r;
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10, fontFamily: SANS }}>
-    <div style={{ position: "relative", width: size, height: size }}>
-      <svg viewBox="0 0 200 200" width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
-        <circle cx="100" cy="100" r={r} fill="none" stroke={COLOR.line} strokeWidth={12} />
-        <circle
-          cx="100"
-          cy="100"
-          r={r}
-          fill="none"
-          stroke={COLOR.lime}
-          strokeWidth={12}
-          strokeLinecap="round"
-          strokeDasharray={c}
-          strokeDashoffset={c * (1 - (score / 100) * progress)}
-        />
-      </svg>
-      <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-        <HandWord text={String(score)} size={size * 0.34} write={write} mark="circle" markProgress={circle} color={COLOR.ink} />
+      <div style={{ position: "relative", width: size, height: size }}>
+        <svg viewBox="0 0 200 200" width={size} height={size} style={{ transform: "rotate(-90deg)" }}>
+          <circle cx="100" cy="100" r={r} fill="none" stroke={COLOR.line} strokeWidth={12} />
+          <circle
+            cx="100"
+            cy="100"
+            r={r}
+            fill="none"
+            stroke={COLOR.lime}
+            strokeWidth={12}
+            strokeLinecap="round"
+            strokeDasharray={c}
+            strokeDashoffset={c * (1 - (score / 100) * progress)}
+          />
+        </svg>
+        <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+          <div style={{ fontSize: size * 0.32, fontWeight: 900, color: COLOR.ink, lineHeight: 1, letterSpacing: "-0.04em", fontVariantNumeric: "tabular-nums" }}>
+            {Math.round(score * progress)}
+          </div>
+          <div style={{ fontSize: size * 0.07, color: COLOR.sub, marginTop: 4 }}>/ 100</div>
+        </div>
       </div>
-    </div>
-      <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 18, color: COLOR.sub }}>
-        <Icon name="Sparkles" size={20} color={COLOR.limeInk} /> AI 강의 평가
-      </div>
+      {label && (
+        <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 18, color: COLOR.sub }}>
+          <Icon name="Sparkles" size={20} color={COLOR.limeInk} /> AI 강의 평가
+        </div>
+      )}
     </div>
   );
 };

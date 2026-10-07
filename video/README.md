@@ -1,13 +1,14 @@
 # classin-motion
 
-ClassIn 15초 시네마틱 키네틱 타이포그래피 영상 (Remotion 4).
+ClassIn 20초 키네틱 타이포그래피 영상 (Remotion 4).
 
 - 대본: [SCRIPT.md](./SCRIPT.md)
-- 대본 → 프레임 데이터: `src/timeline.ts` (대본을 고치면 여기도 같이 고친다)
+- 본편: `src/main/` (`ClassIn20` 컴포지션) → `out/classin-20s.mp4`
+- 대본 → 프레임 데이터: `src/timeline.ts` (카피·타이밍·효과음은 여기 한 곳에서)
 - 브랜드 컬러: `src/brand.ts` · 폰트: `src/fonts.ts` (Pretendard, JetBrains Mono — 전부 로컬 번들, 렌더 시 네트워크 불필요)
 - 아이콘: `src/icons.tsx` (lucide 라인 아이콘 + 획 드로우온) · 장점 표현 요소: `src/elements.tsx`
 - 손글씨 강조 + 손그림 마크: `src/hand.tsx` (카피의 `{중괄호}`가 연두 손글씨로 쓰인다)
-- '슥슥' 효과음: `public/sfx/*.wav` — 임시 합성본, `python3 scripts/make-sfx.py`로 재생성
+- '슥슥' + UI 효과음: `public/sfx/*.wav` — 임시 합성본, `npm run sfx`로 재생성
 - 요소 보드: `npx remotion still ElementBoard out/element-board.png --frame=89`
 
 ## 실행
@@ -16,9 +17,13 @@ ClassIn 15초 시네마틱 키네틱 타이포그래피 영상 (Remotion 4).
 cd video
 npm install
 npm run studio            # 브라우저 미리보기 (Remotion Studio)
+npm run render            # 본편 20초 → out/classin-20s.mp4
 npm run render:animatic   # 대본 타이밍 애니매틱 → out/animatic.mp4
+npm run sfx               # '슥슥' 효과음 임시본 다시 만들기
 npm run typecheck
 ```
+
+음악은 `public/music/bed.mp3`(또는 `.wav`)를 넣으면 자동으로 깔린다.
 
 첫 렌더 때 Remotion이 Chrome Headless Shell을 내려받는다. 네트워크가 막힌 환경이면 이미 깔린 Chromium을 지정한다:
 `npx remotion render Animatic out/animatic.mp4 --browser-executable=<headless_shell 경로>`
@@ -38,7 +43,7 @@ npm run typecheck
 | `@remotion/effects`, `@remotion/light-leaks` | 라이트 릭 등 이펙트 |
 | `@remotion/fonts`, `pretendard`, `@fontsource/jetbrains-mono` | 로컬 폰트 로딩 |
 | `lucide` | 라인 아이콘 세트 (ISC) — 획 단위 데이터라 드로우온 애니메이션 가능 |
-| `@fontsource/east-sea-dokdo` 외 3종 | 손글씨 강조 폰트 후보 (OFL) — 동해 독도 · 나눔손글씨 펜/붓 · 개구 |
+| `@fontsource/east-sea-dokdo` | 손글씨 강조 폰트 동해 독도 (OFL) — 카피 강조 단어에만 |
 | `@remotion/google-fonts` | 디스플레이 폰트 탐색용 (렌더 시 네트워크 필요) |
 | `@remotion/media-utils` | 음원 파형·비트 분석 |
 

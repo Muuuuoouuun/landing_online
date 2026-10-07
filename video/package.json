@@ -2,19 +2,18 @@
   "name": "classin-motion",
   "version": "0.1.0",
   "private": true,
-  "description": "ClassIn 15s cinematic kinetic-typography commercial (Remotion)",
+  "description": "ClassIn 20s kinetic-typography commercial (Remotion)",
   "scripts": {
     "studio": "remotion studio",
+    "render": "remotion render ClassIn20 out/classin-20s.mp4",
     "render:animatic": "remotion render Animatic out/animatic.mp4",
     "still": "remotion still",
+    "sfx": "python3 scripts/make-sfx.py",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@fontsource/east-sea-dokdo": "5.3.0",
-    "@fontsource/gaegu": "5.3.0",
     "@fontsource/jetbrains-mono": "5.3.0",
-    "@fontsource/nanum-brush-script": "5.3.0",
-    "@fontsource/nanum-pen-script": "5.3.0",
     "@remotion/animation-utils": "4.0.533",
     "@remotion/cli": "4.0.533",
     "@remotion/effects": "4.0.533",

@@ -13,7 +13,7 @@ import {
   RadarChart,
   ScoreRing,
 } from "./elements";
-import { DEFAULT_HAND, HAND_LABEL, HandKey, MONO, SANS } from "./fonts";
+import { MONO, SANS } from "./fonts";
 import { EmphLine, HandWord, Mark, MarkKind } from "./hand";
 import { Icon } from "./icons";
 import { SCENES } from "./timeline";
@@ -45,10 +45,10 @@ const SWATCHES: [keyof typeof COLOR, string][] = [
 ];
 
 const MARKS: { kind: MarkKind; word: string; sfx: string; where: string }[] = [
-  { kind: "circle", word: "수업", sfx: "circle.wav · 0.43s", where: "S1 의심 · S6 채점 · S7 확신" },
-  { kind: "underline", word: "아니니까", sfx: "underline.wav · 0.27s", where: "S2 · S6 · S8" },
-  { kind: "check", word: "녹화 완료", sfx: "check.wav · 0.30s", where: "S4" },
-  { kind: "highlight", word: "한 화면", sfx: "highlight.wav · 0.35s", where: "S5" },
+  { kind: "circle", word: "수업", sfx: "circle.wav · 0.43s", where: "S1 의심 · S8 확신" },
+  { kind: "underline", word: "아니니까", sfx: "underline.wav · 0.27s", where: "S2 · S6 · S7 · S9" },
+  { kind: "check", word: "클릭 한 번", sfx: "check.wav · 0.30s", where: "S5" },
+  { kind: "highlight", word: "데이터", sfx: "highlight.wav · 0.35s", where: "S4" },
   { kind: "strike", word: "회의", sfx: "strike.wav · 0.42s", where: "S2 회의 그리드 지우기" },
 ];
 
@@ -69,8 +69,8 @@ export const ElementBoard: React.FC = () => {
     >
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 48 }}>
         <div style={{ fontSize: 48, fontWeight: 900, letterSpacing: "-0.03em" }}>
-          ClassIn 15″ 스타일 보드{" "}
-          <HandWord text="v3" size={48} write={p(0, 20)} mark="underline" markProgress={p(20, 12)} />
+          ClassIn 20″ 스타일 보드{" "}
+          <HandWord text="v4" size={48} write={p(0, 20)} mark="underline" markProgress={p(20, 12)} />
         </div>
         <div style={{ fontFamily: MONO, fontSize: 18, color: COLOR.sub }}>밝은 테마 · 연두 강조 · 손글씨 강조 · 슥슥 SFX</div>
       </div>
@@ -99,30 +99,10 @@ export const ElementBoard: React.FC = () => {
             </div>
           </Section>
 
-          <Section tag="HANDWRITING" title="손글씨 강조 폰트 후보 4종" note={`전부 OFL(상업 사용 가능). 현재 기본값: ${HAND_LABEL[DEFAULT_HAND]}`}>
-            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-              {(Object.keys(HAND_LABEL) as HandKey[]).map((key, i) => (
-                <div
-                  key={key}
-                  style={{
-                    ...card,
-                    boxShadow: "none",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 28,
-                    padding: "14px 24px",
-                    borderColor: key === DEFAULT_HAND ? COLOR.lime : COLOR.line,
-                    borderWidth: key === DEFAULT_HAND ? 2 : 1,
-                  }}
-                >
-                  <div style={{ width: 150 }}>
-                    <div style={{ fontSize: 18, fontWeight: 700 }}>{HAND_LABEL[key]}</div>
-                    {key === DEFAULT_HAND && <div style={{ fontFamily: MONO, fontSize: 13, color: COLOR.limeInk }}>DEFAULT</div>}
-                  </div>
-                  {["수업", "녹화 완료", "AI가 평가", "92"].map((w) => (
-                    <HandWord key={w} text={w} size={44} hand={key} write={p(i * 6, 24)} />
-                  ))}
-                </div>
+          <Section tag="HANDWRITING" title="손글씨 강조 = 동해 독도" note="OFL(상업 사용 가능). 카피의 강조 단어에만 쓰고, 숫자·UI에는 쓰지 않는다">
+            <div style={{ ...card, boxShadow: "none", display: "flex", alignItems: "center", gap: 26, padding: "18px 24px", borderColor: COLOR.lime, borderWidth: 2 }}>
+              {["수업", "데이터", "클릭 한 번", "AI가 평가", "돌아간다"].map((w, i) => (
+                <HandWord key={w} text={w} size={38} write={p(i * 6, 24)} />
               ))}
             </div>
           </Section>
@@ -202,9 +182,9 @@ export const ElementBoard: React.FC = () => {
             </div>
           </Section>
 
-          <Section tag="S6" title="AI 강의 평가 — 채점하듯" note="점수는 손글씨 + 동그라미 · 직접 본 수업 0 vs AI 평가 48">
+          <Section tag="S6" title="AI 강의 평가" note="점수는 기본 폰트(손글씨 아님) · 직접 본 수업 0 vs AI 평가 48">
             <div style={{ display: "flex", gap: 24, alignItems: "center" }}>
-              <ScoreRing score={92} progress={p(10, 50)} write={p(30, 12)} circle={p(44, 14)} size={190} />
+              <ScoreRing score={92} progress={p(10, 50)} size={190} />
               <RadarChart values={[0.92, 0.7, 0.88, 0.8, 0.75]} progress={p(10, 60)} size={220} />
               <CompareCounter progress={p(20, 60)} />
             </div>

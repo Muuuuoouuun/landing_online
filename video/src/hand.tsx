@@ -1,7 +1,7 @@
 import React from "react";
 import { interpolate } from "remotion";
 import { COLOR } from "./brand";
-import { DEFAULT_HAND, handFamily, HandKey, loadHand } from "./fonts";
+import { HAND, loadHand } from "./fonts";
 
 // 손글씨 강조 시스템.
 // 카피에서 {중괄호} 부분이 강조 — 연두 손글씨로 '쓰이고', 다 쓰이면 마크(밑줄·동그라미…)가 그어진다.
@@ -51,7 +51,7 @@ const MARK_BOX: Record<MarkKind, React.CSSProperties> = {
   underline: { left: "-4%", width: "108%", top: "74%", height: "34%" },
   circle: { left: "-16%", width: "132%", top: "-20%", height: "140%" },
   strike: { left: "-6%", width: "112%", top: "28%", height: "44%" },
-  check: { left: "104%", width: "1.1em", top: "-10%", height: "1.1em" },
+  check: { left: "-0.82em", width: "0.68em", top: "6%", height: "0.68em" },
   highlight: { left: "-4%", width: "108%", top: "38%", height: "56%" },
 };
 
@@ -109,21 +109,20 @@ export const HandWord: React.FC<{
   write: number;
   mark?: MarkKind;
   markProgress?: number;
-  hand?: HandKey;
   color?: string;
-}> = ({ text, size, write, mark, markProgress = 0, hand = DEFAULT_HAND, color = COLOR.limeInk }) => {
-  loadHand(hand, text);
+}> = ({ text, size, write, mark, markProgress = 0, color = COLOR.limeInk }) => {
+  loadHand(text);
   const edge = write * 112 - 6;
   const mask = `linear-gradient(90deg, #000 ${edge - 6}%, transparent ${edge + 6}%)`;
   return (
-    <span style={{ position: "relative", display: "inline-block", padding: "0 0.06em", whiteSpace: "nowrap" }}>
+    <span style={{ position: "relative", display: "inline-block", padding: "0 0.12em 0 0.06em", whiteSpace: "nowrap" }}>
       {mark && <Mark kind={mark} progress={markProgress} size={size} />}
       <span
         style={{
           position: "relative",
           zIndex: 1,
-          fontFamily: handFamily(hand),
-          fontWeight: hand === "gaegu" ? 700 : 400,
+          fontFamily: HAND,
+          fontWeight: 400,
           fontSize: size * 1.3,
           lineHeight: 1,
           color,
@@ -144,8 +143,7 @@ export const EmphLine: React.FC<{
   local: number;
   mark?: MarkKind;
   delay?: number;
-  hand?: HandKey;
-}> = ({ text, size, local, mark, delay, hand }) => {
+}> = ({ text, size, local, mark, delay }) => {
   const word = emphasisOf(text);
   const t = word ? emphasisTiming(word, delay) : undefined;
   return (
@@ -156,7 +154,6 @@ export const EmphLine: React.FC<{
             key={i}
             text={seg.text}
             size={size}
-            hand={hand}
             write={interpolate(local, [t.write, t.written], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}
             mark={mark}
             markProgress={
