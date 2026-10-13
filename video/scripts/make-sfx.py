@@ -73,6 +73,41 @@ def whoosh(dur: float = 0.5) -> np.ndarray:
     return mix * np.sin(np.pi * t) ** 1.6
 
 
+def shutter() -> np.ndarray:
+    """카메라 셔터 — 짧은 기계음 두 번 (매치 컷)."""
+    n = int(0.16 * SR)
+    t = np.arange(n) / SR
+    out = np.zeros(n)
+    for d, g in ((0.0, 1.0), (0.055, 0.7)):
+        i = int(d * SR)
+        m = n - i
+        tt = t[:m]
+        out[i:] += g * (band(rng.standard_normal(m), 2600, 0.5) * np.exp(-tt / 0.012) + 0.3 * tone(m / SR, 900, 700, 0.008)[:m])
+    return out
+
+
+def swell(dur: float = 1.0) -> np.ndarray:
+    """줌 아웃용 낮은 스웰 — 공기가 빠지듯 커졌다 사라진다."""
+    n = int(dur * SR)
+    t = np.linspace(0, 1, n)
+    air = band(rng.standard_normal(n), 420, 0.8) * 0.8 + band(rng.standard_normal(n), 1400, 0.6) * 0.25 * t
+    sub = tone(dur, 95, 55, 10.0) * 0.5
+    env = np.sin(np.pi * np.clip(t / 0.85, 0, 1)) ** 1.4
+    return (air + sub) * env
+
+
+def chime(freq: float) -> np.ndarray:
+    """체크리스트 점등 — 작고 맑은 벨."""
+    dur = 0.9
+    n = int(dur * SR)
+    t = np.arange(n) / SR
+    y = np.sin(2 * np.pi * freq * t) * np.exp(-t / 0.32)
+    y += 0.28 * np.sin(2 * np.pi * freq * 2.76 * t) * np.exp(-t / 0.09)
+    y += 0.08 * np.sin(2 * np.pi * freq * 5.4 * t) * np.exp(-t / 0.03)
+    y += 0.35 * np.sin(2 * np.pi * freq / 2 * t) * np.exp(-t / 0.25)
+    return y * np.clip(t / 0.003, 0, 1)
+
+
 def hit() -> np.ndarray:
     body = tone(0.9, 110, 48, 0.28)
     snap = band(rng.standard_normal(int(0.9 * SR)), 3000, 0.8) * np.exp(-np.arange(int(0.9 * SR)) / SR / 0.03)
@@ -81,21 +116,29 @@ def hit() -> np.ndarray:
 
 
 SOUNDS = {
-    # 손글씨로 단어 쓰기 — 짧은 단어(1–3자) / 긴 단어(4자 이상)
-    "write-short": seq((0, 0.09, 3400), (0.12, 0.07, 3900), (0.21, 0.11, 3000)),
-    "write-long": seq((0, 0.08, 3500), (0.10, 0.06, 4100), (0.18, 0.10, 3100), (0.31, 0.07, 3800), (0.41, 0.12, 2900)),
-    # 강조 마크
-    "underline": seq((0, 0.22, 2600)),
-    "circle": seq((0, 0.38, 2800)),
-    "check": seq((0, 0.07, 3600), (0.09, 0.16, 3000)),
-    "highlight": seq((0, 0.30, 1800)),
+    # 손글씨로 단어 쓰기 — v6는 쓰는 속도가 느려져(7f + 글자당 3f) 소리도 길어졌다
+    # 짧은 단어(1–2자, 약 0.45초) / 보통(3–4자, 약 0.6초) / 긴 단어(5자 이상, 약 0.75초)
+    "write-short": seq((0, 0.11, 3400), (0.15, 0.09, 3900), (0.28, 0.15, 3000)),
+    "write-long": seq((0, 0.10, 3500), (0.13, 0.08, 4100), (0.24, 0.12, 3100), (0.39, 0.08, 3800), (0.49, 0.13, 2900)),
+    "write-xl": seq(
+        (0, 0.10, 3500), (0.13, 0.08, 4100), (0.24, 0.11, 3100), (0.38, 0.08, 3800), (0.49, 0.10, 3300), (0.62, 0.13, 2900)
+    ),
+    # 강조 마크 (12–14f)
+    "underline": seq((0, 0.36, 2600)),
+    "circle": seq((0, 0.46, 2800)),
+    "check": seq((0, 0.09, 3600), (0.11, 0.2, 3000)),
+    "highlight": seq((0, 0.42, 1800)),
     "strike": seq((0, 0.06, 3800), (0.07, 0.06, 3300), (0.14, 0.06, 3900), (0.21, 0.07, 3200), (0.29, 0.08, 3600)),
     # UI · 전환 — 손글씨 소리보다 한 단계 작게 믹스한다
     "click": click(),
     "pop": tone(0.18, 520, 980, 0.05),
     "tick": tone(0.05, 2600, 2400, 0.008),
     "whoosh": whoosh(),
+    "swell": swell(),
+    "shutter": shutter(),
     "hit": hit(),
+    # 체크리스트 점등 — C 장조 5음(도·레·미·솔·라)으로 하나씩 올라간다
+    **{f"chime-{i + 1}": chime(f) for i, f in enumerate([1046.5, 1174.7, 1318.5, 1568.0, 1760.0])},
 }
 
 

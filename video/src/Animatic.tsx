@@ -18,6 +18,7 @@ import { BEAT, Cue, CueStyle, DURATION, FPS, Scene, SCENES, SFX } from "./timeli
 // 대본 타이밍 검토용 애니매틱 — 카피 · 손글씨 강조 · '슥슥' 효과음 싱크만 보여준다. 최종 모션 아님.
 
 const STYLE: Record<CueStyle, { size: number; css: React.CSSProperties }> = {
+  lead: { size: 80, css: { fontWeight: 800, color: COLOR.ink } },
   story: { size: 60, css: { fontWeight: 600, color: COLOR.sub } },
   slam: { size: 112, css: { fontWeight: 900, color: COLOR.ink, letterSpacing: "-0.03em" } },
   verb: { size: 120, css: { fontWeight: 800, color: COLOR.ink, letterSpacing: "-0.03em" } },

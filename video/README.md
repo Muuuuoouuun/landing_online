@@ -1,15 +1,15 @@
 # classin-motion
 
-ClassIn 20초 키네틱 타이포그래피 영상 (Remotion 4).
+ClassIn 24초 키네틱 타이포그래피 영상 (Remotion 4).
 
 - 대본: [SCRIPT.md](./SCRIPT.md)
-- 본편: `src/main/` (`ClassIn20` 컴포지션) → `out/classin-20s.mp4`
+- 본편: `src/main/` (`ClassIn24` 컴포지션) → `out/classin-24s.mp4` — 장면을 겹쳐 그리는 구조(페이드 없는 전환), 하단 체크리스트 바는 `Checklist.tsx`
 - 대본 → 프레임 데이터: `src/timeline.ts` (카피·타이밍·효과음은 여기 한 곳에서)
 - 브랜드 컬러: `src/brand.ts` · 폰트: `src/fonts.ts` (Pretendard, JetBrains Mono — 전부 로컬 번들, 렌더 시 네트워크 불필요)
 - 아이콘: `src/icons.tsx` (lucide 라인 아이콘 + 획 드로우온) · 장점 표현 요소: `src/elements.tsx`
 - 손글씨 강조 + 손그림 마크: `src/hand.tsx` (카피의 `{중괄호}`가 연두 손글씨로 쓰인다)
 - '슥슥' + UI 효과음: `public/sfx/*.wav` — 임시 합성본, `npm run sfx`로 재생성
-- 실사 소재: `public/img/` (수업 화면 · 과정 화면 2장 · 노트북 사진) — `RealShot`으로 흰 프레임 컷 삽입
+- 실사 소재: `public/img/` (수업 화면 · 과정 화면 2장 · 노트북 사진) — 매치 컷 · 패널에서 펼치기(`RealShot`) · 노트북 화면 원근 매칭(`quadMatrix`)
 - 기획안: [PLAN.md](./PLAN.md)
 - 요소 보드: `npx remotion still ElementBoard out/element-board.png --frame=89`
 
@@ -19,7 +19,7 @@ ClassIn 20초 키네틱 타이포그래피 영상 (Remotion 4).
 cd video
 npm install
 npm run studio            # 브라우저 미리보기 (Remotion Studio)
-npm run render            # 본편 20초 → out/classin-20s.mp4
+npm run render            # 본편 24초 → out/classin-24s.mp4
 npm run render:animatic   # 대본 타이밍 애니매틱 → out/animatic.mp4
 npm run sfx               # '슥슥' 효과음 임시본 다시 만들기
 npm run bgm               # BGM(오리지널 합성) 다시 만들기 → public/music/bed.mp3

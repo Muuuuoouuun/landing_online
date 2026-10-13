@@ -1,10 +1,14 @@
-"""ClassIn 20초 BGM 합성기 — 영상 타이밍에 맞춰 직접 작곡한 오리지널 음원 (외부 샘플 없음).
+"""ClassIn 24초 BGM 합성기 — 영상 타이밍에 맞춰 직접 작곡한 오리지널 음원 (외부 샘플 없음).
 
-밝은 마림바 아르페지오 + 플럭 베이스 + 가벼운 킥·클랩·하이햇 + 패드, 100 BPM.
-- 0.0–1.9초 (S1 질문): Am 패드 + 물음표 같은 마림바 → 라이저
-- 1.9초 (S2 그리드 지우기): C 장조로 드롭, 메인 그루브 시작
-- 16.3초 (S7–S8): 드럼이 빠지는 브레이크다운 + 라이저
-- 18.7초 (S9 로고 히트, f560): 마지막 다운비트 — 큰 C 코드 + 잔향으로 마무리
+밝은 마림바 아르페지오 + 플럭 베이스 + 가벼운 킥·클랩·하이햇 + 패드, 90 BPM (1박 = 20프레임).
+장면 경계가 전부 박자 위(76 + 20k 프레임)에 있어서, 컷마다 짧은 역방향 스웰이 컷 프레임에 정확히 닿는다.
+- 0.0–2.5초 (S1 질문): Am 패드 + 물음표 같은 마림바 세 음 → 라이저
+- 2.5초 (f76, S2 마커 와이프): C 장조로 드롭, 메인 그루브 시작
+- 5.2초 (f156, S3 '딱 맞는'): 벨 화음 강조
+- 7.9–18.5초 (S4–S7): 하이햇까지 들어간 가장 꽉 찬 구간
+- 18.5초 (f556, S7 끝–S8): 드럼이 빠지는 브레이크다운 + 라이저
+- 21.2초 (f636, S9): 다시 들어왔다가 한 박 쉬고
+- 22.5초 (f676, 로고 히트): 마지막 큰 C 화음 + 크래시, 24초까지 잔향
 
     python3 scripts/make-bgm.py      # → public/music/bed.mp3
 """
@@ -16,12 +20,14 @@ from pathlib import Path
 import numpy as np
 
 SR = 48000
-LENGTH = 20.0
-BPM = 100
-BEAT = 60 / BPM  # 0.6초 = 18프레임
+FPS = 30
+LENGTH = 24.0
+BPM = 90
+BEAT = 60 / BPM  # 0.667초 = 20프레임
 BAR = BEAT * 4
-DROP = 1.875  # 첫 다운비트. 여기서 BAR*7 뒤가 로고 히트(18.675초 ≈ f560)
-FINAL = DROP + BAR * 7
+DROP = 76 / FPS  # 첫 다운비트 = S2 마커 와이프 (f76)
+FINAL = 676 / FPS  # 로고 히트 = 마지막 마디의 3박 (DROP + 7마디 + 2박)
+CUTS = [136, 216, 336, 416, 496, 576, 636]  # 장면 경계 (프레임) — timeline.ts SCENES와 같다
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "public" / "music"
@@ -148,16 +154,34 @@ CHORDS = {  # 아르페지오에 쓸 코드 톤 (마림바 음역)
     "F": [72, 77, 81, 84],
     "Fmaj7": [72, 76, 77, 81],
 }
+# 0: S2–S3 · 1: S3 선언–S4 · 2–5: S4–S7 · 6: 브레이크다운(S8) · 7: 엔딩
 BARS = [("C", C), ("G", G), ("Am", AM), ("F", F), ("C", C), ("G", G), ("Fmaj7", F)]
 ARP = [0, 1, 2, 3, 2, 1, 2, 3]  # 8분음표 패턴
 
-# 인트로 — Am 패드 + 물음표 같은 마림바 세 음
+
+def bell(note: float, dur: float = 1.6) -> np.ndarray:
+    f = midi(note)
+    t = env_t(dur)
+    y = np.sin(2 * np.pi * f * t) * np.exp(-t / 0.7)
+    y += 0.3 * np.sin(2 * np.pi * f * 2.76 * t) * np.exp(-t / 0.2)
+    y += 0.1 * np.sin(2 * np.pi * f * 5.4 * t) * np.exp(-t / 0.06)
+    return y * np.clip(t / 0.002, 0, 1)
+
+
+def reverse_swell(dur: float) -> np.ndarray:
+    """컷 프레임에 정확히 끝나는 역방향 스웰 (노이즈가 빨려 들어가는 소리)."""
+    t = env_t(dur)
+    y = lowpass(rng.standard_normal(len(t)), 2400) * (t / dur) ** 3
+    return y * np.clip((dur - t) / 0.01, 0, 1)
+
+
+# 인트로 — Am 패드 + 물음표 같은 마림바 세 음 (드롭 앞 박자 위에)
 pl, pr = pad([57, 60, 64, 71], DROP + 0.3)
 place(pl * 0.05, 0.0, pan=-1)
 place(pr * 0.05, 0.0, pan=1)
 for k, n in enumerate([76, 79, 83]):
-    place(marimba(n, 1.2), 0.15 + k * BEAT, gain=0.16, pan=0.2 * (k - 1), send=0.5)
-place(riser(1.2), DROP - 1.2, gain=0.05, send=0.3)
+    place(marimba(n, 1.3), DROP - (3 - k) * BEAT, gain=0.16, pan=0.2 * (k - 1), send=0.5)
+place(riser(1.4), DROP - 1.4, gain=0.05, send=0.3)
 
 for b, (name, root) in enumerate(BARS):
     t0 = DROP + b * BAR
@@ -168,8 +192,8 @@ for b, (name, root) in enumerate(BARS):
     # 패드
     chord = [root - 12, *[n - 12 for n in tones[:3]]]
     pl, pr = pad(chord, BAR + 0.3)
-    place(pl * (0.05 if not breakdown else 0.07), t0, pan=-1, send=0.3)
-    place(pr * (0.05 if not breakdown else 0.07), t0, pan=1, send=0.3)
+    place(pl * (0.05 if not breakdown else 0.075), t0, pan=-1, send=0.3)
+    place(pr * (0.05 if not breakdown else 0.075), t0, pan=1, send=0.3)
 
     # 마림바 아르페지오 (브레이크다운에선 4분음표로 듬성듬성)
     step = BEAT / 2 if not breakdown else BEAT
@@ -198,12 +222,34 @@ for b, (name, root) in enumerate(BARS):
         for e in range(8):
             place(hat(open_=e % 2 == 1), t0 + e * BEAT / 2, gain=0.05 if e % 2 else 0.035, pan=0.3)
 
+# S3 '딱 맞는' — 둘째 마디 첫 박에 벨 화음
+for k, n in enumerate([84, 88, 91]):
+    place(bell(n), DROP + BAR + k * 0.012, gain=0.06, pan=-0.3 + k * 0.3, send=0.6)
+
+# 장면 경계마다 — 컷 프레임에 닿는 역방향 스웰 + 컷 위의 작은 악센트
+for c in CUTS:
+    at = c / FPS
+    place(reverse_swell(0.5), at - 0.5, gain=0.045 if c != 576 else 0.03, pan=0.0, send=0.2)
+    if c not in (576, 636):  # 브레이크다운·엔딩은 따로
+        place(hat(open_=True), at, gain=0.06, pan=-0.2, send=0.3)
+        place(marimba(CHORDS["C"][3] + 12, 0.6), at, gain=0.05, pan=0.5, send=0.6)
+
+# 엔딩 마디 — 첫 박에 다시 들어왔다가, 둘째 박을 쉬고(라이저), 셋째 박에 로고 히트
+t7 = DROP + 7 * BAR
+place(kick(), t7, gain=0.42)
+place(bass(36, BEAT * 0.9), t7, gain=0.24)
+for i in range(2):
+    place(marimba(CHORDS["C"][i * 2], 0.7), t7 + i * BEAT / 2, gain=0.14, pan=0.3 - 0.6 * i, send=0.4)
+place(riser(FINAL - t7 - BEAT * 0.5), t7 + BEAT * 0.5, gain=0.06, send=0.3)
+
 # 로고 히트 — 큰 C 코드 + 킥 + 크래시, 잔향으로 끝까지
 place(kick(), FINAL, gain=0.55)
 place(crash(), FINAL, gain=0.12, send=0.5)
 place(bass(36, 1.3), FINAL, gain=0.3)
 for k, n in enumerate([60, 64, 67, 72, 76, 79, 84]):
     place(marimba(n, 1.4), FINAL + k * 0.018, gain=0.13, pan=-0.6 + k * 0.2, send=0.6)
+for k, n in enumerate([84, 88, 91, 96]):
+    place(bell(n, 1.4), FINAL + 0.02 + k * 0.03, gain=0.04, pan=-0.4 + k * 0.25, send=0.7)
 pl, pr = pad([48, 60, 64, 67, 74], LENGTH - FINAL + 0.2)
 place(pl * 0.08, FINAL, pan=-1, send=0.4)
 place(pr * 0.08, FINAL, pan=1, send=0.4)
@@ -233,4 +279,4 @@ with wave.open(str(wav), "wb") as w:
     w.writeframes((mix.T * 32767).astype(np.int16).tobytes())
 subprocess.run(["ffmpeg", "-v", "error", "-y", "-i", str(wav), "-codec:a", "libmp3lame", "-b:a", "192k", str(OUT / "bed.mp3")], check=True)
 wav.unlink()
-print(f"bed.mp3  {LENGTH:.1f}s  drop {DROP:.3f}s  final {FINAL:.3f}s (f{FINAL * 30:.0f})")
+print(f"bed.mp3  {LENGTH:.1f}s  {BPM} BPM  drop {DROP:.3f}s (f{DROP * FPS:.0f})  final {FINAL:.3f}s (f{FINAL * FPS:.0f})")

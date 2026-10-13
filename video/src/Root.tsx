@@ -1,7 +1,7 @@
 import React from "react";
 import { Composition } from "remotion";
 import { Animatic } from "./Animatic";
-import { ClassIn20 } from "./main/ClassIn20";
+import { ClassIn24 } from "./main/ClassIn24";
 import { S2ShadeA, S2ShadeB } from "./sketch/S2Shade";
 import { BOARD_DURATION, BOARD_HEIGHT, ElementBoard } from "./ElementBoard";
 import { DURATION, FPS, HEIGHT, WIDTH } from "./timeline";
@@ -9,8 +9,8 @@ import { DURATION, FPS, HEIGHT, WIDTH } from "./timeline";
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
-      id="ClassIn20"
-      component={ClassIn20}
+      id="ClassIn24"
+      component={ClassIn24}
       durationInFrames={DURATION}
       fps={FPS}
       width={WIDTH}

@@ -2,10 +2,10 @@
   "name": "classin-motion",
   "version": "0.1.0",
   "private": true,
-  "description": "ClassIn 20s kinetic-typography commercial (Remotion)",
+  "description": "ClassIn 24s kinetic-typography commercial (Remotion)",
   "scripts": {
     "studio": "remotion studio",
-    "render": "remotion render ClassIn20 out/classin-20s.mp4",
+    "render": "remotion render ClassIn24 out/classin-24s.mp4",
     "render:animatic": "remotion render Animatic out/animatic.mp4",
     "still": "remotion still",
     "sfx": "python3 scripts/make-sfx.py",

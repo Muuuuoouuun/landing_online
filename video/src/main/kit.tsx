@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React from "react";
 import { AbsoluteFill, Easing, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { COLOR } from "../brand";
 import { MONO, SANS } from "../fonts";
@@ -16,26 +16,19 @@ export const ramp = (frame: number, start: number, len: number, easing = EASE_OU
 
 export const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
 
-// 씬의 시작 프레임(절대값). 카피는 timeline의 절대 프레임을 쓰므로 이걸로 로컬 프레임을 계산한다.
-const SceneFrom = createContext(0);
-export const useAbsFrame = () => useCurrentFrame() + useContext(SceneFrom);
+// v6: 씬을 Sequence로 자르지 않고 전역 프레임에서 겹쳐 그린다(전환 동안 앞뒤 장면이 함께 보임).
+// 카피는 timeline의 절대 프레임을 쓰므로 그대로 전역 프레임을 읽는다.
+export const useAbsFrame = () => useCurrentFrame();
 
-export const SceneShell: React.FC<{
-  from: number;
-  duration: number;
-  enter?: number; // 페이드 인 프레임 (0 = 없음)
-  exit?: number; // 페이드 아웃 프레임 (0 = 없음)
-  children: React.ReactNode;
-}> = ({ from, duration, enter = 8, exit = 8, children }) => {
-  const frame = useCurrentFrame();
-  const fadeIn = enter ? ramp(frame, 0, enter) : 1;
-  const fadeOut = exit ? 1 - ramp(frame, duration - exit, exit, EASE_IN_OUT) : 1;
-  return (
-    <SceneFrom.Provider value={from}>
-      <AbsoluteFill style={{ opacity: Math.min(fadeIn, fadeOut), fontFamily: SANS, color: COLOR.ink }}>{children}</AbsoluteFill>
-    </SceneFrom.Provider>
-  );
-};
+// 장면 하나의 레이어 — 페이드 없이, 전환은 각 장면이 직접 그린다.
+export const Layer: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({ children, style }) => (
+  <AbsoluteFill style={{ fontFamily: SANS, color: COLOR.ink, ...style }}>{children}</AbsoluteFill>
+);
+
+// 카피 스크롤 — 다음 장면이 시작되면 이전 카피는 위로 밀려나며 흐려진다.
+export const COPY_OUT = 12;
+// 카메라 팬 길이 (S5 → S6)
+export const PAN = 18;
 
 export const Paper: React.FC<{ tint?: number }> = ({ tint = 0 }) => (
   <AbsoluteFill
@@ -56,6 +49,7 @@ function interpolateColor(a: string, b: string, t: number) {
 // ── 키네틱 카피 ───────────────────────────────────────────────
 
 export const COPY: Record<CueStyle, { size: number; css: React.CSSProperties }> = {
+  lead: { size: 66, css: { fontWeight: 800, color: COLOR.ink, letterSpacing: "-0.03em" } },
   story: { size: 50, css: { fontWeight: 600, color: COLOR.sub, letterSpacing: "-0.02em" } },
   slam: { size: 100, css: { fontWeight: 900, color: COLOR.ink, letterSpacing: "-0.035em" } },
   verb: { size: 70, css: { fontWeight: 800, color: COLOR.ink, letterSpacing: "-0.03em" } },
@@ -81,7 +75,8 @@ export const CopyLine: React.FC<{
   const segs = parseEmphasis(cue.text);
   const handWord = segs.find((s) => s.hand)?.text;
   const t = handWord ? emphasisTiming(handWord, cue.delay) : undefined;
-  const leave = out !== undefined ? ramp(abs, out, 8, EASE_IN_OUT) : 0;
+  const leave = out !== undefined ? ramp(abs, out, COPY_OUT, EASE_IN_OUT) : 0;
+  if (leave >= 1) return null;
   const handAt = segs.findIndex((s) => s.hand);
   let wordIndex = 0;
 
@@ -93,7 +88,7 @@ export const CopyLine: React.FC<{
         lineHeight: 1.22,
         whiteSpace: "nowrap",
         opacity: (1 - leave) * (1 - dim * 0.72),
-        transform: `translateY(${-leave * 24}px)`,
+        transform: `translateY(${-leave * 56}px)`,
         ...style,
       }}
     >
@@ -114,7 +109,7 @@ export const CopyLine: React.FC<{
           if (/^\s+$/.test(w) || w === "") return <span key={`${si}-${wi}`}>{w}</span>;
           // 강조 단어 뒤의 글자(조사·쉼표)는 손글씨가 다 쓰인 뒤에 붙는다
           const after = t && handAt >= 0 && si > handAt;
-          const p = after ? ramp(local, t.written - 2, 8) : ramp(local, wordIndex++ * 2, 12);
+          const p = after ? ramp(local, t.written - 2, 10) : ramp(local, wordIndex++ * 3, 16);
           return (
             <span key={`${si}-${wi}`} style={{ display: "inline-block", clipPath: "inset(-40% -20% -10% -20%)" }}>
               <span style={{ display: "inline-block", transform: `translateY(${(1 - p) * 105}%)` }}>{w}</span>
@@ -126,26 +121,39 @@ export const CopyLine: React.FC<{
   );
 };
 
-// 씬 상단의 작은 기능 라벨
-export const Eyebrow: React.FC<{ text: string; at: number; style?: React.CSSProperties }> = ({ text, at, style }) => {
+// 씬 상단의 작은 기능 라벨 — 체크리스트 항목과 같은 번호·이름 ("01 실시간 상호작용")
+export const Eyebrow: React.FC<{ text: string; at: number; index?: number; out?: number; style?: React.CSSProperties }> = ({
+  text,
+  at,
+  index,
+  out,
+  style,
+}) => {
   const abs = useAbsFrame();
-  const p = ramp(abs, at, 12);
+  const p = ramp(abs, at, 14);
+  const leave = out !== undefined ? ramp(abs, out, COPY_OUT, EASE_IN_OUT) : 0;
+  if (p <= 0 || leave >= 1) return null;
   return (
     <div
       style={{
         display: "inline-flex",
         alignItems: "center",
-        gap: 10,
-        fontFamily: MONO,
-        fontSize: 18,
-        letterSpacing: "0.08em",
+        gap: 12,
+        fontSize: 24,
+        fontWeight: 700,
+        letterSpacing: "-0.01em",
         color: COLOR.limeInk,
-        opacity: p,
-        transform: `translateX(${(1 - p) * -16}px)`,
+        opacity: p * (1 - leave),
+        transform: `translate(${(1 - p) * -16}px, ${-leave * 56}px)`,
         ...style,
       }}
     >
-      <span style={{ width: 8, height: 8, borderRadius: 4, background: COLOR.lime }} />
+      <span style={{ width: 10, height: 10, borderRadius: 5, background: COLOR.lime }} />
+      {index !== undefined && (
+        <span style={{ fontFamily: MONO, fontSize: 20, fontWeight: 600, letterSpacing: "0.04em", color: COLOR.sub }}>
+          {String(index).padStart(2, "0")}
+        </span>
+      )}
       {text}
     </div>
   );
@@ -304,9 +312,11 @@ export const Shaded: React.FC<{ name: IconName; size: number; shade: string; ink
   </div>
 );
 
-// 실제 화면 컷 — 흰 프레임에 넣어 0.6–0.8초 띄우고, 연두 손그림 마크로 짚는다.
+// 실제 화면 컷 — 흰 프레임에 넣어 1초 안팎 띄우고, 연두 손그림 마크로 짚는다.
 // spots 좌표는 원본 이미지 픽셀 기준, at은 컷 시작 기준 프레임.
+// from이 있으면 그 사각형(화면 좌표)에서 펼쳐져 나온다 — 패널이 그대로 실제 화면이 되는 느낌.
 export type Spot = { x: number; y: number; w: number; h: number; kind: MarkKind; at: number };
+export type Rect = { x: number; y: number; w: number; h: number };
 export const RealShot: React.FC<{
   src: string;
   native: [number, number];
@@ -317,25 +327,35 @@ export const RealShot: React.FC<{
   spots?: Spot[];
   label?: string;
   tilt?: number;
-}> = ({ src, native, width, x, y, t, spots = [], label = "실제 ClassIn 화면", tilt = -2.5 }) => {
+  from?: Rect;
+  exit?: number; // 이 로컬 프레임부터 6f 동안 아래로 빠짐
+}> = ({ src, native, width, x, y, t, spots = [], label = "실제 ClassIn 화면", tilt = -2.5, from, exit }) => {
   if (t < 0) return null;
   const k = width / native[0];
-  const p = ramp(t, 0, 10);
+  const height = native[1] * k;
+  const p = ramp(t, 0, from ? 12 : 10, from ? EASE_IN_OUT : EASE_OUT);
+  const gone = exit !== undefined ? ramp(t, exit, 7, EASE_IN_OUT) : 0;
+  if (gone >= 1) return null;
+  const W = width + 20;
+  const H = height + 20;
+  const transform = from
+    ? `translate(${lerp(from.x - x, 0, p)}px, ${lerp(from.y - y, 0, p) + gone * 40}px) scale(${lerp(from.w / W, 1, p)}, ${lerp(from.h / H, 1, p)}) rotate(${tilt * 0.3 * p}deg)`
+    : `translateY(${(1 - p) * 50 + gone * 40}px) scale(${lerp(0.92, 1, p)}) rotate(${lerp(tilt, tilt * 0.3, p)}deg)`;
   return (
     <div
       style={{
         position: "absolute",
         left: x,
         top: y,
-        opacity: p,
-        transform: `translateY(${(1 - p) * 50}px) scale(${lerp(0.92, 1, p)}) rotate(${lerp(tilt, tilt * 0.3, p)}deg)`,
-        transformOrigin: "50% 60%",
+        opacity: (from ? ramp(t, 0, 5) : p) * (1 - gone),
+        transform,
+        transformOrigin: from ? "0 0" : "50% 60%",
         zIndex: 60,
       }}
     >
       <div style={{ padding: 10, borderRadius: 22, background: COLOR.surface, border: `1px solid ${COLOR.line}`, boxShadow: "0 40px 90px rgba(21,24,28,0.22), 0 4px 10px rgba(21,24,28,0.08)" }}>
-        <div style={{ position: "relative", width, height: native[1] * k, borderRadius: 14, overflow: "hidden" }}>
-          <Img src={staticFile(src)} style={{ width, height: native[1] * k, display: "block" }} />
+        <div style={{ position: "relative", width, height, borderRadius: 14, overflow: "hidden" }}>
+          <Img src={staticFile(src)} style={{ width, height, display: "block", opacity: from ? ramp(t, 3, 8) : 1 }} />
           {spots.map((sp, i) => (
             <div key={i} style={{ position: "absolute", left: sp.x * k, top: sp.y * k, width: sp.w * k, height: sp.h * k }}>
               <Mark kind={sp.kind} progress={ramp(t, sp.at, MARK_FRAMES[sp.kind] + 2, EASE_IN_OUT)} size={90} />
@@ -343,9 +363,95 @@ export const RealShot: React.FC<{
           ))}
         </div>
       </div>
-      <div style={{ position: "absolute", left: 22, top: -24, opacity: ramp(t, 4, 6) }}>
-        <Chip icon="Monitor" label={label} on size={18} style={{ boxShadow: shadow }} />
-      </div>
+      {label && (
+        <div style={{ position: "absolute", left: 22, top: -24, opacity: ramp(t, from ? 10 : 4, 6) }}>
+          <Chip icon="Monitor" label={label} on size={18} style={{ boxShadow: shadow }} />
+        </div>
+      )}
     </div>
   );
+};
+
+// ── 강조 장치 ────────────────────────────────────────────────
+
+// 스포트라이트 — 클릭할 곳만 남기고 나머지를 종이색으로 덮어 물러나게 한다.
+export const Spotlight: React.FC<{ rect: Rect; p: number; radius?: number; pad?: number }> = ({ rect, p, radius = 14, pad = 10 }) =>
+  p <= 0 ? null : (
+    <div
+      style={{
+        position: "absolute",
+        left: rect.x - pad,
+        top: rect.y - pad,
+        width: rect.w + pad * 2,
+        height: rect.h + pad * 2,
+        borderRadius: radius,
+        boxShadow: `0 0 0 ${3 * p}px ${COLOR.lime}, 0 0 0 4000px rgba(247,247,242,${0.62 * p})`,
+        zIndex: 40,
+        pointerEvents: "none",
+      }}
+    />
+  );
+
+// 초점 브래킷 — 네 모서리가 크게 벌어져 있다가 대상 크기에 '딱' 맞게 스냅한다.
+const SNAP = Easing.bezier(0.34, 1.56, 0.64, 1);
+export const FocusBrackets: React.FC<{ rect: Rect; p: number; fade?: number; color?: string; arm?: number; gap?: number }> = ({
+  rect,
+  p,
+  fade = 0,
+  color = COLOR.limeInk,
+  arm = 46,
+  gap = 16,
+}) => {
+  if (p <= 0 || fade >= 1) return null;
+  const e = SNAP(Math.min(1, p));
+  const spread = lerp(70, 0, e) + fade * 30;
+  const rot = lerp(-4, 0, e);
+  const corners: [number, number, number, number][] = [
+    [-1, -1, rect.x - gap, rect.y - gap],
+    [1, -1, rect.x + rect.w + gap, rect.y - gap],
+    [1, 1, rect.x + rect.w + gap, rect.y + rect.h + gap],
+    [-1, 1, rect.x - gap, rect.y + rect.h + gap],
+  ];
+  return (
+    <svg width={1920} height={1080} style={{ position: "absolute", left: 0, top: 0, overflow: "visible", opacity: Math.min(1, p * 3) * (1 - fade), zIndex: 45 }}>
+      <g transform={`rotate(${rot} ${rect.x + rect.w / 2} ${rect.y + rect.h / 2})`}>
+        {corners.map(([sx, sy, cx, cy], i) => {
+          const x = cx + sx * spread;
+          const y = cy + sy * spread;
+          return (
+            <path
+              key={i}
+              d={`M ${x} ${y - sy * arm} L ${x} ${y} L ${x - sx * arm} ${y}`}
+              fill="none"
+              stroke={color}
+              strokeWidth={7}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          );
+        })}
+      </g>
+    </svg>
+  );
+};
+
+// 사각형(0,0,w,h)을 임의의 사각형 네 꼭짓점(시계 방향, 좌상단부터)으로 보내는 CSS matrix3d — 원근 매칭용
+export type Pt = [number, number];
+export const quadMatrix = (w: number, h: number, q: [Pt, Pt, Pt, Pt]) => {
+  const [[x0, y0], [x1, y1], [x2, y2], [x3, y3]] = q;
+  const dx1 = x1 - x2;
+  const dx2 = x3 - x2;
+  const dx3 = x0 - x1 + x2 - x3;
+  const dy1 = y1 - y2;
+  const dy2 = y3 - y2;
+  const dy3 = y0 - y1 + y2 - y3;
+  const den = dx1 * dy2 - dx2 * dy1;
+  const g = (dx3 * dy2 - dx2 * dy3) / den;
+  const hh = (dx1 * dy3 - dx3 * dy1) / den;
+  const a = x1 - x0 + g * x1;
+  const b = x3 - x0 + hh * x3;
+  const d = y1 - y0 + g * y1;
+  const e = y3 - y0 + hh * y3;
+  const m = [a / w, d / w, 0, g / w, b / h, e / h, 0, hh / h, 0, 0, 1, 0, x0, y0, 0, 1];
+  return `matrix3d(${m.join(",")})`;
 };

@@ -1,12 +1,12 @@
 import React from "react";
-import { AbsoluteFill, useCurrentFrame } from "remotion";
+import { AbsoluteFill } from "remotion";
 import { COLOR } from "../brand";
 import { EngagementMeter } from "../elements";
 import { Icon } from "../icons";
 import { sceneById } from "../timeline";
-import { CopyLine, EASE_IN_OUT, lerp, ramp, SceneShell, Shaded } from "./kit";
+import { CopyLine, EASE_IN_OUT, Layer, lerp, ramp, Shaded } from "./kit";
 
-// S1 고민 · S2 전환 — 회의 그리드 48칸 → 연두 마커로 지워 버린다.
+// S1 질문 · S2 전환 — 회의 그리드 48칸을 질문째 연두 마커로 지워 버린다.
 
 const COLS = 8;
 const ROWS = 6;
@@ -91,15 +91,14 @@ const Glow: React.FC<{ opacity?: number }> = ({ opacity = 1 }) => (
   />
 );
 
-export const S1Meeting: React.FC = () => {
+// S1 화면 전체 — S2가 이 화면을 그대로 이어받아 마커로 지운다
+const S1Frame: React.FC<{ t: number }> = ({ t }) => {
   const s = sceneById("S1");
-  const local = useCurrentFrame();
-  const abs = local + s.from;
-  const zoom = lerp(1, 1.04, ramp(local, 0, s.duration, EASE_IN_OUT));
+  const zoom = lerp(1, 1.05, ramp(t, 0, s.duration, EASE_IN_OUT));
   return (
-    <SceneShell from={s.from} duration={s.duration} enter={0} exit={0}>
+    <>
       <AbsoluteFill style={{ transform: `scale(${zoom})` }}>
-        <MeetingWall s1Local={local} />
+        <MeetingWall s1Local={t} />
       </AbsoluteFill>
       <Glow />
       <div style={{ position: "absolute", top: 392, width: "100%", textAlign: "center" }}>
@@ -108,12 +107,18 @@ export const S1Meeting: React.FC = () => {
       <div style={{ position: "absolute", top: 466, width: "100%", textAlign: "center" }}>
         <CopyLine cue={s.cues[1]} size={124} />
       </div>
-      <div style={{ position: "absolute", right: 128, bottom: 112, opacity: ramp(local, 16, 12) }}>
-        <EngagementMeter level={0} frame={abs} width={250} />
+      <div style={{ position: "absolute", right: 128, bottom: 112, opacity: ramp(t, 16, 12) }}>
+        <EngagementMeter level={0} frame={t} width={250} />
       </div>
-    </SceneShell>
+    </>
   );
 };
+
+export const S1Meeting: React.FC<{ t: number }> = ({ t }) => (
+  <Layer>
+    <S1Frame t={t} />
+  </Layer>
+);
 
 // 지그재그 마커 — 위에서 아래로 쓸어내리며 그리드를 지운다
 const Scribble: React.FC<{ p: number }> = ({ p }) => {
@@ -147,41 +152,46 @@ const Scribble: React.FC<{ p: number }> = ({ p }) => {
   );
 };
 
-export const S2Wipe: React.FC = () => {
+export const S2Wipe: React.FC<{ t: number }> = ({ t }) => {
   const s = sceneById("S2");
-  const local = useCurrentFrame();
-  const fold = ramp(local, 12, 18, EASE_IN_OUT);
-  const swap = ramp(local, 36, 12, EASE_IN_OUT);
+  const live = t < s.duration;
+  const fold = ramp(t, 12, 18, EASE_IN_OUT);
+  const swap = ramp(t, 36, 12, EASE_IN_OUT);
   return (
-    <SceneShell from={s.from} duration={s.duration} enter={0} exit={6}>
-      <AbsoluteFill
-        style={{
-          transform: `scale(${lerp(1.04, 0.62, fold)}) rotate(${lerp(0, -3, fold)}deg)`,
-          opacity: 1 - ramp(local, 18, 12),
-        }}
-      >
-        <MeetingWall s1Local={99} />
-        <Scribble p={ramp(local, 0, 14, EASE_IN_OUT)} />
-      </AbsoluteFill>
-      <Glow opacity={1 - fold} />
-      {/* 카피 뒤 음영 아이콘: 회의(카메라) → 수업(칠판). '아니니까요'를 다 쓰는 순간 바뀐다 */}
-      <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
-        <div
-          style={{
-            position: "absolute",
-            opacity: ramp(local, 14, 10) * lerp(0.7, 0, swap),
-            transform: `translate(${-swap * 380}px, 0) scale(${lerp(1, 0.55, swap)})`,
-          }}
-        >
-          <Shaded name="Video" size={560} shade="#E4E6E1" ink="#CDD1CB" />
-        </div>
-        <div style={{ position: "absolute", opacity: swap * 0.42, transform: `scale(${lerp(0.8, 1, swap)})` }}>
-          <Shaded name="Presentation" size={600} shade={COLOR.lime} ink={`${COLOR.ink}33`} p={swap} />
-        </div>
-      </AbsoluteFill>
+    <Layer>
+      {live && (
+        <>
+          {/* 질문 화면이 통째로 지워지고 접혀 사라진다 */}
+          <AbsoluteFill
+            style={{
+              transform: `scale(${lerp(1, 0.62, fold)}) rotate(${lerp(0, -3, fold)}deg)`,
+              opacity: 1 - ramp(t, 18, 12),
+            }}
+          >
+            <S1Frame t={sceneById("S1").duration} />
+            <Scribble p={ramp(t, 0, 16, EASE_IN_OUT)} />
+          </AbsoluteFill>
+          <Glow opacity={1 - fold} />
+          {/* 카피 뒤 음영 아이콘: 회의(카메라) → 수업(칠판). '아니니까요'를 다 쓰는 순간 바뀐다 */}
+          <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
+            <div
+              style={{
+                position: "absolute",
+                opacity: ramp(t, 14, 10) * lerp(0.7, 0, swap),
+                transform: `translate(${-swap * 380}px, 0) scale(${lerp(1, 0.55, swap)})`,
+              }}
+            >
+              <Shaded name="Video" size={560} shade="#E4E6E1" ink="#CDD1CB" />
+            </div>
+            <div style={{ position: "absolute", opacity: swap * 0.42, transform: `scale(${lerp(0.8, 1, swap)})` }}>
+              <Shaded name="Presentation" size={600} shade={COLOR.lime} ink={`${COLOR.ink}33`} p={swap} />
+            </div>
+          </AbsoluteFill>
+        </>
+      )}
       <div style={{ position: "absolute", top: 468, width: "100%", textAlign: "center" }}>
-        <CopyLine cue={s.cues[0]} size={112} />
+        <CopyLine cue={s.cues[0]} size={112} out={s.from + s.duration} />
       </div>
-    </SceneShell>
+    </Layer>
   );
 };

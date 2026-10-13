@@ -2,7 +2,7 @@ import React from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import { COLOR } from "../brand";
 import { Icon } from "../icons";
-import { CopyLine, EASE_IN_OUT, lerp, Paper, ramp, SceneShell, Shaded } from "../main/kit";
+import { CopyLine, EASE_IN_OUT, Layer, lerp, Paper, ramp, Shaded } from "../main/kit";
 
 // 기획 시안 — S2 '수업은, 회의가 아니니까.'에 회의/수업 아이콘을 음영으로 붙이는 두 가지 안.
 
@@ -25,7 +25,7 @@ export const S2ShadeA: React.FC = () => {
   return (
     <AbsoluteFill>
       <Paper />
-      <SceneShell from={0} duration={60} enter={0} exit={0}>
+      <Layer>
         <div style={{ position: "absolute", left: 230, top: 150, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, opacity: lerp(1, 0.45, meetingFade) }}>
           <div style={{ position: "relative", width: 420, height: 360 }}>
             <div style={{ position: "absolute", left: 60, top: 0 }}>
@@ -60,7 +60,7 @@ export const S2ShadeA: React.FC = () => {
         <div style={{ position: "absolute", top: 760, width: "100%", textAlign: "center" }}>
           <CopyLine cue={CUE} size={104} />
         </div>
-      </SceneShell>
+      </Layer>
     </AbsoluteFill>
   );
 };
@@ -72,7 +72,7 @@ export const S2ShadeB: React.FC = () => {
   return (
     <AbsoluteFill>
       <Paper />
-      <SceneShell from={0} duration={60} enter={0} exit={0}>
+      <Layer>
         <AbsoluteFill style={{ alignItems: "center", justifyContent: "center" }}>
           <div style={{ position: "absolute", opacity: lerp(0.7, 0, swap), transform: `translate(${-swap * 380}px, 0) scale(${lerp(1, 0.55, swap)})` }}>
             <Shaded name="Video" size={560} shade="#E4E6E1" ink="#CDD1CB" />
@@ -87,7 +87,7 @@ export const S2ShadeB: React.FC = () => {
         <div style={{ position: "absolute", left: 120, bottom: 110, display: "flex", alignItems: "center", gap: 14, opacity: 1 - swap }}>
           <Icon name="Video" size={36} color="#AEB2AC" /> <span style={{ fontSize: 22, color: COLOR.sub }}>회의</span>
         </div>
-      </SceneShell>
+      </Layer>
     </AbsoluteFill>
   );
 };

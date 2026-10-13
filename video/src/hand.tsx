@@ -9,16 +9,17 @@ import { HAND, loadHand } from "./fonts";
 
 export type MarkKind = "underline" | "circle" | "strike" | "check" | "highlight";
 
+// v6: 손글씨·마크를 v5보다 약 1.4배 느리게 — 쓰는 손이 보이는 속도
 export const MARK_FRAMES: Record<MarkKind, number> = {
-  underline: 8,
-  circle: 10,
-  strike: 10,
-  check: 8,
-  highlight: 10,
+  underline: 12,
+  circle: 14,
+  strike: 12,
+  check: 10,
+  highlight: 13,
 };
 
 export const WRITE_DELAY = 4; // 줄이 뜬 뒤 손글씨가 시작되기까지
-const MARK_GAP = 2; // 다 쓰고 마크까지
+const MARK_GAP = 3; // 다 쓰고 마크까지
 
 export type Segment = { text: string; hand: boolean };
 export const parseEmphasis = (text: string): Segment[] =>
@@ -28,7 +29,8 @@ export const parseEmphasis = (text: string): Segment[] =>
     .map((s) => (s.startsWith("{") ? { text: s.slice(1, -1), hand: true } : { text: s, hand: false }));
 
 export const emphasisOf = (text: string) => parseEmphasis(text).find((s) => s.hand)?.text;
-export const writeFrames = (word: string) => Math.round(5 + 2.2 * word.length);
+// 쓰는 시간 = 7f + 글자당 3f (띄어쓰기 제외) — '수업' 13f, '아니니까요' 22f
+export const writeFrames = (word: string) => 7 + 3 * word.replace(/\s/g, "").length;
 
 // 강조 타이밍: 쓰기 시작 · 쓰기 끝 · 마크 시작 (cue 기준 상대 프레임)
 export const emphasisTiming = (word: string, delay = WRITE_DELAY) => {
